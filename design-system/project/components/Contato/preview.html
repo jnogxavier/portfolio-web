@@ -1,0 +1,15 @@
+<!-- @dsCard group="Peças" height=260 subtitle="O endereço é sempre texto selecionável" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@350..600&family=Zilla+Slab:wght@500;700&family=Spline+Sans+Mono:wght@400&display=swap">
+<style> body { margin: 0; padding: 24px; background: var(--surface); } </style>
+<div id="root"></div>
+<script>
+  document.getElementById('root').appendChild(window.Jnx.Contato({
+    estado: { estado: 'saudavel', texto: 'Disponível para conversar' },
+    email: 'jnogxavier@gmail.com',
+    links: [
+      { texto: 'Currículo em PDF', href: '#' },
+      { texto: 'GitHub', href: 'https://github.com/jnogxavier' },
+      { texto: 'LinkedIn', href: 'https://www.linkedin.com/in/jnogxavier' }
+    ]
+  }));
+</script>

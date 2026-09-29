@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jnogxavier — pior caso</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@350..600&family=Zilla+Slab:wght@500;700&family=Spline+Sans+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="project/components/bundle.css">
+<style>
+  body { margin:0; padding:24px 16px 96px; background:var(--surface); color:var(--ink); font-family:var(--font-sans); }
+  .wrap { max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:48px; }
+  h1 { font:700 24px/30px var(--font-display); margin:0; }
+  .peca > h2 { font:600 13px/18px var(--font-sans); color:var(--ink-muted); margin:0 0 12px; }
+  .barra { position:fixed; left:50%; bottom:16px; transform:translateX(-50%); display:flex; gap:2px;
+           background:#8884; padding:3px; border-radius:999px; font:500 12px system-ui; z-index:9; }
+  .barra button { border:0; background:transparent; padding:6px 12px; border-radius:999px; cursor:pointer; color:inherit; }
+  .barra button[aria-pressed="true"] { background:#fff; color:#111; }
+  .larg { display:flex; gap:8px; align-items:center; font:500 12px system-ui; color:var(--ink-muted); }
+  .larg input { width:120px; }
+</style></head><body>
+<div class="wrap">
+  <h1>Banco de ensaio dos componentes</h1>
+  <div class="larg"><label for="w">Largura do contêiner</label><input id="w" type="range" min="280" max="760" value="680"><span id="wv">680px</span></div>
+  <div id="palco"></div>
+</div>
+<div class="barra" role="group" aria-label="Conjunto de dados">
+  <button data-set="demo" aria-pressed="true">Demo</button>
+  <button data-set="pior" aria-pressed="false">Pior caso</button>
+  <button data-set="vazio" aria-pressed="false">Vazio</button>
+  <button data-set="um" aria-pressed="false">Um</button>
+</div>
+<script src="project/components/bundle.js"></script>
+<script>
+const SVG='http://www.w3.org/2000/svg';
+function dg(){const s=document.createElementNS(SVG,'svg');s.setAttribute('viewBox','0 0 600 390');
+ s.setAttribute('role','img');s.setAttribute('aria-label','diagrama de ensaio');
+ const r=document.createElementNS(SVG,'rect');r.setAttribute('x','200');r.setAttribute('y','20');
+ r.setAttribute('width','200');r.setAttribute('height','52');r.setAttribute('rx','6');r.setAttribute('class','jnx-dg-caixa');
+ const t=document.createElementNS(SVG,'text');t.setAttribute('x','216');t.setAttribute('y','43');
+ t.setAttribute('class','jnx-dg-rotulo');t.textContent='Controlador';s.append(r,t);return s;}
+
+const DADOS={
+ demo:{caso:{titulo:'Esteira de entrega em serviços financeiros',meta:'DevOps Engineer na BCJ, fevereiro a julho de 2026',
+   problema:'Cada time escrevia o próprio pipeline. Dezenas de arquivos quase iguais, nenhum com cache.',
+   abordagem:'Juntei tudo em seis templates no Azure DevOps. Perdi flexibilidade.',
+   resultado:{valor:'6–8 min',unidade:'de build, contra ~15 antes'},
+   aprendizado:'Deixei a migração opcional tempo demais.',
+   links:[{texto:'Arquitetura',href:'#'},{texto:'Notas',href:'#'}]},
+  pill:{estado:'saudavel',texto:'No ar'},
+  codigo:{linguagem:'YAML',codigo:'syncPolicy:\n  automated:\n    prune: true'},
+  contato:{email:'jnogxavier@gmail.com',estado:{estado:'saudavel',texto:'Disponível para conversar'},
+   links:[{texto:'Currículo em PDF',href:'#'},{texto:'GitHub',href:'#'},{texto:'LinkedIn',href:'#'}]}},
+
+ pior:{caso:{titulo:'platform-gateway-reconciliation-controller-v2-canary',
+   meta:'Engenheiro de Plataforma e Confiabilidade de Sistemas Distribuídos, janeiro de 2024 a dezembro de 2026',
+   problema:'Problema curto.',
+   abordagem:'A'.repeat(4)+' '+'Abordagem muito longa que se estende por várias linhas para ver como o bloco se comporta quando o texto passa da medida confortável e continua indo. '.repeat(4),
+   resultado:{valor:'1.284.000',unidade:'requisições por segundo no pico medido durante a campanha de novembro, com margem de erro de três por cento'},
+   aprendizado:'Ok.',
+   links:[{texto:'Arquitetura anonimizada do plano de controle',href:'#'},{texto:'Repositório',href:'#'}]},
+  pill:{estado:'degradada',texto:'Fora do ar desde maio de 2026 por decisão do cliente'},
+  codigo:{linguagem:'YAML de ApplicationSet com sobrescrita por ambiente',
+   codigo:'spec:\n\tgenerators:\n\t\t- list:\n\t\t\t\telements: [{env: producao-regiao-sudeste-1, replicas: 12, imagem: "registro.interno.exemplo/plataforma/gateway:v2.14.3-hotfix"}]'},
+  contato:{email:'bartholomew.fitzgerald@northwind-industries-holdings.example.com',
+   estado:{estado:'saudavel',texto:'Disponível para conversar a partir de janeiro'},
+   links:[{texto:'Currículo em PDF',href:'#'},{texto:'GitHub',href:'#'},{texto:'LinkedIn',href:'#'}]}},
+
+ vazio:{caso:{titulo:''},pill:{estado:'saudavel',texto:''},codigo:{codigo:''},contato:{email:''}},
+ um:{caso:{titulo:'Um',meta:'Jo',problema:'x',resultado:{valor:'1'},aprendizado:'y',links:[{texto:'Link',href:'#'}]},
+  pill:{estado:'saudavel',texto:'Jo'},codigo:{linguagem:'sh',codigo:'ls'},
+  contato:{email:'a@b.co',links:[{texto:'CV',href:'#'}]}}
+};
+
+function render(set){
+ const d=DADOS[set],p=document.getElementById('palco');p.textContent='';
+ const add=(nome,node)=>{const s=document.createElement('section');s.className='peca';
+   const h=document.createElement('h2');h.textContent=nome;s.append(h,node);p.appendChild(s);};
+ add('Caso',Jnx.Caso(d.caso));
+ add('Diagrama',Jnx.Diagrama({conteudo:dg(),legenda:set==='pior'?'Legenda bem longa que descreve o desenho com muito mais palavras do que caberia confortavelmente numa linha só e segue adiante.':'Legenda curta.'}));
+ add('BlocoCodigo',Jnx.BlocoCodigo(d.codigo));
+ add('EstadoPill',Jnx.EstadoPill(d.pill));
+ add('Contato',Jnx.Contato(d.contato));
+}
+document.querySelectorAll('.barra button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.barra button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+ render(b.dataset.set);}));
+const w=document.getElementById('w');
+w.addEventListener('input',()=>{document.querySelector('.wrap').style.maxWidth=w.value+'px';
+ document.getElementById('wv').textContent=w.value+'px';});
+render('demo');
+</script></body></html>

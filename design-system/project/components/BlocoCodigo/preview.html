@@ -1,0 +1,10 @@
+<!-- @dsCard group="Conteúdo" height=220 subtitle="Mono só para código de verdade" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@350..600&family=Zilla+Slab:wght@500;700&family=Spline+Sans+Mono:wght@400&display=swap">
+<style> body { margin: 0; padding: 24px; background: var(--surface); } </style>
+<div id="root"></div>
+<script>
+  document.getElementById('root').appendChild(window.Jnx.BlocoCodigo({
+    linguagem: 'YAML, ApplicationSet do ArgoCD',
+    codigo: 'syncPolicy:\n  automated:\n    prune: true\n    selfHeal: true\n  retry:\n    limit: 5'
+  }));
+</script>

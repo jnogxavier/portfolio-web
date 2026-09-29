@@ -1,0 +1,15 @@
+<!-- @dsCard group="Peças" height=560 subtitle="A unidade que o site repete" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@350..600&family=Zilla+Slab:wght@500;700&family=Spline+Sans+Mono:wght@400&display=swap">
+<style> body { margin: 0; padding: 24px; background: var(--surface); } </style>
+<div id="root"></div>
+<script>
+  document.getElementById('root').appendChild(window.Jnx.Caso({
+    titulo: 'Esteira de entrega em serviços financeiros',
+    meta: 'DevOps Engineer na BCJ, fevereiro a julho de 2026',
+    problema: 'Cada time escrevia o próprio pipeline. Dezenas de arquivos quase iguais, nenhum com cache. Subir um serviço novo levava um dia.',
+    abordagem: 'Juntei tudo em seis templates no Azure DevOps, com build multi-stage e cache. Perdi flexibilidade. Quem precisa de algo fora do padrão agora abre exceção declarada, e isso aparece no diff.',
+    resultado: { valor: '6–8 min', unidade: 'de build, contra ~15 antes' },
+    aprendizado: 'Deixei a migração opcional tempo demais. Fiquei com dois padrões rodando por semanas, o que é pior do que qualquer um dos dois sozinho. Hoje eu começaria pelos três serviços mais barulhentos e migraria sem perguntar.',
+    links: [{ texto: 'Arquitetura (anonimizada)', href: '#' }]
+  }));
+</script>
