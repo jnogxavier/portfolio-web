@@ -1,0 +1,82 @@
+---
+import Esteira from './diagramas/Esteira.astro';
+import Reconciliacao from './diagramas/Reconciliacao.astro';
+import Topologia from './diagramas/Topologia.astro';
+import { textos, type Idioma } from '../i18n';
+import Correlacao from './diagramas/Correlacao.astro';
+import TresFontes from './diagramas/TresFontes.astro';
+
+// As tres leituras na ordem em que a direção A as define, mais o aprendizado.
+// O contrato de estilo continua sendo as classes jnx-* do design system.
+interface Props {
+  titulo: string; meta: string;
+  declarado: string; observado: string; reconciliado: string;
+  resultado?: { antes?: string; valor: string; unidade?: string };
+  diagrama?: 'esteira' | 'reconciliacao' | 'topologia' | 'correlacao' | 'tresfontes';
+  ganhos?: string[];
+  lang?: Idioma;
+  aprendizado: string;
+  links?: { texto: string; href: string }[];
+}
+const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, links = [], lang = 'pt' } = Astro.props;
+const x = textos[lang];
+const leituras = [
+  { rotulo: x.movimentos[0], texto: declarado },
+  { rotulo: x.movimentos[1], texto: observado },
+  { rotulo: x.movimentos[2], texto: reconciliado },
+];
+---
+<article class="jnx-caso">
+  <div class="jnx-caso__cabeca">
+    <h1 class="jnx-caso__titulo">{titulo}</h1>
+    <p class="jnx-caso__meta">{meta}</p>
+  </div>
+
+  {leituras.map(({ rotulo, texto }) => (
+    <div class="jnx-caso__movimento">
+      <h2 class="jnx-caso__rotulo">{rotulo}</h2>
+      <p class="jnx-caso__texto">{texto}</p>
+    </div>
+  ))}
+
+  {diagrama === 'esteira' && <Esteira lang={lang} />}
+  {diagrama === 'reconciliacao' && <Reconciliacao lang={lang} />}
+  {diagrama === 'topologia' && <Topologia lang={lang} />}
+  {diagrama === 'correlacao' && <Correlacao lang={lang} />}
+  {diagrama === 'tresfontes' && <TresFontes lang={lang} />}
+
+  {resultado && (
+    <p class="jnx-caso__resultado">
+      <span class="jnx-caso__medida">{resultado.valor}</span>
+      {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
+      {resultado.antes && <span class="jnx-caso__unidade">{x.contra} {resultado.antes} {x.antes}</span>}
+    </p>
+  )}
+
+  {ganhos.length > 0 && (
+    <div class="jnx-caso__movimento">
+      <h2 class="jnx-caso__rotulo">{x.destravou}</h2>
+      <ul class="ganhos">
+        {ganhos.map((g) => <li>{g}</li>)}
+      </ul>
+    </div>
+  )}
+
+  <div class="jnx-caso__movimento">
+    <h2 class="jnx-caso__rotulo">{x.faria}</h2>
+    <p class="jnx-caso__texto">{aprendizado}</p>
+  </div>
+
+  {links.length > 0 && (
+    <nav class="jnx-caso__links">
+      {links.map((l) => <a class="jnx-link" href={l.href}>{l.texto}</a>)}
+    </nav>
+  )}
+</article>
+
+<style>
+  /* Lista sem marcador decorativo: régua fina separando, como o resto do sistema. */
+  .ganhos { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+  .ganhos li { padding-block: var(--space-3); border-top: 1px solid var(--line); }
+  .ganhos li:first-child { border-top: none; padding-top: 0; }
+</style>
