@@ -1,0 +1,72 @@
+---
+import { dg } from '../../data/diagramas';
+import type { Idioma } from '../../i18n';
+interface Props { lang?: Idioma }
+const { lang = 'pt' } = Astro.props;
+const d = dg.esteira[lang];
+// Uma afirmação: antes cada serviço levava seu próprio caminho; depois todos
+// passam pelos mesmos templates, e o cache fica no meio do caminho de todos.
+// A diferença entre as duas metades é o conteúdo do desenho.
+---
+<figure class="dg">
+  <svg viewBox="0 0 620 330" role="img"
+       aria-label={d.alt}>
+    <defs>
+      <marker id="es-ponta" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <text x="0" y="14" class="dg-fase">{d.antes}</text>
+    <g class="dg-linha">
+      <rect x="0" y="34" width="92" height="30" rx="2" /><text x="46" y="53" class="dg-rot">{d.svcA}</text>
+      <rect x="0" y="76" width="92" height="30" rx="2" /><text x="46" y="95" class="dg-rot">{d.svcB}</text>
+      <rect x="0" y="118" width="92" height="30" rx="2" /><text x="46" y="137" class="dg-rot">{d.svcC}</text>
+
+      <rect x="210" y="34" width="118" height="30" rx="2" /><text x="269" y="53" class="dg-rot">{d.pipeA}</text>
+      <rect x="210" y="76" width="118" height="30" rx="2" /><text x="269" y="95" class="dg-rot">{d.pipeB}</text>
+      <rect x="210" y="118" width="118" height="30" rx="2" /><text x="269" y="137" class="dg-rot">{d.pipeC}</text>
+
+      <rect x="446" y="76" width="118" height="30" rx="2" /><text x="505" y="95" class="dg-rot">{d.prod}</text>
+    </g>
+    <g class="dg-seta" marker-end="url(#es-ponta)">
+      <path d="M92 49 H204" /><path d="M92 91 H204" /><path d="M92 133 H204" />
+      <path d="M328 49 H400 V88 H440" /><path d="M328 91 H440" /><path d="M328 133 H400 V94 H440" />
+    </g>
+    <text x="269" y="166" class="dg-nota">{d.nota}</text>
+
+    <line x1="0" y1="196" x2="620" y2="196" class="dg-regua" />
+
+    <text x="0" y="226" class="dg-fase">{d.depois}</text>
+    <g class="dg-linha">
+      <rect x="0" y="246" width="92" height="30" rx="2" /><text x="46" y="265" class="dg-rot">{d.svcA}</text>
+      <rect x="0" y="288" width="92" height="30" rx="2" /><text x="46" y="307" class="dg-rot">{d.svcB}</text>
+
+      <rect x="210" y="258" width="118" height="48" rx="2" class="dg-marcado" />
+      <text x="269" y="278" class="dg-rot">{d.tpl}</text>
+      <text x="269" y="295" class="dg-nota-in">{d.cache}</text>
+
+      <rect x="446" y="267" width="118" height="30" rx="2" /><text x="505" y="286" class="dg-rot">{d.prod}</text>
+    </g>
+    <g class="dg-seta" marker-end="url(#es-ponta)">
+      <path d="M92 261 H170 V278 H204" /><path d="M92 303 H170 V288 H204" />
+      <path d="M328 282 H440" />
+    </g>
+  </svg>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
+<style>
+  .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
+  .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
+  .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
+  .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
+  .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  .dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 12px; text-anchor: middle; opacity: 0.65; }
+  .dg-fase { fill: currentColor; font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; opacity: 0.6; }
+  .dg-regua { stroke: var(--line); stroke-width: 1; }
+  figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+</style>

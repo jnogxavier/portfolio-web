@@ -1,0 +1,62 @@
+---
+import { dg } from '../../data/diagramas';
+import type { Idioma } from '../../i18n';
+interface Props { lang?: Idioma }
+const { lang = 'pt' } = Astro.props;
+const d = dg.reconciliacao[lang];
+// Uma afirmação: o ArgoCD compara o que o repositório declara com o que o
+// cluster tem, e a diferença é o que ele corrige. A seta de volta é o desenho
+// inteiro — sem ela isto seria só mais um deploy.
+---
+<figure class="dg">
+  <svg viewBox="0 0 620 230" role="img"
+       aria-label={d.alt}>
+    <defs>
+      <marker id="rc-ponta" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <g class="dg-linha">
+      <rect x="0" y="62" width="140" height="56" rx="2" />
+      <text x="70" y="86" class="dg-rot">{d.repo}</text>
+      <text x="70" y="104" class="dg-nota-in">{d.repoN}</text>
+
+      <rect x="240" y="62" width="140" height="56" rx="2" class="dg-marcado" />
+      <text x="310" y="94" class="dg-rot">ArgoCD</text>
+
+      <rect x="480" y="62" width="140" height="56" rx="2" />
+      <text x="550" y="86" class="dg-rot">{d.cluster}</text>
+      <text x="550" y="104" class="dg-nota-in">{d.clusterN}</text>
+    </g>
+
+    <g class="dg-seta" marker-end="url(#rc-ponta)">
+      <path d="M140 90 H234" />
+      <path d="M380 78 H474" />
+      <path d="M474 110 H386" />
+      <path d="M550 190 V124" class="dg-tracejada" />
+    </g>
+
+    <text x="187" y="80" class="dg-aresta">{d.le}</text>
+    <text x="427" y="68" class="dg-aresta">{d.aplica}</text>
+    <text x="427" y="128" class="dg-aresta">{d.compara}</text>
+    <text x="550" y="208" class="dg-nota">{d.drift1}</text>
+    <text x="550" y="224" class="dg-nota">{d.drift2}</text>
+  </svg>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
+<style>
+  .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
+  .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
+  .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
+  .dg-tracejada { stroke-dasharray: 4 4; opacity: 0.5 !important; }
+  .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
+  .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  .dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.6; }
+  .dg-aresta { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+</style>
