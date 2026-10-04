@@ -1,0 +1,66 @@
+---
+import { dg } from '../../data/diagramas';
+import type { Idioma } from '../../i18n';
+interface Props { lang?: Idioma }
+const { lang = 'pt' } = Astro.props;
+const d = dg.correlacao[lang];
+// Uma afirmação: uma execução emite três sinais, os três carregam o mesmo
+// identificador, e quem decide o destino é o Collector — não o código.
+---
+<figure class="dg">
+  <svg viewBox="0 0 640 300" role="img"
+       aria-label={d.alt}>
+    <defs>
+      <marker id="co-ponta" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <g class="dg-linha">
+      <rect x="0" y="126" width="122" height="48" rx="2" class="dg-marcado" />
+      <text x="61" y="146" class="dg-rot">{d.exec}</text>
+      <text x="61" y="163" class="dg-nota-in">{d.execN}</text>
+
+      <rect x="182" y="40" width="112" height="40" rx="2" /><text x="238" y="65" class="dg-rot">{d.log}</text>
+      <rect x="182" y="130" width="112" height="40" rx="2" /><text x="238" y="155" class="dg-rot">{d.met}</text>
+      <rect x="182" y="220" width="112" height="40" rx="2" /><text x="238" y="245" class="dg-rot">{d.trace}</text>
+
+      <rect x="356" y="126" width="120" height="48" rx="2" />
+      <text x="416" y="146" class="dg-rot">{d.col}</text>
+      <text x="416" y="163" class="dg-nota-in">{d.colN}</text>
+
+      <rect x="528" y="40" width="112" height="40" rx="2" /><text x="584" y="65" class="dg-rot">Loki</text>
+      <rect x="528" y="130" width="112" height="40" rx="2" /><text x="584" y="155" class="dg-rot">Prometheus</text>
+      <rect x="528" y="220" width="112" height="40" rx="2" /><text x="584" y="245" class="dg-rot">Tempo</text>
+    </g>
+
+    <g class="dg-seta" marker-end="url(#co-ponta)">
+      <path d="M122 150 H152 V60 H176" />
+      <path d="M122 150 H176" />
+      <path d="M122 150 H152 V240 H176" />
+      <path d="M294 60 H324 V150 H350" />
+      <path d="M294 150 H350" />
+      <path d="M294 240 H324 V150 H350" />
+      <path d="M476 150 H506 V60 H522" />
+      <path d="M476 150 H522" />
+      <path d="M476 150 H506 V240 H522" />
+    </g>
+
+    <text x="238" y="100" class="dg-aresta">{d.mesmo}</text>
+    <text x="325" y="286" class="dg-aresta">{d.otlp}</text>
+  </svg>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
+<style>
+  .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
+  .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
+  .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
+  .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
+  .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  .dg-aresta { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+</style>

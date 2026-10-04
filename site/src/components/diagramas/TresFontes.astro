@@ -1,0 +1,72 @@
+---
+import { dg } from '../../data/diagramas';
+import type { Idioma } from '../../i18n';
+interface Props { lang?: Idioma }
+const { lang = 'pt' } = Astro.props;
+const d = dg.tresfontes[lang];
+// Uma afirmação: a configuração de um serviço mora em três lugares que não se
+// falam. A ferramenta lê os três e mostra junto, com o valor sensível coberto.
+---
+<figure class="dg">
+  <svg viewBox="0 0 640 260" role="img"
+       aria-label={d.alt}>
+    <defs>
+      <marker id="tf-ponta" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <text x="90" y="14" class="dg-fase">{d.tres}</text>
+    <g class="dg-linha">
+      <rect x="0" y="26" width="180" height="42" rx="2" />
+      <text x="90" y="44" class="dg-rot">{d.td}</text>
+      <text x="90" y="60" class="dg-nota-in">{d.tdN}</text>
+
+      <rect x="0" y="104" width="180" height="42" rx="2" />
+      <text x="90" y="122" class="dg-rot">{d.sm}</text>
+      <text x="90" y="138" class="dg-nota-in">{d.smN}</text>
+
+      <rect x="0" y="182" width="180" height="42" rx="2" />
+      <text x="90" y="200" class="dg-rot">{d.ps}</text>
+      <text x="90" y="216" class="dg-nota-in">{d.psN}</text>
+    </g>
+
+    <g class="dg-seta" marker-end="url(#tf-ponta)">
+      <path d="M180 47 H230 V118 H254" />
+      <path d="M180 125 H254" />
+      <path d="M180 203 H230 V132 H254" />
+      <path d="M374 125 H424" />
+    </g>
+    <text x="217" y="246" class="dg-aresta">{d.leitura}</text>
+
+    <g class="dg-linha">
+      <rect x="260" y="104" width="114" height="42" rx="2" class="dg-marcado" />
+      <text x="317" y="130" class="dg-rot">{d.ferr}</text>
+
+      <rect x="430" y="60" width="210" height="130" rx="2" />
+      <text x="535" y="84" class="dg-rot">{d.tela}</text>
+      <line x1="452" y1="98" x2="618" y2="98" class="dg-regua" />
+      <text x="452" y="122" class="dg-cod">DATABASE_URL</text><text x="618" y="122" class="dg-cod dg-cod--fim">••••••••</text>
+      <text x="452" y="146" class="dg-cod">LOG_LEVEL</text><text x="618" y="146" class="dg-cod dg-cod--fim">info</text>
+      <text x="452" y="170" class="dg-cod">API_TOKEN</text><text x="618" y="170" class="dg-cod dg-cod--fim">••••••••</text>
+    </g>
+  </svg>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
+<style>
+  .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
+  .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
+  .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
+  .dg-regua { stroke: currentColor; stroke-width: 1; opacity: 0.25; }
+  .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
+  .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  .dg-aresta { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  .dg-fase { fill: currentColor; font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-anchor: middle; opacity: 0.6; }
+  .dg-cod { fill: currentColor; font-family: var(--font-mono); font-size: 12px; opacity: 0.8; }
+  .dg-cod--fim { text-anchor: end; }
+  figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+</style>
