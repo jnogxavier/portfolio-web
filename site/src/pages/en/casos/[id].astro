@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Caso from '../../../components/Caso.astro';
+
+export async function getStaticPaths() {
+  const casos = await getCollection('casosEn');
+  return casos.map((c) => ({ params: { id: c.id }, props: { caso: c.data } }));
+}
+const { caso } = Astro.props;
+---
+<Base titulo={`${caso.titulo} — jnogxavier`} descricao={caso.chamada} parUrl={caso.par ? `/casos/${caso.par}/` : undefined} lang="en">
+  <section class="faixa pagina">
+    <a class="voltar jnx-link" href="/en/#casos">Back to the cases</a>
+    <Caso {...caso} lang="en" />
+  </section>
+</Base>
+<style>
+  .pagina { padding-block: var(--space-6) var(--space-9); display: flex; flex-direction: column; gap: var(--space-6); }
+  .voltar { font-size: 0.875rem; }
+</style>
