@@ -1,12 +1,16 @@
+# dependências e build
 node_modules/
 dist/
 .astro/
+site/public/bundle.js
 
+# ambiente
 .env
-.env.production
+.env*.local
 
-npm-debug.log*
+# sistema e editor
 .DS_Store
 .idea/
-CLAUDE.md
-.claude/
+.vscode/
+*.swp
+npm-debug.log*

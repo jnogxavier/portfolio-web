@@ -111,9 +111,8 @@ o default genérico.
 `prefers-reduced-motion` tira o deslocamento e mantém a revelação por
 opacidade. Menos e mais suave, não zero.
 
-Histórico: até 03/10/2026 esta seção descrevia duas colunas reconciliando. Esse
-movimento morreu junto com a home antiga e ficou uma hora documentado sem
-existir. Documentação que mente sobre o produto é pior que documentação
+Esta seção descreve o que existe. Quando o movimento mudar, ela muda junto —
+documentação que descreve comportamento inexistente é pior que documentação
 faltando.
 
 ## Cor, e o que cada token quer dizer
@@ -124,9 +123,8 @@ vizinho dele. É por isso que o papel e o texto parecem pertencer ao mesmo lugar
 mesmo onde não há vinho visível.
 
 `band` é a superfície de faixa em cor cheia, com `band-ink` por cima. Existe
-separado porque escurece nos dois temas. Usar `brand` como fundo quebra o tema
-escuro: ele clareia lá, e a faixa vira rosa com texto quase preto. Foi o que
-aconteceu em 04/10/2026.
+separado porque escurece nos dois temas. Nunca usar `brand` como fundo: ele
+clareia no escuro, e a faixa vira rosa com texto quase preto.
 
 `measure` é o acento secundário e só aparece onde há número medido. Um uso
 visível no site inteiro. Se vazar para outro lugar, perde a força.

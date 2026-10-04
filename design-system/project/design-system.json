@@ -19,7 +19,6 @@
   "lastChange": {
     "by": "João Vitor Nogueira Xavier",
     "at": "2026-10-03T23:44:44Z",
-    "via": "Claude Code",
     "note": "Segunda rodada de pior caso: min-width:0 faltando fazia a reticência da pílula ser inerte; região viva própria para o botão copiar."
   }
 }

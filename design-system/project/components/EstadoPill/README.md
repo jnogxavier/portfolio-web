@@ -22,6 +22,4 @@ Em cromo de página — cabeçalho, rodapé, barra de navegação — ela não s
 justifica, e o contêiner vira caixa dentro de caixa. Ali use só o ponto e o
 texto, sem borda e sem fundo, assentados na linha de base do que está ao lado.
 
-Foi exatamente esse o erro em 04/10/2026: a pílula entrou no cabeçalho ao lado
-da placa do nome, duas caixas com raios diferentes encostadas, e leu como
-cartão forçado.
+Duas caixas com raios diferentes encostadas leem como cartão forçado.
