@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+const notas = await getCollection('notas');
+---
+<Base titulo="Notas — jnogxavier" descricao="Textos curtos sobre problemas que resolvi." atual="/notas">
+  <section class="faixa texto">
+    <h1>Notas</h1>
+    {notas.length === 0 ? (
+      <>
+        <p>Ainda não publiquei nenhuma nota.</p>
+        <p>
+          Quando publicar, vão ser textos curtos sobre um problema específico que
+          resolvi — o tipo de coisa que eu procuraria no Google às onze da noite.
+          Enquanto isso, os casos na página inicial têm mais detalhe.
+        </p>
+        <p><a class="jnx-link" href="/">Ver os casos</a></p>
+      </>
+    ) : (
+      <ul>
+        {notas.map((n) => (
+          <li><a class="jnx-link" href={`/notas/${n.id}`}>{n.data.titulo}</a> — {n.data.resumo}</li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+<style>
+  .texto { padding-block: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); max-width: 68ch; }
+  h1 { margin: 0 0 var(--space-2); font: 700 2rem/1.15 var(--font-display); letter-spacing: -0.015em; }
+  p, ul { margin: 0; }
+  ul { padding-inline-start: 1.1em; display: flex; flex-direction: column; gap: var(--space-3); }
+</style>
