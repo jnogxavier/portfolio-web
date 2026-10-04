@@ -1,0 +1,218 @@
+---
+import Base from '../layouts/Base.astro';
+import Malha from './Malha.astro';
+import Icone from './Icone.astro';
+import { skills, areasEn, itensEn } from '../data/skills';
+import { textos, type Idioma } from '../i18n';
+
+interface Props {
+  lang: Idioma;
+  t: { titulo: string; descricao: string };
+  casos: { id: string; data: any }[];
+  linha: any[];
+  sobre: string[];
+}
+const { lang, t, casos, linha, sobre } = Astro.props;
+const x = textos[lang];
+const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade.';
+---
+<Base
+  titulo={t.titulo}
+  descricao={t.descricao}
+  lang={lang}
+>
+  <section class="capa" id="topo">
+    <Malha />
+    <div class="faixa capa__texto">
+      <p class="capa__nome">João Vitor Nogueira Xavier</p>
+      <h1>{x.h1}</h1>
+      <p class="lede">{x.lede}</p>
+      <p class="capa__acoes">
+        <a class="jnx-acao jnx-acao--sobre-cor" href="#casos">{x.verCasos}</a>
+        <a class="jnx-acao jnx-acao--sobre-cor jnx-acao--secundaria" href={zap}
+           target="_blank" rel="noopener noreferrer">{x.zap}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="secao" id="sobre">
+    <div class="faixa">
+      <h2>{x.tSobre}</h2>
+      <div class="sobre">
+        <div class="retrato" role="img" aria-label={x.fotoAlt}>
+          <svg viewBox="0 0 80 100" aria-hidden="true">
+            <circle cx="40" cy="38" r="15" /><path d="M14 92 a26 26 0 0 1 52 0" />
+          </svg>
+          <span>{x.foto}</span>
+        </div>
+        <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--alt" id="experiencia">
+    <div class="faixa">
+      <h2>{x.tExp}</h2>
+      <ol class="trilha">
+        {linha.map((e) => (
+          <li>
+            <div class="trilha__quando">
+              <span class="trilha__periodo">{e.periodo}</span>
+              <span class="trilha__lugar">{e.lugar}</span>
+            </div>
+            <div class="trilha__oque">
+              <h3>{e.cargo}</h3>
+              <p class="trilha__onde">{e.onde}</p>
+              {e.texto.map((t) => <p>{t}</p>)}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao" id="skills">
+    <div class="faixa">
+      <h2>{x.tSkills}</h2>
+      <p class="skills__intro">{x.skillsNota}</p>
+      <dl class="skills">
+        {skills.map((g) => (
+          <div class="skills__linha">
+            <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
+            <dd>{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="secao secao--alt" id="casos">
+    <div class="faixa">
+      <div class="secao__cabeca">
+        <h2>{x.tCasos}</h2>
+        <p class="secao__nota">{x.casosNota}</p>
+      </div>
+      <ol class="lista">
+        {casos.map((c) => (
+          <li>
+            <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
+              <h3>{c.data.titulo}</h3>
+              <p>{c.data.chamada}</p>
+              <span class="lista__onde">{c.data.meta}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao" id="contato">
+    <div class="faixa">
+      <h2>{x.tContato}</h2>
+      <p class="contato__nota">{x.contatoNota}</p>
+      <nav class="canais" aria-label="Canais de contato">
+        <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" />jnogxavier@gmail.com</a>
+        <a href={zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
+        <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
+        <a href="https://linkedin.com/in/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+      </nav>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .capa { position: relative; overflow: hidden; background: var(--band); color: var(--band-ink); }
+  .capa__texto {
+    position: relative; padding-block: var(--space-8) var(--space-7);
+    display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start;
+  }
+  .capa__nome { margin: 0; font: 500 0.9375rem/1.3 var(--font-sans); opacity: 0.8; }
+  h1 {
+    margin: 0; max-width: 18ch;
+    font: 700 clamp(2rem, 1rem + 3.4vw, 3rem)/1.08 var(--font-display);
+    letter-spacing: -0.022em; text-wrap: balance;
+  }
+  .lede { margin: 0; max-width: 56ch; font-size: 1.0625rem; opacity: 0.92; }
+  .capa__acoes { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-2) 0 0; }
+
+  /* Seções com fundo alternado: a separação é da cor, não de uma régua fina. */
+  .secao { padding-block: var(--space-8); }
+  .secao--alt { background: var(--surface-raised); border-block: 1px solid var(--line); }
+  .secao h2 {
+    margin: 0 0 var(--space-5); font: 700 1.75rem/1.2 var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  .secao__cabeca { margin-bottom: var(--space-5); }
+  .secao__cabeca h2 { margin-bottom: var(--space-2); }
+  .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
+
+  .sobre { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
+  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
+  .sobre__texto p { margin: 0; }
+  .retrato {
+    width: 148px; aspect-ratio: 4 / 5; flex: none;
+    border: 1px dashed var(--line); background: var(--surface-raised);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: var(--space-2); color: var(--ink-muted);
+  }
+  .retrato svg { width: 48px; height: 60px; fill: none; stroke: currentColor; stroke-width: 3; opacity: 0.35; }
+  .retrato span { font: 500 0.6875rem/1 var(--font-sans); letter-spacing: 0.08em; opacity: 0.7; }
+  @media (min-width: 46rem) { .sobre { flex-direction: row; gap: var(--space-6); } }
+
+  .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .trilha li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
+  .trilha li:first-child { border-top: none; padding-top: 0; }
+  .trilha__quando { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
+  .trilha__periodo { font: 500 0.875rem/1.4 var(--font-sans); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .trilha__lugar { font: 400 0.875rem/1.4 var(--font-sans); color: var(--ink-muted); }
+  .trilha__oque { display: flex; flex-direction: column; gap: var(--space-2); max-width: 66ch; min-width: 0; }
+  .trilha h3 { margin: 0; font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; }
+  .trilha__onde { margin: 0; font: 500 0.9375rem/1.4 var(--font-sans); color: var(--brand-ink); }
+  .trilha__oque p { margin: 0; color: var(--ink-muted); }
+  .trilha__oque p.trilha__onde { color: var(--brand-ink); }
+  @media (min-width: 52rem) {
+    .trilha li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
+  }
+
+  /* Linha de definição: área à esquerda, tecnologias à direita.
+     Formato de referência — varre-se a esquerda e lê-se a direita. */
+  .skills { margin: 0; }
+  .skills__linha { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid var(--line); }
+  .skills__linha:first-child { border-top: none; padding-top: 0; }
+  .skills dt { font: 600 0.9375rem/1.4 var(--font-sans); color: var(--ink); }
+  .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) 0; min-width: 0; }
+  /* Régua entre itens: metade deles tem duas palavras, e só espaço não separa. */
+  .skills dd span {
+    font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); white-space: nowrap;
+    padding-inline: var(--space-3);
+  }
+  .skills dd span:first-child { padding-inline-start: 0; }
+  .skills dd span:not(:last-child) { border-inline-end: 1px solid var(--line); }
+  @media (min-width: 46rem) {
+    .skills__linha { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
+  }
+
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .lista li { border-top: 1px solid var(--line); }
+  .lista li:first-child { border-top: none; }
+  .lista a {
+    display: block; padding-block: var(--space-5); color: inherit; text-decoration: none;
+    transition: background-color 140ms ease;
+  }
+  .lista h3 { margin: 0 0 var(--space-2); font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; }
+  .lista p { margin: 0 0 var(--space-2); color: var(--ink-muted); max-width: 64ch; }
+  .lista__onde { font-size: 0.75rem; color: var(--ink-muted); }
+  @media (hover: hover) { .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; } }
+  .lista a:active { background: var(--line); }
+  .lista a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+  .skills__intro { margin: -0.5rem 0 var(--space-5); color: var(--ink-muted); max-width: 62ch; }
+  .contato__nota { margin: 0 0 var(--space-5); max-width: 62ch; color: var(--ink-muted); }
+  .canais { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
+  .canais a {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    min-height: 44px; color: var(--brand-ink);
+    font: 500 1rem/1 var(--font-sans); text-underline-offset: 4px;
+  }
+  .canais a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+</style>
