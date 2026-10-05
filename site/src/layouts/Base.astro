@@ -6,23 +6,22 @@ import '../styles/componentes.css';
 import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
-interface Props { titulo: string; descricao: string; atual?: string; lang?: Idioma; parUrl?: string }
-const { titulo, descricao, atual, lang = 'pt', parUrl } = Astro.props;
-const x = textos[lang];
-const outro = textos[x.outro];
-const raiz = x.raiz;
+interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string }
+const { titulo, descricao, lang = 'pt', parUrl } = Astro.props;
+const rotulos = textos[lang];
+const raiz = rotulos.raiz;
 const aqui = Astro.url.pathname;
 const alterna = parUrl ?? (lang === 'en' ? '/' : '/en/');
 const nav = [
-  { texto: x.nav.sobre, href: raiz + '#sobre' },
-  { texto: x.nav.exp, href: raiz + '#experiencia' },
-  { texto: x.nav.skills, href: raiz + '#skills' },
-  { texto: x.nav.casos, href: raiz + '#casos' },
-  { texto: x.nav.contato, href: raiz + '#contato' },
+  { texto: rotulos.nav.sobre, href: raiz + '#sobre' },
+  { texto: rotulos.nav.exp, href: raiz + '#experiencia' },
+  { texto: rotulos.nav.skills, href: raiz + '#skills' },
+  { texto: rotulos.nav.casos, href: raiz + '#casos' },
+  { texto: rotulos.nav.contato, href: raiz + '#contato' },
 ];
 ---
 <!doctype html>
-<html lang={x.lang}>
+<html lang={rotulos.lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -33,7 +32,7 @@ const nav = [
     <link rel="alternate" hreflang="en" href={lang === 'en' ? aqui : alterna} />
     <link rel="alternate" hreflang="x-default" href={lang === 'pt' ? aqui : alterna} />
     <meta property="og:image" content="/og.png" />
-    <meta property="og:locale" content={x.lang} />
+    <meta property="og:locale" content={rotulos.lang} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descricao} />
@@ -66,27 +65,27 @@ const nav = [
     })();
   </script>
   <body>
-    <a class="pular" href="#conteudo">{x.pular}</a>
+    <a class="pular" href="#conteudo">{rotulos.pular}</a>
 
     <header class="topo">
       <div class="tarja">
         <div class="faixa tarja__linha">
           <p class="estado">
             <span class="estado__no" aria-hidden="true"></span>
-            <a href="mailto:jnogxavier@gmail.com" aria-label={x.statusLabel}>{x.status}</a>
-            <span class="estado__onde">{x.onde}</span>
+            <a href="mailto:jnogxavier@gmail.com" aria-label={rotulos.statusLabel}>{rotulos.status}</a>
+            <span class="estado__onde">{rotulos.onde}</span>
           </p>
         </div>
       </div>
 
       <div class="faixa topo__linha">
-        <a class="marca" href={raiz} aria-label="Início" aria-current={atual === '/' ? 'page' : undefined}><Placa /></a>
+        <a class="marca" href={raiz} aria-label="Início" aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
 
         <nav class="menu" aria-label="Principal">
           {nav.map((l) => (
-            <a href={l.href} aria-current={atual === l.href ? 'page' : undefined}>{l.texto}</a>
+            <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
-          <a class="menu__cv" href={x.cvArquivo} download>{x.nav.cv}</a>
+          <a class="menu__cv" href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
           <div class="idiomas" role="group" aria-label={lang === 'en' ? 'Language' : 'Idioma'}>
             {lang === 'pt'
               ? <span class="idioma idioma--atual" aria-current="true" lang="pt">Português</span>
@@ -95,7 +94,7 @@ const nav = [
               ? <span class="idioma idioma--atual" aria-current="true" lang="en">English</span>
               : <a class="idioma" href={alterna} hreflang="en" lang="en">English</a>}
           </div>
-          <button class="tema" type="button" id="tema" aria-label={x.alternarTema}>
+          <button class="tema" type="button" id="tema" aria-label={rotulos.alternarTema}>
             <svg viewBox="0 0 24 24" aria-hidden="true" class="tema__sol">
               <circle cx="12" cy="12" r="4.4" />
               <path d="M12 2.6v2.2M12 19.2v2.2M4.4 12H2.2M21.8 12h-2.2M6.6 6.6 5 5M19 19l-1.6-1.6M17.4 6.6 19 5M5 19l1.6-1.6" />
@@ -111,7 +110,6 @@ const nav = [
     <main id="conteudo" tabindex="-1"><slot /></main>
 
     <footer class="rodape">
-      <div class="malha" aria-hidden="true"></div>
       <div class="faixa rodape__linha">
         <p class="rodape__nome">João Vitor Nogueira Xavier<span>Goiânia, Brasil</span></p>
         <nav class="rodape__links" aria-label="Contato">
@@ -119,7 +117,7 @@ const nav = [
           <a href="https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
           <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
           <a href="https://linkedin.com/in/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-          <a href={x.cvArquivo} download><Icone nome="download" />{x.nav.cv}</a>
+          <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
           {lang === 'pt'
             ? <a href={alterna} hreflang="en" lang="en">English</a>
             : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
@@ -267,7 +265,7 @@ const nav = [
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .rodape { position: relative; overflow: hidden; margin-top: var(--space-9); background: var(--band); color: var(--band-ink); }
-  .rodape > :not(.malha) { position: relative; }
+  .rodape > * { position: relative; }
   .rodape__linha {
     display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6);
     justify-content: space-between; align-items: baseline;
