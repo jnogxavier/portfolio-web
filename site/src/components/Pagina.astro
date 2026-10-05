@@ -40,7 +40,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
       <h2>{rotulos.tSobre}</h2>
       <div class="sobre">
         <img class="retrato" src="/retrato.webp" width="444" height="555"
-             alt={rotulos.fotoAlt} decoding="async" />
+             alt={rotulos.fotoAlt} loading="lazy" decoding="async" />
         <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
       </div>
     </div>

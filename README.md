@@ -13,6 +13,12 @@ npm run dev
 
 `npm run build` gera o site em `site/dist`.
 
+## Domínio
+
+`site` em `astro.config.mjs` define o endereço usado em canonical, Open Graph,
+hreflang, JSON-LD, sitemap e robots. Está em `https://jnogxavier.com` como
+provisório — trocar lá e em `public/robots.txt` quando o domínio for definido.
+
 ## Onde está o quê
 
 - `site/src/content/casos` e `casos-en` — os casos, um arquivo por caso. O campo

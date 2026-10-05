@@ -28,10 +28,14 @@ const nav = [
     <title>{titulo}</title>
     <meta name="description" content={descricao} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" hreflang="pt-BR" href={lang === 'pt' ? aqui : alterna} />
-    <link rel="alternate" hreflang="en" href={lang === 'en' ? aqui : alterna} />
-    <link rel="alternate" hreflang="x-default" href={lang === 'pt' ? aqui : alterna} />
-    <meta property="og:image" content="/og.png" />
+    <meta name="theme-color" content="#f2ebed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#181115" media="(prefers-color-scheme: dark)" />
+    <link rel="alternate" hreflang="pt-BR" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(lang === 'en' ? aqui : alterna, Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site).href} />
+    <meta property="og:url" content={new URL(aqui, Astro.site).href} />
+    <link rel="canonical" href={new URL(aqui, Astro.site).href} />
     <meta property="og:locale" content={rotulos.lang} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:title" content={titulo} />
@@ -51,7 +55,7 @@ const nav = [
         "Full Stack", "Ruby on Rails", "PostgreSQL", "React", "Flutter"],
       "knowsLanguage": ["pt-BR", "en"],
       "sameAs": ["https://github.com/jnogxavier", "https://linkedin.com/in/jnogxavier"],
-      "url": "/"
+      "url": Astro.site?.href
     })} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/zilla-slab-700-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/archivo-350_600-latin.woff2" />
@@ -141,6 +145,7 @@ const nav = [
 <style>
   :global(html) {
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
     scroll-padding-top: 7.5rem;
     scroll-behavior: smooth;
   }
@@ -185,6 +190,7 @@ const nav = [
   }
   .pular:focus { transform: translateY(0); }
   :global(main:focus) { outline: none; }
+  :global(main:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
 
   .topo { border-bottom: 1px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 10; }
   .tarja { border-bottom: 1px solid var(--line); background: var(--surface-raised); }
@@ -252,9 +258,11 @@ const nav = [
   .menu { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
   @media (max-width: 56rem) {
     .menu { gap: var(--space-2) var(--space-4); }
-    .menu a { padding-block: 0.9375rem; font-size: 0.875rem; }
+    :global(a), :global(button) { touch-action: manipulation; }
+  .menu a { padding-block: 0.9375rem; font-size: 0.875rem; }
     .topo__linha { padding-block: var(--space-2); }
   }
+  :global(a), :global(button) { touch-action: manipulation; }
   .menu a {
     font: 500 0.9375rem/1 var(--font-sans); letter-spacing: 0.005em;
     color: var(--ink-muted); text-decoration: none; padding-block: 1.46875rem;
