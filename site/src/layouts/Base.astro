@@ -137,7 +137,7 @@ const nav = [
         const novo = escuroAgora ? 'light' : 'dark';
         raiz.dataset.trocando = '';
         raiz.dataset.tema = novo;
-        setTimeout(() => delete raiz.dataset.trocando, 260);
+        setTimeout(() => delete raiz.dataset.trocando, 360);
         try { localStorage.setItem('tema', novo); } catch (e) {}
       });
     </script>
@@ -168,8 +168,8 @@ const nav = [
   }
   :global(:root) { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
   :global(html[data-trocando] *) {
-    transition: background-color 220ms var(--ease-out), border-color 220ms var(--ease-out),
-                color 220ms var(--ease-out), fill 220ms var(--ease-out), stroke 220ms var(--ease-out) !important;
+    transition: background-color 320ms var(--ease-out), border-color 320ms var(--ease-out),
+                color 320ms var(--ease-out), fill 320ms var(--ease-out), stroke 320ms var(--ease-out) !important;
   }
   @media (prefers-reduced-motion: reduce) {
     :global(html[data-trocando] *) { transition: none !important; }

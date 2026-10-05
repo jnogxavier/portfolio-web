@@ -148,12 +148,31 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
   .sobre { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
-  @starting-style { .retrato { opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .retrato { transition: none; } }
+  @starting-style { .retrato { opacity: 0; transform: translateY(8px); } }
+  @media (prefers-reduced-motion: reduce) { .retrato { transition: opacity 200ms linear; transform: none !important; } }
+
+  .capa__nome, .capa h1, .lede, .capa__acoes {
+    transform: none;
+    transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+  }
+  .capa h1 { transition-delay: 70ms; }
+  .lede { transition-delay: 140ms; }
+  .capa__acoes { transition-delay: 210ms; }
+  .capa :global(.malha) { transition: opacity 900ms var(--ease-out) 120ms; }
+  @starting-style {
+    .capa__nome, .capa h1, .lede, .capa__acoes { opacity: 0; transform: translateY(14px); }
+    .capa :global(.malha) { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .capa__nome, .capa h1, .lede, .capa__acoes, .capa :global(.malha) {
+      transition: opacity 220ms linear; transition-delay: 0ms; transform: none !important;
+    }
+  }
   .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
   .sobre__texto p { margin: 0; }
   .retrato {
-    opacity: 1; transition: opacity 240ms var(--ease-out);
+    opacity: 1; transform: none;
+    transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
     width: 148px; height: auto; aspect-ratio: 4 / 5; flex: none;
     object-fit: cover;
     border: 1px solid var(--line); border-radius: var(--radius-sm);
