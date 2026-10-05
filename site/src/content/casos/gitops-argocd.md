@@ -39,6 +39,15 @@ ganhos:
     Segredo saiu do repositório: o cluster passou a buscar credencial de um
     cofre externo, e o que está versionado é a referência, não o valor.
   - >-
+    Configuração saiu do repositório da aplicação. Variável de ambiente, mesmo
+    a que não é segredo, passou a viver no repositório de plataforma — então
+    quem tem acesso ao código deixou de ter, por tabela, a configuração de
+    produção.
+  - >-
+    Cada ambiente ficou isolado em três camadas: namespace próprio, cofre
+    próprio e caminho próprio dentro dele. Homologação não alcança credencial
+    de produção nem por engano de configuração.
+  - >-
     O cluster passou a ser reconstruível a partir do repositório, porque o
     repositório deixou de ser documentação e virou a fonte.
 aprendizado: >-
