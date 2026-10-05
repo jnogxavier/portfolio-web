@@ -1,5 +1,5 @@
 ---
-titulo: Telemetry off the vendor, with OpenTelemetry
+titulo: Proving the way off a vendor before asking for the migration
 meta: DevOps Engineer at BCJ, 2026
 ordem: 3
 par: observabilidade-otel
@@ -13,20 +13,22 @@ observado: >-
   something had failed, not where. And logs did not talk to traces, so every
   investigation started from nothing.
 reconciliado: >-
-  The OpenTelemetry SDK initialised in the core, before anything else, with
-  auto-instrumentation for HTTP, Express and Postgres. Each job became its own
-  span, with counters for runs and errors, a gauge for jobs in flight, and a
-  duration histogram by status. Logs started carrying traceId and spanId
-  whenever a span is active. Export goes over OTLP to the Collector, and from
-  there telemetry goes wherever the platform wants — Tempo, Prometheus, Loki —
-  without touching application code.
+  I built a proof of concept from the real backend, with the OpenTelemetry SDK
+  initialised in the core before anything else and auto-instrumentation for
+  HTTP, Express and Postgres. Each job became its own span, with execution and
+  error counters, a gauge of jobs in flight and a duration histogram by status.
+  Logs started carrying traceId and spanId whenever a span is active. Export is
+  OTLP to the Collector, which picks the destination — Tempo, Prometheus, Loki —
+  without the application knowing which. I documented the proposal, the
+  implementation decisions and the adoption roadmap, including what TypeORM
+  would still need.
 resultado:
-  antes: one proprietary agent
+  antes: no instrumentation of its own
   valor: "4"
-  unidade: services with correlated logs, metrics and traces
+  unidade: services instrumented in the proof of concept, with correlated logs, metrics and traces
 chamada: >-
-  I replaced the Elastic APM agent with OpenTelemetry and instrumented four
-  services from scratch, so logs, metrics and traces talk about the same run.
+  I instrumented four services with OpenTelemetry as a proof of concept, to show
+  with running code that leaving the proprietary agent was possible.
 ganhos:
   - >-
     Telemetry stopped depending on a vendor. The Collector decides the
@@ -35,13 +37,17 @@ ganhos:
     Investigating a slow job got a starting point: from the log, by traceId,
     straight to the trace for that run.
   - >-
-    Duplicate instrumentation went away, along with the overhead it cost and
-    the build risk from leftover references to the old agent.
+    Instrumentation ended up in one place, the core, rather than spread across
+    services — so wiring up a new service stopped being instrumentation work and
+    became an import.
 aprendizado: >-
-  It stopped at proof of concept. I had instrumentation, metrics and
-  correlation working, and I never took it through to an alert in production —
-  and an alert is what turns telemetry into operations. Today I would pick one
-  symptom, like a job running past its expected time, and close the whole loop
-  until it wakes someone up, before instrumenting the rest.
+  The proof of concept worked and the migration did not happen: production
+  stayed on the proprietary agent. I treated the problem as technical when it
+  was about priority — running code does not on its own convince the people who
+  have to approve stopping something else to adopt it.
+  If I started over, I would lead with the number that matters to whoever
+  decides: how much time is lost today on an investigation that starts from
+  scratch because logs and traces do not talk to each other. The code would come
+  second.
 links: []
 ---
