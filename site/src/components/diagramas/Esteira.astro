@@ -4,7 +4,7 @@ interface Props { d: any }
 const { d } = Astro.props;
 ---
 <figure class="dg">
-  <svg viewBox="0 0 620 330" role="img"
+  <svg viewBox="0 0 620 372" role="img"
        aria-label={d.alt}>
     <Ponta />
 
@@ -32,16 +32,17 @@ const { d } = Astro.props;
     <g class="dg-linha">
       <rect x="0" y="246" width="92" height="30" rx="2" /><text x="46" y="265" class="dg-rot">{d.svcA}</text>
       <rect x="0" y="288" width="92" height="30" rx="2" /><text x="46" y="307" class="dg-rot">{d.svcB}</text>
+        <rect x="0" y="330" width="92" height="30" rx="2" /><text x="46" y="349" class="dg-rot">{d.svcC}</text>
 
-      <rect x="210" y="258" width="118" height="48" rx="2" class="dg-marcado" />
-      <text x="269" y="278" class="dg-rot">{d.tpl}</text>
-      <text x="269" y="295" class="dg-nota-in">{d.cache}</text>
+      <rect x="210" y="279" width="118" height="48" rx="2" class="dg-marcado" />
+      <text x="269" y="299" class="dg-rot">{d.tpl}</text>
+      <text x="269" y="316" class="dg-nota-in">{d.cache}</text>
 
-      <rect x="446" y="267" width="118" height="30" rx="2" /><text x="505" y="286" class="dg-rot">{d.prod}</text>
+      <rect x="446" y="288" width="118" height="30" rx="2" /><text x="505" y="307" class="dg-rot">{d.prod}</text>
     </g>
     <g class="dg-seta" marker-end="url(#ponta)">
-      <path d="M92 261 H170 V278 H204" /><path d="M92 303 H170 V288 H204" />
-      <path d="M328 282 H440" />
+        <path d="M92 261 H170 V300 H204" /><path d="M92 303 H204" /><path d="M92 345 H170 V306 H204" />
+        <path d="M328 303 H440" />
     </g>
   </svg>
   <figcaption>{d.cap}</figcaption>
