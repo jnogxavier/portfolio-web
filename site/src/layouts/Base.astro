@@ -135,7 +135,9 @@ const nav = [
           ? raiz.dataset.tema === 'dark'
           : matchMedia('(prefers-color-scheme: dark)').matches;
         const novo = escuroAgora ? 'light' : 'dark';
+        raiz.dataset.trocando = '';
         raiz.dataset.tema = novo;
+        setTimeout(() => delete raiz.dataset.trocando, 260);
         try { localStorage.setItem('tema', novo); } catch (e) {}
       });
     </script>
@@ -165,6 +167,13 @@ const nav = [
     :global(section:target > .faixa > .secao__cabeca > h2) { animation: none; }
   }
   :global(:root) { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+  :global(html[data-trocando] *) {
+    transition: background-color 220ms var(--ease-out), border-color 220ms var(--ease-out),
+                color 220ms var(--ease-out), fill 220ms var(--ease-out), stroke 220ms var(--ease-out) !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html[data-trocando] *) { transition: none !important; }
+  }
   :global(body) {
     background: var(--surface); color: var(--ink);
     font: 400 1rem/1.625 var(--font-sans);
@@ -222,6 +231,7 @@ const nav = [
   }
   .menu__cv { padding-inline: var(--space-4); color: var(--ink-muted) !important; padding-block: 0 !important; }
   .tema { width: 40px; padding: 0; }
+  @media (prefers-reduced-motion: reduce) { .tema svg { transition: opacity 160ms var(--ease-out); transform: none !important; } }
 
   .idiomas { padding: 0; overflow: hidden; }
   .idioma {
@@ -240,14 +250,16 @@ const nav = [
   }
   .menu__cv:focus-visible, .tema:focus-visible, .idioma:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .tema svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
-  .tema__lua { display: none; }
+  .tema { display: grid; place-items: center; }
+  .tema svg { grid-area: 1 / 1; transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out); }
+  .tema__lua { opacity: 0; transform: rotate(-90deg) scale(0.8); }
   :global(:root[data-tema='dark']) .tema__sol,
-  :global(:root:not([data-tema='light'])) .tema__sol { display: none; }
+  :global(:root:not([data-tema='light'])) .tema__sol { opacity: 0; transform: rotate(90deg) scale(0.8); }
   :global(:root[data-tema='dark']) .tema__lua,
-  :global(:root:not([data-tema='light'])) .tema__lua { display: block; }
+  :global(:root:not([data-tema='light'])) .tema__lua { opacity: 1; transform: none; }
   @media (prefers-color-scheme: light) {
-    :global(:root:not([data-tema='dark'])) .tema__sol { display: block; }
-    :global(:root:not([data-tema='dark'])) .tema__lua { display: none; }
+    :global(:root:not([data-tema='dark'])) .tema__sol { opacity: 1; transform: none; }
+    :global(:root:not([data-tema='dark'])) .tema__lua { opacity: 0; transform: rotate(-90deg) scale(0.8); }
   }
   .tema:active, .menu__cv:active { transform: scale(0.96); }
   .tema:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
