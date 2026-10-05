@@ -1,4 +1,3 @@
-// Títulos e datas copiados do currículo, sem adjetivo e sem qualificador.
 export const trajetoria = [
   {
     cargo: 'Desenvolvedor Full Stack (Ruby on Rails)',

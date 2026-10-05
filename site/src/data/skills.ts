@@ -1,8 +1,5 @@
-// Agrupadas pelo que resolvem. União dos dois currículos.
-// Istio, KEDA e CloudFormation ficam de fora: não são defensáveis em entrevista.
 export const areasEn: Record<string, string> = {"Plataforma e containers": "Platform and containers", "Entrega e GitOps": "Delivery and GitOps", "Infraestrutura como código": "Infrastructure as code", "Cloud": "Cloud", "Sistemas": "Systems", "Observabilidade": "Observability", "Mensageria e gateway": "Messaging and gateway", "Linguagens": "Languages", "Backend e dados": "Backend and data", "Frontend e mobile": "Frontend and mobile", "Testes e qualidade": "Testing and quality", "Segurança": "Security", "Idiomas": "Spoken languages"};
 
-// Só os itens que são descrição, não nome próprio, precisam de tradução.
 export const itensEn: Record<string, string> = {
   "Português nativo": "Portuguese (native)",
   "Inglês avançado (C1)": "English (C1)",

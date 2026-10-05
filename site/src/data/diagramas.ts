@@ -1,4 +1,3 @@
-// Texto dos diagramas nos dois idiomas. O desenho é o mesmo; só a palavra muda.
 export const dg = {
   esteira: {
     pt: { antes: 'Antes', depois: 'Depois', svcA: 'serviço A', svcB: 'serviço B', svcC: 'serviço C',

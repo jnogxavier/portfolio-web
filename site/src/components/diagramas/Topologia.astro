@@ -4,9 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.topologia[lang];
-// Uma afirmação: existe uma porta só para fora, e as redes dos produtos não se
-// falam diretamente — o tráfego entre elas sobe para a camada de aplicação.
-// Versão abstrata de propósito: sem nome de recurso, sem faixa de endereço.
 ---
 <figure class="dg">
   <svg viewBox="0 0 620 430" role="img"

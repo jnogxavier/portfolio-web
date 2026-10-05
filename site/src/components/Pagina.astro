@@ -137,7 +137,6 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .lede { margin: 0; max-width: 56ch; font-size: 1.0625rem; opacity: 0.92; }
   .capa__acoes { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-2) 0 0; }
 
-  /* Seções com fundo alternado: a separação é da cor, não de uma régua fina. */
   .secao { padding-block: var(--space-8); }
   .secao--alt { background: var(--surface-raised); border-block: 1px solid var(--line); }
   .secao h2 {
@@ -174,14 +173,11 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     .trilha li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
   }
 
-  /* Linha de definição: área à esquerda, tecnologias à direita.
-     Formato de referência — varre-se a esquerda e lê-se a direita. */
   .skills { margin: 0; }
   .skills__linha { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid var(--line); }
   .skills__linha:first-child { border-top: none; padding-top: 0; }
   .skills dt { font: 600 0.9375rem/1.4 var(--font-sans); color: var(--ink); }
   .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) 0; min-width: 0; }
-  /* Régua entre itens: metade deles tem duas palavras, e só espaço não separa. */
   .skills dd span {
     font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); white-space: nowrap;
     padding-inline: var(--space-3);
@@ -195,7 +191,6 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .lista { list-style: none; margin: 0; padding: 0; }
   .lista li { border-top: 1px solid var(--line); }
   .lista li:first-child { border-top: none; }
-  /* A linha inteira é o alvo. A seta diz isso antes do cursor chegar. */
   .lista a {
     display: grid; grid-template-columns: 1fr auto; align-items: center;
     gap: var(--space-4);

@@ -4,9 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.esteira[lang];
-// Uma afirmação: antes cada serviço levava seu próprio caminho; depois todos
-// passam pelos mesmos templates, e o cache fica no meio do caminho de todos.
-// A diferença entre as duas metades é o conteúdo do desenho.
 ---
 <figure class="dg">
   <svg viewBox="0 0 620 330" role="img"

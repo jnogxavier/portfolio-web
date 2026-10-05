@@ -4,7 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.gateway[lang];
-// Uma afirmação: o que não está na lista não atravessa.
 ---
 <figure class="dg">
   <svg viewBox="0 0 640 250" role="img" aria-label={d.alt}>

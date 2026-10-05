@@ -1,4 +1,3 @@
-// Rótulos de interface por idioma. Conteúdo fica nas coleções e nos data files.
 export const textos = {
   pt: {
     lang: 'pt-BR', outro: 'en', outroNome: 'English', raiz: '/',

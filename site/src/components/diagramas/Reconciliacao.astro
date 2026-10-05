@@ -4,9 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.reconciliacao[lang];
-// Uma afirmação: o ArgoCD compara o que o repositório declara com o que o
-// cluster tem, e a diferença é o que ele corrige. A seta de volta é o desenho
-// inteiro — sem ela isto seria só mais um deploy.
 ---
 <figure class="dg">
   <svg viewBox="0 0 620 230" role="img"

@@ -14,7 +14,6 @@ const outro = textos[x.outro];
 const raiz = x.raiz;
 const aqui = Astro.url.pathname;
 const alterna = parUrl ?? (lang === 'en' ? '/' : '/en/');
-// Menu não promete conteúdo que não existe: Notas só entra quando houver nota.
 const temNotas = (await getCollection('notas')).length > 0;
 const nav = [
   { texto: x.nav.sobre, href: raiz + '#sobre' },
@@ -85,7 +84,6 @@ const nav = [
       <div class="faixa topo__linha">
         <a class="marca" href={raiz} aria-label="Início" aria-current={atual === '/' ? 'page' : undefined}><Placa /></a>
 
-
         <nav class="menu" aria-label="Principal">
           {nav.map((l) => (
             <a href={l.href} aria-current={atual === l.href ? 'page' : undefined}>{l.texto}</a>
@@ -147,16 +145,13 @@ const nav = [
 <style>
   :global(html) {
     margin: 0;
-    /* A barra fixa tem 96px. Sem isto, a âncora para atrás dela. */
     scroll-padding-top: 7.5rem;
     scroll-behavior: smooth;
   }
   @media (prefers-reduced-motion: reduce) { :global(html) { scroll-behavior: auto; } }
   :global(body) { margin: 0; }
-  /* Destaque breve na seção alcançada, para a pessoa ver onde parou. */
   :global(section:target > .faixa > h2),
   :global(section:target > .faixa > .secao__cabeca > h2) {
-    /* O destaque acompanha a palavra, não a largura da faixa. */
     width: fit-content; max-width: 100%;
     animation: alvo 1600ms ease-out both;
   }
@@ -168,7 +163,6 @@ const nav = [
     :global(section:target > .faixa > h2),
     :global(section:target > .faixa > .secao__cabeca > h2) { animation: none; }
   }
-  /* Curva única do sistema. A nativa do navegador é fraca demais. */
   :global(:root) { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
   :global(body) {
     background: var(--surface); color: var(--ink);
@@ -179,7 +173,6 @@ const nav = [
     max-width: 68rem; margin-inline: auto;
     padding-inline: max(var(--space-5), env(safe-area-inset-left), env(safe-area-inset-right));
   }
-  /* Papel milimetrado. O que tira a cara de branco liso. */
   :global(.malha) {
     position: absolute; inset: 0; pointer-events: none; opacity: 0.14;
     background-image:
@@ -204,8 +197,6 @@ const nav = [
     display: flex; align-items: center; justify-content: space-between;
     gap: var(--space-3) var(--space-5); min-height: 60px; flex-wrap: wrap;
   }
-  /* Ocupa o meio com informação, não com simetria. */
-  /* Sem caixa: o ponto já é o estado. O círculo é o nó da malha, vivo. */
   .estado {
     margin: 0; display: flex; align-items: center; gap: var(--space-2); min-width: 0;
     font: 400 0.8125rem/1 var(--font-sans); color: var(--ink);
@@ -219,7 +210,6 @@ const nav = [
   @media (hover: hover) { .estado a:hover { text-decoration-color: currentColor; } }
   .estado__onde { color: var(--ink-muted); white-space: nowrap; margin-left: var(--space-2); }
 
-  /* Currículo, idioma e tema formam um conjunto: mesma altura, mesma borda. */
   .menu__cv, .idiomas, .tema {
     display: inline-flex; align-items: center; justify-content: center;
     height: 40px; align-self: center; flex: none; position: relative;
@@ -231,7 +221,6 @@ const nav = [
   .menu__cv { padding-inline: var(--space-4); color: var(--ink-muted) !important; padding-block: 0 !important; }
   .tema { width: 40px; padding: 0; }
 
-  /* Par segmentado: os dois idiomas visíveis, o ativo preenchido. */
   .idiomas { padding: 0; overflow: hidden; }
   .idioma {
     display: inline-flex; align-items: center; height: 100%;
@@ -261,7 +250,6 @@ const nav = [
   .tema:active, .menu__cv:active { transform: scale(0.96); }
   .tema:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   @media (hover: hover) { .tema:hover { color: var(--ink); border-color: var(--brand); } }
-
 
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; }

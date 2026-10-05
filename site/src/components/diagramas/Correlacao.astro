@@ -4,8 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.correlacao[lang];
-// Uma afirmação: uma execução emite três sinais, os três carregam o mesmo
-// identificador, e quem decide o destino é o Collector — não o código.
 ---
 <figure class="dg">
   <svg viewBox="0 0 640 300" role="img"

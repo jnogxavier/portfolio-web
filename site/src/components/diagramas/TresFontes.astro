@@ -4,8 +4,6 @@ import type { Idioma } from '../../i18n';
 interface Props { lang?: Idioma }
 const { lang = 'pt' } = Astro.props;
 const d = dg.tresfontes[lang];
-// Uma afirmação: a configuração de um serviço mora em três lugares que não se
-// falam. A ferramenta lê os três e mostra junto, com o valor sensível coberto.
 ---
 <figure class="dg">
   <svg viewBox="0 0 640 260" role="img"
