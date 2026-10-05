@@ -148,9 +148,12 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
   .sobre { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
+  @starting-style { .retrato { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .retrato { transition: none; } }
   .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
   .sobre__texto p { margin: 0; }
   .retrato {
+    opacity: 1; transition: opacity 240ms var(--ease-out);
     width: 148px; height: auto; aspect-ratio: 4 / 5; flex: none;
     object-fit: cover;
     border: 1px solid var(--line); border-radius: var(--radius-sm);
