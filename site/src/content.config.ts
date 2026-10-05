@@ -42,12 +42,5 @@ const casosEn = defineCollection({
   }),
 });
 
-const notas = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/notas' }),
-  schema: z.object({
-    titulo: z.string(),
-    resumo: z.string(),
-  }),
-});
 
-export const collections = { casos, casosEn, notas };
+export const collections = { casos, casosEn };

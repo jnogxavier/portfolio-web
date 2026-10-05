@@ -1,35 +1,22 @@
 # jnogxavier-portfolio
 
 Portfólio pessoal de João Vitor Nogueira Xavier — DevOps, Platform Engineer e
-desenvolvedor full stack. Site estático em Astro, com design system próprio.
+desenvolvedor full stack. Site estático em Astro, em português e inglês.
 
-## Estrutura
+## Rodar
 
-- `design-system/` — tokens em OKLCH, manual e componentes. Fonte única do
-  vocabulário visual. Um script copia os arquivos para o site antes de cada build.
-- `site/` — o site em Astro, em português e inglês.
-
-## Rodando
-
-```bash
+```sh
 cd site
 npm install
 npm run dev
 ```
 
-O `npm run sync` roda sozinho antes de `dev` e `build`, trazendo os tokens e o
-CSS dos componentes do design system.
+`npm run build` gera o site em `site/dist`.
 
-## Como o conteúdo é organizado
+## Onde está o quê
 
-É portfólio, não currículo em HTML. Cada trabalho é contado como caso, nesta
-ordem: o que deveria acontecer, o que acontecia, o que eu fiz, o resultado
-medido, e o que eu faria diferente. O número fecha o caso, nunca abre.
-
-Casos sem número medido não entram.
-
-## Idiomas
-
-Português na raiz, inglês em `/en/`. Cada caso declara o par no outro idioma
-pelo campo `par` do frontmatter, então a troca de idioma vai para a página
-equivalente e não para a home.
+- `site/src/content/casos` e `casos-en` — os casos, um arquivo por caso. O campo
+  `par` liga a versão em português à versão em inglês.
+- `site/src/data` — trajetória, skills e os textos dos diagramas.
+- `site/src/i18n.ts` — todo rótulo de interface nos dois idiomas.
+- `site/src/styles/tokens.css` — cores em OKLCH, espaçamento e tipografia.
