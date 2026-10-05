@@ -2,21 +2,15 @@
 import { getCollection } from 'astro:content';
 import Pagina from '../components/Pagina.astro';
 import { trajetoria } from '../data/trajetoria';
+import { sobre } from '../data/sobre';
+import { textos } from '../i18n';
 
 const casos = (await getCollection('casos')).sort((a, b) => a.data.ordem - b.data.ordem);
-const sobre = [
-  'Passei cinco anos escrevendo aplicação, boa parte em Ruby on Rails. Sistemas que as pessoas usavam todo dia, com os problemas que vêm junto.',
-  'Só que eu vivia travando nas mesmas coisas, e nenhuma delas era regra de negócio. Era build que levava quinze minutos. Era deploy quebrando na sexta sem ninguém saber o que tinha mudado. Aí fui atrás de entender, e acabei ficando desse lado.',
-  'Hoje faço plataforma: Kubernetes, entrega contínua, infraestrutura como código, observabilidade. Mantenho um Rails em produção também, e isso ajuda — quando alguém reclama da esteira, eu sei do que a pessoa está falando.',
-  'Gosto de ir atrás da causa, mesmo quando tapar o sintoma seria mais rápido. E deixo registrado por que uma decisão foi tomada. Seis meses depois ninguém lembra, e a decisão vira lenda.',
-];
 ---
+
 <Pagina
   lang="pt"
-  t={{
-    titulo: 'João Vitor Nogueira Xavier — DevOps, Platform Engineer e Full Stack',
-    descricao: 'Engenheiro de plataforma e desenvolvedor full stack em Goiânia. DevOps, SRE, infraestrutura, Kubernetes, entrega contínua e Ruby on Rails.',
-  }}
+  seo={{ titulo: textos.pt.seoTitulo, descricao: textos.pt.seoDescricao }}
   casos={casos}
   linha={trajetoria}
   sobre={sobre}

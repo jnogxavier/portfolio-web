@@ -2,22 +2,16 @@
 import { getCollection } from 'astro:content';
 import Pagina from '../../components/Pagina.astro';
 import { trajetoriaEn } from '../../data/trajetoria-en';
+import { sobreEn } from '../../data/sobre';
+import { textos } from '../../i18n';
 
 const casos = (await getCollection('casosEn')).sort((a, b) => a.data.ordem - b.data.ordem);
-const sobre = [
-  'I spent five years writing applications, most of it in Ruby on Rails. Systems people used every day, with the problems that come with that.',
-  'The thing is, I kept getting stuck on the same things, and none of them were business rules. It was a build that took fifteen minutes. It was a deploy breaking on a Friday with nobody able to say what had changed. So I went to find out, and ended up staying on this side.',
-  'These days I do platform work: Kubernetes, continuous delivery, infrastructure as code, observability. I also keep a Rails application in production, and that helps — when someone complains about the pipeline, I know what they mean.',
-  'I prefer to go after the cause, even when patching the symptom would be faster. And I write down why a decision was made. Six months later nobody remembers, and the decision turns into folklore.',
-];
 ---
+
 <Pagina
   lang="en"
-  t={{
-    titulo: 'João Vitor Nogueira Xavier — DevOps, Platform Engineer and Full Stack',
-    descricao: 'Platform engineer and full stack developer in Goiânia, Brazil. DevOps, SRE, infrastructure, Kubernetes, continuous delivery and Ruby on Rails.',
-  }}
+  seo={{ titulo: textos.en.seoTitulo, descricao: textos.en.seoDescricao }}
   casos={casos}
   linha={trajetoriaEn}
-  sobre={sobre}
+  sobre={sobreEn}
 />

@@ -7,40 +7,40 @@ import { textos, type Idioma } from '../i18n';
 
 interface Props {
   lang: Idioma;
-  t: { titulo: string; descricao: string };
+  seo: { titulo: string; descricao: string };
   casos: { id: string; data: any }[];
   linha: any[];
   sobre: string[];
 }
-const { lang, t, casos, linha, sobre } = Astro.props;
-const x = textos[lang];
+const { lang, seo, casos, linha, sobre } = Astro.props;
+const rotulos = textos[lang];
 const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade.';
 ---
 <Base
-  titulo={t.titulo}
-  descricao={t.descricao}
+  titulo={seo.titulo}
+  descricao={seo.descricao}
   lang={lang}
 >
   <section class="capa" id="topo">
     <Malha />
     <div class="faixa capa__texto">
       <p class="capa__nome">João Vitor Nogueira Xavier</p>
-      <h1>{x.h1}</h1>
-      <p class="lede">{x.lede}</p>
+      <h1>{rotulos.h1}</h1>
+      <p class="lede">{rotulos.lede}</p>
       <p class="capa__acoes">
-        <a class="jnx-acao jnx-acao--sobre-cor" href="#casos">{x.verCasos}</a>
+        <a class="jnx-acao jnx-acao--sobre-cor" href="#casos">{rotulos.verCasos}</a>
         <a class="jnx-acao jnx-acao--sobre-cor jnx-acao--secundaria" href={zap}
-           target="_blank" rel="noopener noreferrer">{x.zap}</a>
+           target="_blank" rel="noopener noreferrer">{rotulos.zap}</a>
       </p>
     </div>
   </section>
 
   <section class="secao" id="sobre">
     <div class="faixa">
-      <h2>{x.tSobre}</h2>
+      <h2>{rotulos.tSobre}</h2>
       <div class="sobre">
         <img class="retrato" src="/retrato.webp" width="444" height="555"
-             alt={x.fotoAlt} decoding="async" />
+             alt={rotulos.fotoAlt} decoding="async" />
         <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
       </div>
     </div>
@@ -48,7 +48,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
 
   <section class="secao secao--alt" id="experiencia">
     <div class="faixa">
-      <h2>{x.tExp}</h2>
+      <h2>{rotulos.tExp}</h2>
       <ol class="trilha">
         {linha.map((e) => (
           <li>
@@ -59,7 +59,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
             <div class="trilha__oque">
               <h3>{e.cargo}</h3>
               <p class="trilha__onde">{e.onde}</p>
-              {e.texto.map((t) => <p>{t}</p>)}
+              {e.texto.map((paragrafo) => <p>{paragrafo}</p>)}
             </div>
           </li>
         ))}
@@ -69,8 +69,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
 
   <section class="secao" id="skills">
     <div class="faixa">
-      <h2>{x.tSkills}</h2>
-      <p class="skills__intro">{x.skillsNota}</p>
+      <h2>{rotulos.tSkills}</h2>
+      <p class="skills__intro">{rotulos.skillsNota}</p>
       <dl class="skills">
         {skills.map((g) => (
           <div class="skills__linha">
@@ -85,8 +85,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   <section class="secao secao--alt" id="casos">
     <div class="faixa">
       <div class="secao__cabeca">
-        <h2>{x.tCasos}</h2>
-        <p class="secao__nota">{x.casosNota}</p>
+        <h2>{rotulos.tCasos}</h2>
+        <p class="secao__nota">{rotulos.casosNota}</p>
       </div>
       <ol class="lista">
         {casos.map((c) => (
@@ -110,8 +110,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
 
   <section class="secao" id="contato">
     <div class="faixa">
-      <h2>{x.tContato}</h2>
-      <p class="contato__nota">{x.contatoNota}</p>
+      <h2>{rotulos.tContato}</h2>
+      <p class="contato__nota">{rotulos.contatoNota}</p>
       <nav class="canais" aria-label="Canais de contato">
         <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" />jnogxavier@gmail.com</a>
         <a href={zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>

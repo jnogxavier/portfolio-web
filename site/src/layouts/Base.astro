@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import Placa from '../components/marcas/Tipografica.astro';
 import Icone from '../components/Icone.astro';
 import '../styles/tokens.css';
@@ -14,7 +13,6 @@ const outro = textos[x.outro];
 const raiz = x.raiz;
 const aqui = Astro.url.pathname;
 const alterna = parUrl ?? (lang === 'en' ? '/' : '/en/');
-const temNotas = (await getCollection('notas')).length > 0;
 const nav = [
   { texto: x.nav.sobre, href: raiz + '#sobre' },
   { texto: x.nav.exp, href: raiz + '#experiencia' },
