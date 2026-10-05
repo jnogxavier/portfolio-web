@@ -1,5 +1,5 @@
 ---
-titulo: Telemetria fora do fornecedor, com OpenTelemetry
+titulo: Provar a saída do fornecedor antes de pedir a migração
 meta: DevOps Engineer na BCJ, 2026
 ordem: 3
 par: observability-otel
@@ -13,20 +13,22 @@ observado: >-
   saber que algo falhou, não onde. E o log não conversava com o trace, então
   cada investigação começava do zero.
 reconciliado: >-
-  SDK do OpenTelemetry inicializado no core, antes de qualquer outra coisa, com
+  Montei uma prova de conceito a partir do backend real, com o SDK do
+  OpenTelemetry inicializado no core antes de qualquer outra coisa e
   auto-instrumentação de HTTP, Express e Postgres. Cada job virou um span
   próprio, com contador de execução e de erro, medidor de jobs em curso e
   histograma de duração por status. O log passou a carregar traceId e spanId
-  quando existe span ativo. A exportação é OTLP para o Collector, e dali a
-  telemetria vai para onde a plataforma quiser — Tempo, Prometheus, Loki — sem
-  tocar no código da aplicação.
+  quando existe span ativo. A exportação é OTLP para o Collector, que decide o
+  destino — Tempo, Prometheus, Loki — sem a aplicação saber qual é.
+  Documentei a proposta, as decisões de implementação e o roteiro de adoção,
+  incluindo o que faltaria para o TypeORM.
 resultado:
-  antes: um agente proprietário
+  antes: zero instrumentação própria
   valor: "4"
-  unidade: serviços com log, métrica e trace correlacionados
+  unidade: serviços instrumentados na prova de conceito, com log, métrica e trace correlacionados
 chamada: >-
-  Troquei o agente do Elastic APM por OpenTelemetry, para log, métrica e
-  trace falarem da mesma execução.
+  Instrumentei quatro serviços com OpenTelemetry em prova de conceito, para
+  mostrar com código rodando que dava para sair do agente proprietário.
 ganhos:
   - >-
     A telemetria deixou de depender de um fornecedor. O Collector passou a
@@ -35,13 +37,16 @@ ganhos:
     Investigação de job lento começou a ter ponto de partida: do log, pelo
     traceId, direto para o trace da execução.
   - >-
-    Sumiu a instrumentação duplicada, que custava processamento e criava risco
-    de build por referência residual ao agente antigo.
+    A instrumentação ficou num só lugar, no core, em vez de espalhada por
+    serviço — então ligar um serviço novo deixou de ser trabalho de instrumentar
+    e virou trabalho de importar.
 aprendizado: >-
-  Parou como prova de conceito. Eu tinha instrumentação, métrica e correlação
-  funcionando, e não levei até um alerta em produção — e alerta é o que
-  transforma telemetria em operação. Hoje eu teria escolhido um sintoma só,
-  como job que estoura o tempo esperado, e fechado o ciclo inteiro até alguém
-  ser acordado por ele, antes de instrumentar o resto.
+  A prova de conceito funcionou e a migração não aconteceu: produção seguiu com
+  o agente proprietário. Eu tratei o problema como técnico quando ele era de
+  prioridade — código rodando não convence sozinho quem precisa aprovar parar
+  outra coisa para adotar.
+  Se eu recomeçasse, levaria antes o número que interessa a quem decide: quanto
+  tempo se perde hoje numa investigação que começa do zero porque log e trace
+  não se falam. Depois mostraria o código.
 links: []
 ---
