@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { textos } from '../../i18n';
 import Caso from '../../components/Caso.astro';
 
 export async function getStaticPaths() {
@@ -11,7 +12,7 @@ const { caso } = Astro.props;
 ---
 <Base titulo={`${caso.titulo} — jnogxavier`} descricao={caso.chamada} parUrl={caso.par ? `/en/casos/${caso.par}/` : undefined}>
   <section class="faixa pagina">
-    <a class="voltar jnx-link" href="/#casos">Voltar aos casos</a>
+    <a class="voltar jnx-link" href="/#casos">{textos.pt.voltar}</a>
     <Caso {...caso} />
   </section>
 </Base>

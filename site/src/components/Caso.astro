@@ -1,11 +1,13 @@
 ---
+import { textos, type Idioma } from '../i18n';
 import Esteira from './diagramas/Esteira.astro';
 import Reconciliacao from './diagramas/Reconciliacao.astro';
 import Topologia from './diagramas/Topologia.astro';
-import { textos, type Idioma } from '../i18n';
 import Correlacao from './diagramas/Correlacao.astro';
 import TresFontes from './diagramas/TresFontes.astro';
 import Gateway from './diagramas/Gateway.astro';
+
+const diagramas = { esteira: Esteira, reconciliacao: Reconciliacao, topologia: Topologia, correlacao: Correlacao, tresfontes: TresFontes, gateway: Gateway };
 
 interface Props {
   titulo: string; meta: string;
@@ -15,14 +17,14 @@ interface Props {
   ganhos?: string[];
   lang?: Idioma;
   aprendizado: string;
-  links?: { texto: string; href: string }[];
 }
-const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, links = [], lang = 'pt' } = Astro.props;
-const x = textos[lang];
+const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, lang = 'pt' } = Astro.props;
+const rotulos = textos[lang];
+const Diagrama = diagrama ? diagramas[diagrama] : null;
 const leituras = [
-  { rotulo: x.movimentos[0], texto: declarado },
-  { rotulo: x.movimentos[1], texto: observado },
-  { rotulo: x.movimentos[2], texto: reconciliado },
+  { rotulo: rotulos.movimentos[0], texto: declarado },
+  { rotulo: rotulos.movimentos[1], texto: observado },
+  { rotulo: rotulos.movimentos[2], texto: reconciliado },
 ];
 ---
 <article class="jnx-caso">
@@ -38,24 +40,20 @@ const leituras = [
     </div>
   ))}
 
-  {diagrama === 'esteira' && <Esteira lang={lang} />}
-  {diagrama === 'reconciliacao' && <Reconciliacao lang={lang} />}
-  {diagrama === 'topologia' && <Topologia lang={lang} />}
-  {diagrama === 'correlacao' && <Correlacao lang={lang} />}
-  {diagrama === 'tresfontes' && <TresFontes lang={lang} />}
-  {diagrama === 'gateway' && <Gateway lang={lang} />}
+
+  {Diagrama && <Diagrama lang={lang} />}
 
   {resultado && (
     <p class="jnx-caso__resultado">
       <span class="jnx-caso__medida">{resultado.valor}</span>
       {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
-      {resultado.antes && <span class="jnx-caso__unidade">{x.contra} {resultado.antes} {x.antes}</span>}
+      {resultado.antes && <span class="jnx-caso__unidade">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
     </p>
   )}
 
   {ganhos.length > 0 && (
     <div class="jnx-caso__movimento">
-      <h2 class="jnx-caso__rotulo">{x.destravou}</h2>
+      <h2 class="jnx-caso__rotulo">{rotulos.destravou}</h2>
       <ul class="ganhos">
         {ganhos.map((g) => <li>{g}</li>)}
       </ul>
@@ -63,15 +61,10 @@ const leituras = [
   )}
 
   <div class="jnx-caso__movimento">
-    <h2 class="jnx-caso__rotulo">{x.faria}</h2>
+    <h2 class="jnx-caso__rotulo">{rotulos.faria}</h2>
     <p class="jnx-caso__texto">{aprendizado}</p>
   </div>
 
-  {links.length > 0 && (
-    <nav class="jnx-caso__links">
-      {links.map((l) => <a class="jnx-link" href={l.href}>{l.texto}</a>)}
-    </nav>
-  )}
 </article>
 
 <style>
