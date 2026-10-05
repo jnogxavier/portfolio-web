@@ -96,9 +96,15 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
         {casos.map((c) => (
           <li>
             <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
-              <h3>{c.data.titulo}</h3>
-              <p>{c.data.chamada}</p>
-              <span class="lista__onde">{c.data.meta}</span>
+              <span class="lista__texto">
+                <h3>{c.data.titulo}</h3>
+                <p>{c.data.chamada}</p>
+                <span class="lista__onde">{c.data.meta}</span>
+              </span>
+              <svg class="lista__seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </a>
           </li>
         ))}
@@ -195,14 +201,34 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .lista { list-style: none; margin: 0; padding: 0; }
   .lista li { border-top: 1px solid var(--line); }
   .lista li:first-child { border-top: none; }
+  /* A linha inteira é o alvo. A seta diz isso antes do cursor chegar. */
   .lista a {
-    display: block; padding-block: var(--space-5); color: inherit; text-decoration: none;
-    transition: background-color 140ms ease;
+    display: grid; grid-template-columns: 1fr auto; align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+    padding-inline: var(--space-3);
+    margin-inline: calc(var(--space-3) * -1);
+    border-radius: var(--radius-sm);
+    color: inherit; text-decoration: none;
+    transition: background-color 160ms ease;
+  }
+  .lista__texto { min-width: 0; }
+  .lista__seta {
+    width: 1.375rem; height: 1.375rem; color: var(--ink-muted);
+    transition: transform 180ms var(--ease-out), color 160ms ease;
   }
   .lista h3 { margin: 0 0 var(--space-2); font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; }
   .lista p { margin: 0 0 var(--space-2); color: var(--ink-muted); max-width: 64ch; }
   .lista__onde { font-size: 0.75rem; color: var(--ink-muted); }
-  @media (hover: hover) { .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; } }
+  @media (hover: hover) {
+    .lista a:hover { background: color-mix(in oklch, var(--brand) 7%, transparent); }
+    .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
+    .lista a:hover .lista__seta { transform: translateX(5px); color: var(--brand-ink); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lista__seta { transition: color 160ms ease; }
+    .lista a:hover .lista__seta { transform: none; }
+  }
   .lista a:active { background: var(--line); }
   .lista a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 
