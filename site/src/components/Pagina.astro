@@ -41,7 +41,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
       <div class="sobre">
-        <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
+        <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p>{p}</p></div>)}</div>
       </div>
     </div>
   </section>
@@ -176,8 +176,10 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
       transition: opacity 220ms linear; transition-delay: 0ms; transform: none !important;
     }
   }
-  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; min-width: 0; }
-  .sobre__texto p { margin: 0; }
+  .sobre__texto { display: flex; flex-direction: column; min-width: 0; }
+  .sobre__bloco { padding-block: var(--space-4); border-top: 1px solid var(--line); }
+  .sobre__bloco:first-child { border-top: none; padding-top: 0; }
+  .sobre__bloco p { margin: 0; max-width: 66ch; }
 
   .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .trilha li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
