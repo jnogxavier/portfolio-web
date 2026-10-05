@@ -39,12 +39,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     <div class="faixa">
       <h2>{x.tSobre}</h2>
       <div class="sobre">
-        <div class="retrato" role="img" aria-label={x.fotoAlt}>
-          <svg viewBox="0 0 80 100" aria-hidden="true">
-            <circle cx="40" cy="38" r="15" /><path d="M14 92 a26 26 0 0 1 52 0" />
-          </svg>
-          <span>{x.foto}</span>
-        </div>
+        <img class="retrato" src="/retrato.webp" width="444" height="555"
+             alt={x.fotoAlt} decoding="async" />
         <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
       </div>
     </div>
@@ -156,13 +152,11 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
   .sobre__texto p { margin: 0; }
   .retrato {
-    width: 148px; aspect-ratio: 4 / 5; flex: none;
-    border: 1px dashed var(--line); background: var(--surface-raised);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: var(--space-2); color: var(--ink-muted);
+    width: 148px; height: auto; aspect-ratio: 4 / 5; flex: none;
+    object-fit: cover;
+    border: 1px solid var(--line); border-radius: var(--radius-sm);
+    background: var(--surface-raised);
   }
-  .retrato svg { width: 48px; height: 60px; fill: none; stroke: currentColor; stroke-width: 3; opacity: 0.35; }
-  .retrato span { font: 500 0.6875rem/1 var(--font-sans); letter-spacing: 0.08em; opacity: 0.7; }
   @media (min-width: 46rem) { .sobre { flex-direction: row; gap: var(--space-6); } }
 
   .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
