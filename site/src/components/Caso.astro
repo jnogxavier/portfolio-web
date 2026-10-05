@@ -1,5 +1,6 @@
 ---
 import { textos, type Idioma } from '../i18n';
+import { dg } from '../data/diagramas';
 import Esteira from './diagramas/Esteira.astro';
 import Reconciliacao from './diagramas/Reconciliacao.astro';
 import Topologia from './diagramas/Topologia.astro';
@@ -41,7 +42,7 @@ const leituras = [
   ))}
 
 
-  {Diagrama && <Diagrama lang={lang} />}
+  {Diagrama && diagrama && <Diagrama d={dg[diagrama][lang]} />}
 
   {resultado && (
     <p class="jnx-caso__resultado">
