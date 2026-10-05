@@ -39,8 +39,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
 
   <section class="secao" id="sobre">
     <div class="faixa">
-      <h2>{rotulos.tSobre}</h2>
       <div class="sobre">
+        <h2>{rotulos.tSobre}</h2>
         <div class="sobre__texto">{sobre.map((p) => <p>{p}</p>)}</div>
       </div>
     </div>
@@ -133,7 +133,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     width: 100%; max-width: 300px; height: auto; aspect-ratio: 4 / 5;
     object-fit: cover; justify-self: start;
     border: 1px solid color-mix(in oklch, var(--band-ink) 28%, transparent);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-lg);
   }
   @media (min-width: 56rem) {
     .capa__grade { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); }
@@ -158,7 +158,11 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__cabeca h2 { margin-bottom: var(--space-2); }
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
-  .sobre { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
+  .sobre { display: grid; gap: var(--space-4); }
+  .sobre h2 { margin: 0; }
+  @media (min-width: 46rem) {
+    .sobre { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+  }
   }
 
   .capa__nome, .capa h1, .lede, .capa__acoes {
@@ -176,7 +180,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
       transition: opacity 220ms linear; transition-delay: 0ms; transform: none !important;
     }
   }
-  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
+  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; min-width: 0; }
   .sobre__texto p { margin: 0; }
 
   .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
