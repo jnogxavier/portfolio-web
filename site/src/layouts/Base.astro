@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Placa from '../components/marcas/Tipografica.astro';
 import Icone from '../components/Icone.astro';
 import '../styles/tokens.css';
-import '../styles/bundle.css';
+import '../styles/componentes.css';
 import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
@@ -130,8 +130,6 @@ const nav = [
         </nav>
       </div>
     </footer>
-
-    <script src="/bundle.js" defer is:inline></script>
     <script is:inline>
       document.getElementById('tema')?.addEventListener('click', () => {
         const raiz = document.documentElement;

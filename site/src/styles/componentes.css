@@ -1,0 +1,33 @@
+/* Tamanhos em rem para respeitar a preferência de fonte do navegador.
+   Espaçamento entre irmãos por gap, nunca por margin. */
+
+.jnx-caso {
+  max-width: 68ch; min-width: 0;
+  display: flex; flex-direction: column; gap: var(--space-7);
+  font: 400 1rem/1.625 var(--font-sans);
+}
+
+/* Alvo de toque de 44px sem engordar o texto: o recuo vertical do link faz a conta. */
+.jnx-link {
+  color: var(--brand-ink); text-underline-offset: 3px; overflow-wrap: anywhere;
+  display: inline-block; padding-block: 0.5625rem; min-width: 0;
+}
+.jnx-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+/* Dois papéis e nada mais: primário preenchido, secundário vazado.
+   Sobre faixa de cor, --sobre-cor inverte os dois sem criar um terceiro estilo. */
+.jnx-acao {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 11ch; padding-inline: var(--space-5);
+  font: 500 0.9375rem/1 var(--font-sans); text-decoration: none;
+  border: 1.5px solid var(--brand); background: var(--brand); color: var(--surface);
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms ease;
+}
+.jnx-acao--secundaria { background: transparent; color: var(--brand-ink); }
+.jnx-acao--sobre-cor { border-color: var(--band-ink); background: var(--band-ink); color: var(--band); }
+.jnx-acao--sobre-cor.jnx-acao--secundaria { background: transparent; color: var(--band-ink); }
+.jnx-acao:active { transform: scale(0.97); }
+.jnx-acao:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.jnx-acao--sobre-cor:focus-visible { outline-color: var(--band-ink); }
+@media (hover: hover) { .jnx-acao:hover { opacity: 0.88; } }
