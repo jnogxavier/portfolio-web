@@ -52,6 +52,18 @@ export const dg = {
       alt: 'A job run emits a log, a metric and a trace. All three carry the same traceId. They all leave over OTLP to the Collector, which forwards each kind of signal to its destination: Loki, Prometheus and Tempo.',
       cap: 'The win is the third column not being tied to the first. Swapping backends became Collector configuration, and the application never finds out.' },
   },
+  gateway: {
+    pt: { cliente: 'cliente', req: 'com token',
+      gw: 'gateway', gwN1: 'valida o token e o emissor', gwN2: 'teto por rota e por cliente',
+      passa: 'só o que passou', svc: 'serviço interno', descarta: 'endpoint não declarado aqui não responde',
+      alt: 'A requisição do cliente chega ao gateway com um token. O gateway valida o token e o emissor e aplica um teto de requisição por rota e por cliente. Só o que passa segue para o serviço interno. Endpoint que não está declarado no gateway não responde.',
+      cap: 'O ganho não é o gateway existir — ele já existia. É ele ter virado o único caminho, e passado a exigir identidade para deixar passar.' },
+    en: { cliente: 'client', req: 'with a token',
+      gw: 'gateway', gwN1: 'validates token and issuer', gwN2: 'rate limit per route and per client',
+      passa: 'only what passed', svc: 'internal service', descarta: 'an endpoint not declared here does not answer',
+      alt: 'The client request reaches the gateway with a token. The gateway validates the token and the issuer and applies a rate limit per route and per client. Only what passes goes through to the internal service. An endpoint not declared in the gateway does not answer.',
+      cap: 'The win is not that the gateway exists — it already did. It is that it became the only path, and started demanding identity to let anything through.' },
+  },
   tresfontes: {
     pt: { tres: 'Três lugares', td: 'task definition', tdN: 'variáveis de ambiente',
       sm: 'Secrets Manager', smN: 'segredos', ps: 'Parameter Store', psN: 'parâmetros',
