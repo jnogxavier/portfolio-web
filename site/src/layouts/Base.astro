@@ -166,10 +166,9 @@ const nav = [
     :global(section:target > .faixa > h2),
     :global(section:target > .faixa > .secao__cabeca > h2) { animation: none; }
   }
-  :global(:root) { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
   :global(html[data-trocando] *) {
-    transition: background-color 320ms var(--ease-out), border-color 320ms var(--ease-out),
-                color 320ms var(--ease-out), fill 320ms var(--ease-out), stroke 320ms var(--ease-out) !important;
+    transition: background-color 320ms ease, border-color 320ms ease,
+                color 320ms ease, fill 320ms ease, stroke 320ms ease !important;
   }
   @media (prefers-reduced-motion: reduce) {
     :global(html[data-trocando] *) { transition: none !important; }
@@ -218,7 +217,7 @@ const nav = [
   }
   .estado a { color: inherit; display: inline-flex; align-items: center; min-height: 36px; text-underline-offset: 3px; text-decoration-color: var(--line); }
   .estado a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-  @media (hover: hover) { .estado a:hover { text-decoration-color: currentColor; } }
+  @media (hover: hover) and (pointer: fine) { .estado a:hover { text-decoration-color: currentColor; } }
   .estado__onde { color: var(--ink-muted); white-space: nowrap; margin-left: var(--space-2); }
 
   .menu__cv, .idiomas, .tema {
@@ -227,7 +226,7 @@ const nav = [
     background: none; border: 1px solid var(--line); border-radius: var(--radius-sm);
     color: var(--ink-muted); cursor: pointer; text-decoration: none;
     font: 500 0.875rem/1 var(--font-sans);
-    transition: color 140ms ease, border-color 140ms ease;
+    transition: color 140ms ease, border-color 140ms ease, transform 140ms var(--ease-out);
   }
   .menu__cv { padding-inline: var(--space-4); color: var(--ink-muted) !important; padding-block: 0 !important; }
   .tema { width: 40px; padding: 0; }
@@ -244,7 +243,7 @@ const nav = [
   .idioma--atual { background: var(--brand); color: var(--surface) !important; }
 
   .menu__cv::after, .tema::after { content: ''; position: absolute; inset: -2px; }
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     .menu__cv:hover, .tema:hover { color: var(--ink) !important; border-color: var(--brand); }
     a.idioma:hover { background: var(--surface-raised); color: var(--ink) !important; }
   }
@@ -263,7 +262,7 @@ const nav = [
   }
   .tema:active, .menu__cv:active { transform: scale(0.96); }
   .tema:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-  @media (hover: hover) { .tema:hover { color: var(--ink); border-color: var(--brand); } }
+  @media (hover: hover) and (pointer: fine) { .tema:hover { color: var(--ink); border-color: var(--brand); } }
 
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; }
@@ -280,7 +279,7 @@ const nav = [
     color: var(--ink-muted); text-decoration: none; padding-block: 1.46875rem;
     transition: color 140ms ease;
   }
-  @media (hover: hover) { .menu a:hover { color: var(--ink); } }
+  @media (hover: hover) and (pointer: fine) { .menu a:hover { color: var(--ink); } }
   .menu a[aria-current='page'] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); }
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
@@ -297,6 +296,6 @@ const nav = [
   .rodape__links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
   .rodape__links a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; }
   .rodape a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in oklch, currentColor 45%, transparent); }
-  @media (hover: hover) { .rodape a:hover { text-decoration-color: currentColor; } }
+  @media (hover: hover) and (pointer: fine) { .rodape a:hover { text-decoration-color: currentColor; } }
   .rodape a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
 </style>

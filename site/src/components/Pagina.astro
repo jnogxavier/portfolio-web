@@ -148,17 +148,28 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
   .sobre { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
-  @starting-style { .retrato { opacity: 0; transform: translateY(8px); } }
-  @media (prefers-reduced-motion: reduce) { .retrato { transition: opacity 200ms linear; transform: none !important; } }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .retrato {
+        animation: entraRetrato linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 55%;
+      }
+      @keyframes entraRetrato {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: none; }
+      }
+    }
+  }
 
   .capa__nome, .capa h1, .lede, .capa__acoes {
     transform: none;
-    transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+    transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out);
   }
   .capa h1 { transition-delay: 70ms; }
   .lede { transition-delay: 140ms; }
   .capa__acoes { transition-delay: 210ms; }
-  .capa :global(.malha) { transition: opacity 900ms var(--ease-out) 120ms; }
+  .capa :global(.malha) { transition: opacity 640ms var(--ease-out) 140ms; }
   @starting-style {
     .capa__nome, .capa h1, .lede, .capa__acoes { opacity: 0; transform: translateY(14px); }
     .capa :global(.malha) { opacity: 0; }
@@ -171,8 +182,6 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); max-width: 66ch; }
   .sobre__texto p { margin: 0; }
   .retrato {
-    opacity: 1; transform: none;
-    transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
     width: 148px; height: auto; aspect-ratio: 4 / 5; flex: none;
     object-fit: cover;
     border: 1px solid var(--line); border-radius: var(--radius-sm);
@@ -231,7 +240,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .lista h3 { margin: 0 0 var(--space-2); font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; }
   .lista p { margin: 0 0 var(--space-2); color: var(--ink-muted); max-width: 64ch; }
   .lista__onde { font-size: 0.75rem; color: var(--ink-muted); }
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     .lista a:hover { background: color-mix(in oklch, var(--brand) 7%, transparent); }
     .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
     .lista a:hover .lista__seta { transform: translateX(5px); color: var(--brand-ink); }
@@ -240,7 +249,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     .lista__seta { transition: color 160ms ease; }
     .lista a:hover .lista__seta { transform: none; }
   }
-  .lista a:active { background: var(--line); }
+  .lista a:active { background: var(--line); transition-duration: 0ms; }
   .lista a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 
   .skills__intro { margin: -0.5rem 0 var(--space-5); color: var(--ink-muted); max-width: 62ch; }
