@@ -38,11 +38,13 @@ ganhos:
     Ambiente virou workspace com estado próprio, então mexer em homologação
     deixou de ter qualquer caminho até produção.
 aprendizado: >-
-  O programa era codificar o que já existia para não perder no pior caso, e eu
-  comecei pela OCI porque era onde estava o Kubernetes. A AWS ficou de fora e
-  continua fora. Se eu recomeçasse, teria codificado primeiro o que era mais
-  difícil de reconstruir, não o que era mais confortável de escrever — e isso
-  provavelmente apontava para a AWS, que já estava em produção havia mais
-  tempo e tinha menos gente sabendo como tinha sido montada.
+  Comecei pela OCI porque era onde estava o cluster, e é onde estavam as partes
+  móveis. Isso eu faria de novo. O que não terminou foi o resto: a AWS ficou de
+  fora e continua fora.
+  E é aí que mora a lição. Infraestrutura como código só paga quando cobre tudo
+  que importa. Enquanto metade do parque está versionada e a outra metade
+  continua no console, o pior caso não foi eliminado — só mudou de endereço.
+  Hoje eu dimensionaria o programa pelo tempo que de fato existia, em vez de
+  tratar cobertura total como consequência natural de ter começado bem.
 links: []
 ---

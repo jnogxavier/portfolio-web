@@ -38,11 +38,14 @@ ganhos:
     Each environment became a workspace with its own state, so touching staging
     no longer has any path to production.
 aprendizado: >-
-  The point was to codify what already existed so it would not be lost in the
-  worst case, and I started with OCI because that is where Kubernetes lived.
-  AWS stayed out and is still out. Starting over, I would have codified
-  whatever was hardest to rebuild rather than whatever was most comfortable to
-  write — and that probably pointed at AWS, which had been in production longer
-  with fewer people who knew how it had been put together.
+  I started with OCI because that was where the cluster lived, and that is where
+  the moving parts were. I would do that again. What did not finish was the
+  rest: AWS stayed out, and it is still out.
+  That is where the lesson is. Infrastructure as code only pays off once it
+  covers everything that matters. While half the estate is versioned and the
+  other half is still in a console, the worst case has not been removed — it has
+  only changed address.
+  Today I would size the programme against the time that actually existed,
+  rather than treating full coverage as the natural consequence of a good start.
 links: []
 ---
