@@ -75,7 +75,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
         {skills.map((g) => (
           <div class="skills__linha">
             <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
-            <dd>{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
+            <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
           </div>
         ))}
       </dl>
