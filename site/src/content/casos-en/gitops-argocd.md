@@ -39,6 +39,14 @@ ganhos:
     Secrets left the repository: the cluster pulls credentials from an external
     store, and what is versioned is the reference, not the value.
   - >-
+    Configuration left the application repository. Environment variables, even
+    the ones that are not secrets, moved to the platform repository — so having
+    the code no longer means having production configuration by default.
+  - >-
+    Each environment ended up isolated in three layers: its own namespace, its
+    own secret store and its own path inside it. Staging cannot reach
+    production credentials, not even through a misconfiguration.
+  - >-
     The cluster became rebuildable from the repository, because the repository
     stopped being documentation and became the source.
 aprendizado: >-

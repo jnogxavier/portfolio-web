@@ -1,0 +1,56 @@
+---
+import { dg } from '../../data/diagramas';
+import type { Idioma } from '../../i18n';
+interface Props { lang?: Idioma }
+const { lang = 'pt' } = Astro.props;
+const d = dg.gateway[lang];
+// Uma afirmação: o que não está na lista não atravessa.
+---
+<figure class="dg">
+  <svg viewBox="0 0 640 250" role="img" aria-label={d.alt}>
+    <defs>
+      <marker id="gw-ponta" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <g class="dg-linha">
+      <rect x="0" y="62" width="108" height="48" rx="2" />
+      <text x="54" y="91" class="dg-rot">{d.cliente}</text>
+
+      <rect x="248" y="48" width="152" height="76" rx="2" class="dg-marcado" />
+      <text x="324" y="72" class="dg-rot">{d.gw}</text>
+      <text x="324" y="92" class="dg-nota-in">{d.gwN1}</text>
+      <text x="324" y="110" class="dg-nota-in">{d.gwN2}</text>
+
+      <rect x="532" y="62" width="108" height="48" rx="2" />
+      <text x="586" y="91" class="dg-rot">{d.svc}</text>
+    </g>
+
+    <g class="dg-seta" marker-end="url(#gw-ponta)">
+      <path d="M108 86 H242" />
+      <path d="M400 86 H526" />
+      <path d="M324 124 V196" class="dg-tracejada" />
+    </g>
+
+    <text x="175" y="76" class="dg-aresta">{d.req}</text>
+    <text x="463" y="76" class="dg-aresta">{d.passa}</text>
+    <text x="324" y="216" class="dg-nota">{d.descarta}</text>
+  </svg>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
+<style>
+  .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
+  .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
+  .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
+  .dg-tracejada { stroke-dasharray: 4 4; opacity: 0.45 !important; }
+  .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
+  .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.72; }
+  .dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.6; }
+  .dg-aresta { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
+  figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+</style>
