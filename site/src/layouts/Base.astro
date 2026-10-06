@@ -6,6 +6,7 @@ import '../styles/componentes.css';
 import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
+import { contato } from '../data/contato';
 interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string }
 const { titulo, descricao, lang = 'pt', parUrl } = Astro.props;
 const rotulos = textos[lang];
@@ -48,13 +49,13 @@ const nav = [
       "alternateName": "jnogxavier",
       "jobTitle": ["DevOps Engineer", "Platform Engineer", "Desenvolvedor Full Stack"],
       "description": "Engenheiro de plataforma e desenvolvedor full stack em Goiânia, Brasil.",
-      "email": "mailto:jnogxavier@gmail.com",
+      "email": `mailto:${contato.email}`,
       "address": { "@type": "PostalAddress", "addressLocality": "Goiânia", "addressRegion": "GO", "addressCountry": "BR" },
       "knowsAbout": ["DevOps", "Platform Engineering", "SRE", "Infraestrutura", "Kubernetes", "GitOps", "ArgoCD",
         "Terraform", "CI/CD", "Observabilidade", "OpenTelemetry", "Docker", "AWS", "Oracle Cloud",
         "Full Stack", "Ruby on Rails", "PostgreSQL", "React", "Flutter"],
       "knowsLanguage": ["pt-BR", "en"],
-      "sameAs": ["https://github.com/jnogxavier", "https://linkedin.com/in/jnogxavier"],
+      "sameAs": [contato.github, contato.linkedin],
       "url": Astro.site?.href
     })} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/zilla-slab-700-latin.woff2" />
@@ -95,7 +96,7 @@ const nav = [
         <div class="faixa tarja__linha">
           <p class="estado">
             <span class="estado__no" aria-hidden="true"></span>
-            <a href="mailto:jnogxavier@gmail.com" aria-label={rotulos.statusLabel}>{rotulos.status}</a>
+            <a href={`mailto:${contato.email}`} aria-label={rotulos.statusLabel}>{rotulos.status}</a>
             <span class="estado__onde">{rotulos.onde}</span>
           </p>
         </div>
@@ -136,10 +137,10 @@ const nav = [
       <div class="faixa rodape__linha">
         <p class="rodape__nome">João Vitor Nogueira Xavier<span>{rotulos.local}</span></p>
         <nav class="rodape__links" aria-label={rotulos.rodape}>
-          <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" /><span translate="no">jnogxavier@gmail.com</span></a>
-          <a href="https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-          <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-          <a href="https://linkedin.com/in/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+          <a href={`mailto:${contato.email}`}><Icone nome="email" /><span translate="no">{contato.email}</span></a>
+          <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
+          <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
+          <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
           <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
           {lang === 'pt'
             ? <a href={alterna} hreflang="en" lang="en">English</a>
