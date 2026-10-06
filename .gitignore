@@ -13,3 +13,6 @@ dist/
 .vscode/
 *.swp
 npm-debug.log*
+
+# cloudflare
+.wrangler/
