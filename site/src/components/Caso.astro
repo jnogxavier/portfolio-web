@@ -16,10 +16,12 @@ interface Props {
   resultado?: { antes?: string; valor: string; unidade?: string };
   diagrama?: 'esteira' | 'reconciliacao' | 'topologia' | 'correlacao' | 'tresfontes' | 'gateway';
   ganhos?: string[];
+  ant?: { id: string; titulo: string };
+  prox?: { id: string; titulo: string };
   lang?: Idioma;
   aprendizado: string;
 }
-const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, lang = 'pt' } = Astro.props;
+const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, ant, prox, lang = 'pt' } = Astro.props;
 const rotulos = textos[lang];
 const Diagrama = diagrama ? diagramas[diagrama] : null;
 const leituras = [
@@ -66,10 +68,43 @@ const leituras = [
     <p class="jnx-caso__texto">{aprendizado}</p>
   </div>
 
+  {(ant || prox) && (
+    <nav class="entre" aria-label={rotulos.entreCasos}>
+      {ant && (
+        <a href={`${rotulos.casosRota}/${ant.id}/`} rel="prev">
+          <span class="entre__rotulo">{rotulos.anterior}</span>
+          <span class="entre__titulo">{ant.titulo}</span>
+        </a>
+      )}
+      {prox && (
+        <a class="entre__prox" href={`${rotulos.casosRota}/${prox.id}/`} rel="next">
+          <span class="entre__rotulo">{rotulos.proximo}</span>
+          <span class="entre__titulo">{prox.titulo}</span>
+        </a>
+      )}
+    </nav>
+  )}
 </article>
 
 <style>
   .ganhos { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
   .ganhos li { padding-block: var(--space-3); border-top: 1px solid var(--line); }
   .ganhos li:first-child { border-top: none; padding-top: 0; }
+
+  .entre { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); padding-top: var(--space-6); border-top: 1px solid var(--line); }
+  .entre a {
+    display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; min-height: 44px;
+    color: var(--brand-ink); text-decoration: none; overflow-wrap: anywhere;
+    transition: transform 160ms var(--ease-out);
+  }
+  .entre__prox { grid-column: 2; text-align: end; }
+  .entre__rotulo { font: 500 0.75rem/1.4167 var(--font-sans); color: var(--ink-muted); }
+  .entre__titulo { font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+  .entre a:active { transform: scale(0.97); }
+  .entre a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .entre a:hover .entre__titulo { text-decoration: underline; text-underline-offset: 4px; } }
+  @media (max-width: 40rem) {
+    .entre { grid-template-columns: 1fr; }
+    .entre__prox { grid-column: 1; text-align: start; }
+  }
 </style>
