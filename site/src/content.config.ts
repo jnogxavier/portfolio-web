@@ -11,7 +11,7 @@ const esquemaCaso = z.object({
   observado: z.string(),
   reconciliado: z.string(),
   resultado: z.object({ antes: z.string().optional(), valor: z.string(), unidade: z.string().optional() }).optional(),
-  diagrama: z.enum(['esteira', 'reconciliacao', 'topologia', 'correlacao', 'tresfontes', 'gateway']).optional(),
+  diagrama: z.enum(['esteira', 'reconciliacao', 'correlacao', 'tresfontes']).optional(),
   ganhos: z.array(z.string()).default([]),
   aprendizado: z.string(),
 });

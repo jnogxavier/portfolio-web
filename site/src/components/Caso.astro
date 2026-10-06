@@ -3,18 +3,16 @@ import { textos, type Idioma } from '../i18n';
 import { dg } from '../data/diagramas';
 import Esteira from './diagramas/Esteira.astro';
 import Reconciliacao from './diagramas/Reconciliacao.astro';
-import Topologia from './diagramas/Topologia.astro';
 import Correlacao from './diagramas/Correlacao.astro';
 import TresFontes from './diagramas/TresFontes.astro';
-import Gateway from './diagramas/Gateway.astro';
 
-const diagramas = { esteira: Esteira, reconciliacao: Reconciliacao, topologia: Topologia, correlacao: Correlacao, tresfontes: TresFontes, gateway: Gateway };
+const diagramas = { esteira: Esteira, reconciliacao: Reconciliacao, correlacao: Correlacao, tresfontes: TresFontes };
 
 interface Props {
   titulo: string; meta: string;
   declarado: string; observado: string; reconciliado: string;
   resultado?: { antes?: string; valor: string; unidade?: string };
-  diagrama?: 'esteira' | 'reconciliacao' | 'topologia' | 'correlacao' | 'tresfontes' | 'gateway';
+  diagrama?: 'esteira' | 'reconciliacao' | 'correlacao' | 'tresfontes';
   ganhos?: string[];
   ant?: { id: string; titulo: string };
   prox?: { id: string; titulo: string };
