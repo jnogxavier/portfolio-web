@@ -1,61 +1,30 @@
 ---
 titulo: Telemetry the platform controls
-meta: DevOps Engineer at BCJ, 2026
+meta: Observability
 ordem: 3
 par: observabilidade-otel
 diagrama: correlacao
 declarado: >-
-  When a job fails or runs slow, you open the log, find the trace for that run,
-  and see where the time went.
+  When a job fails or runs slow, you can open the log, find the trace of that run and see where the time went.
 observado: >-
-  Instrumentation tied to the Elastic APM agent, which decided where telemetry
-  could go. The jobs had no instrumentation of their own: you could tell
-  something had failed, not where. And logs did not talk to traces, so every
-  investigation started from nothing.
+  Instrumentation was tied to a vendor's agent, which decided where telemetry could go. Jobs had no instrumentation of their own: you could tell that something failed, not where. And logs did not talk to traces, so every investigation started from scratch.
 reconciliado: >-
-  OpenTelemetry collection running in the cluster, exporting over OTLP to the
-  Collector, which picks the destination instead of the application picking it.
-  Fluent Bit in the log path, stripping sensitive fields before the data leaves
-  the environment. Metrics into Prometheus and a Grafana dashboard, so an
-  investigation starts somewhere instead of starting from scratch.
-  On the application side, I instrumented four services with the SDK
-  initialised in the core before anything else, auto-instrumentation for HTTP,
-  Express and Postgres, each job with its own span, execution and error
-  counters, a gauge of jobs in flight and a duration histogram by status, and
-  logs carrying traceId and spanId whenever a span is active.
-resultado:
-  antes: an agent that chose the destination
-  valor: "4"
-  unidade: services with correlated logs, metrics and traces, and the destination in the platform's hands
+  Collection with OpenTelemetry in the cluster, exporting over OTLP to a Collector, which decides the destination instead of the application deciding. A log collector on the log path removes sensitive fields before the data leaves the environment. Metrics go to Prometheus and dashboards to Grafana, so an investigation starts from one place.
+  On the application side, the SDK is initialized in the core before anything else, with automatic instrumentation of HTTP and the database, a span for each job, execution and error counters, a gauge of jobs in flight and a duration histogram by status, and logs carrying traceId and spanId when a span is active.
 chamada: >-
-  I built the collection in the cluster with OpenTelemetry, with sensitive
-  fields stripped before anything leaves, and turned logs and metrics into a
-  dashboard someone actually opens during an incident.
+  Collection with OpenTelemetry, sensitive data filtered before it leaves, and log, metric and trace tied together by one identifier.
 ganhos:
   - >-
-    Telemetry stopped depending on a vendor. The Collector picks the
-    destination, and swapping backends became configuration, not a refactor.
+    Telemetry stopped depending on a vendor. The Collector decides the destination, and changing backends became configuration, not refactoring.
   - >-
-    Sensitive data stops leaving the environment in the log path, rather than
-    later, on the screen of whoever is investigating.
+    Sensitive data stops leaving the environment on the log path, not later, on the screen of whoever is investigating.
   - >-
-    Investigating a slow job got a starting point: from the log, by traceId,
-    straight to the trace for that run.
+    Investigating a slow job gained a starting point: from the log, through the traceId, straight to the trace of that run.
   - >-
-    Instrumentation ended up in one place, the core, rather than spread across
-    services — so wiring up a new service stopped being instrumentation work
-    and became an import.
+    Instrumentation lives in one place, in the core, instead of spread across services, so adding a new service stopped being instrumentation work and became import work.
   - >-
-    Job metrics stopped being “failed or not”: executions, errors, how many are
-    in flight and how long they take by status, which is what lets you notice
-    degradation before the complaint.
+    Job metrics stopped being “failed or not”: executions, errors, how many are in flight and how long they take by status, which is what lets you notice degradation before the complaint.
 aprendizado: >-
-  The collection works and the dashboards get used, but a good part of it I set
-  up straight in the cluster, without going through a repository. It works and
-  it does not survive me: whoever comes next cannot rebuild it without asking.
-  It is exactly the criticism I make in another case on this site, and I
-  repeated the mistake out of haste. Today I would version the observability
-  stack along with everything else, even if it cost another week before the
-  first dashboard.
+  The collection works and the dashboards get used, but a good part of it I set up directly in the cluster, without going through a repository. It works and does not outlive me: whoever comes next cannot rebuild it without asking me. Today I would version the observability stack together with everything else, even if it cost a week more to deliver the first dashboard.
 links: []
 ---
