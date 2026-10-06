@@ -7,8 +7,8 @@ import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
 import { contato } from '../data/contato';
-interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string; canais?: boolean }
-const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo, canais = true } = Astro.props;
+interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string; canais?: boolean; robots?: string }
+const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo, canais = true, robots } = Astro.props;
 const rotulos = textos[lang];
 const raiz = rotulos.raiz;
 const aqui = Astro.url.pathname;
@@ -28,6 +28,7 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{titulo}</title>
     <meta name="description" content={descricao} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#f2ebed" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#181115" media="(prefers-color-scheme: dark)" />
