@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 const { caso, ant, prox } = Astro.props;
 ---
-<Base titulo={`${caso.titulo} — jnogxavier`} descricao={caso.chamada} parUrl={caso.par ? `/casos/${caso.par}/` : undefined} lang="en" imagem={`/og/en/${Astro.params.id}.png`}>
+<Base titulo={`${caso.titulo} — jnogxavier`} descricao={caso.chamada} parUrl={caso.par ? `/casos/${caso.par}/` : undefined} lang="en" imagem={`/og/en/${Astro.params.id}.png`} tipo="article" manchete={caso.titulo}>
   <section class="faixa pagina">
     <a class="voltar jnx-link" href="/en/#casos">{textos.en.voltar}</a>
     <Caso {...caso} lang="en" ant={ant} prox={prox} />
