@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icone from './Icone.astro';
 import { skills, areasEn, itensEn } from '../data/skills';
 import { textos, type Idioma } from '../i18n';
+import { contato } from '../data/contato';
 
 interface Props {
   lang: Idioma;
@@ -13,7 +14,6 @@ interface Props {
 }
 const { lang, seo, casos, linha, sobre } = Astro.props;
 const rotulos = textos[lang];
-const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade.';
 ---
 <Base
   titulo={seo.titulo}
@@ -27,8 +27,8 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
         <h1>{rotulos.h1}</h1>
         <p class="lede">{rotulos.lede}</p>
         <p class="capa__acoes">
-          <a class="jnx-acao jnx-acao--sobre-cor" href="#casos">{rotulos.verCasos}</a>
-          <a class="jnx-acao jnx-acao--sobre-cor jnx-acao--secundaria" href={zap}
+          <a class="jnx-acao" href="#casos">{rotulos.verCasos}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={contato.zap}
              target="_blank" rel="noopener noreferrer">{rotulos.zap}</a>
         </p>
       </div>
@@ -40,9 +40,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   <section class="secao" id="sobre">
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
-      <div class="sobre">
-        <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p>{p}</p></div>)}</div>
-      </div>
+      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p>{p}</p></div>)}</div>
     </div>
   </section>
 
@@ -113,10 +111,10 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
       <h2>{rotulos.tContato}</h2>
       <p class="contato__nota">{rotulos.contatoNota}</p>
       <nav class="canais" aria-label={rotulos.canais}>
-        <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" />jnogxavier@gmail.com</a>
-        <a href={zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-        <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-        <a href="https://linkedin.com/in/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+        <a href={`mailto:${contato.email}`}><Icone nome="email" />{contato.email}</a>
+        <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
+        <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
+        <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
       </nav>
     </div>
   </section>
@@ -158,7 +156,6 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__cabeca h2 { margin-bottom: var(--space-2); }
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
-  .sobre { display: flex; flex-direction: column; }
 
   .capa__nome, .capa h1, .lede, .capa__acoes {
     transform: none;
