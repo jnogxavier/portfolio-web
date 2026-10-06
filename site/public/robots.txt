@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jnogxavier.com/sitemap.xml
+Sitemap: https://jnogxavier.com.br/sitemap.xml
