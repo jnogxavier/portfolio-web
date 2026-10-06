@@ -22,9 +22,9 @@ const { d } = Astro.props;
         <text x="416" y="146" class="dg-rot">{d.col}</text>
         <text x="416" y="163" class="dg-nota-in">{d.colN}</text>
 
-        <rect x="528" y="40" width="112" height="40" rx="2" /><text x="584" y="65" class="dg-rot">Loki</text>
-        <rect x="528" y="130" width="112" height="40" rx="2" /><text x="584" y="155" class="dg-rot">Prometheus</text>
-        <rect x="528" y="220" width="112" height="40" rx="2" /><text x="584" y="245" class="dg-rot">Tempo</text>
+        <rect x="528" y="40" width="112" height="40" rx="2" /><text x="584" y="65" class="dg-rot">{d.dLog}</text>
+        <rect x="528" y="130" width="112" height="40" rx="2" /><text x="584" y="155" class="dg-rot">{d.dMet}</text>
+        <rect x="528" y="220" width="112" height="40" rx="2" /><text x="584" y="245" class="dg-rot">{d.dTrace}</text>
       </g>
 
       <g class="dg-seta" marker-end="url(#ponta)">
