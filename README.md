@@ -21,7 +21,9 @@ na linha do sitemap. Mudar de domínio é trocar os dois.
 
 ## Publicação
 
-O site é estático e roda como Worker de assets no Cloudflare, sem servidor próprio. `site/wrangler.jsonc` declara a pasta `dist` e os dois domínios, e `.github/workflows/site.yml` faz o resto.
+O site é estático e roda como Worker de assets no Cloudflare, sem servidor próprio. `site/wrangler.jsonc` declara a pasta `dist` e o domínio, e `.github/workflows/site.yml` faz o resto.
+
+O `www` fica fora do Worker de propósito. No painel do Cloudflare ele é um registro A de espaço reservado (`192.0.2.1`, proxied) e uma regra de redirecionamento 301 para a raiz. Um custom domain do Worker no `www` impede a regra de agir.
 
 Em todo pull request o workflow roda `npm ci`, `npm run build` e `npm run verifica`, que falha se faltar página ou cartão de compartilhamento, ou se algum endereço do build divergir de `site`. No push para a `main` ele repete isso e publica com o wrangler.
 
