@@ -46,7 +46,7 @@ ganhos:
     serviço — então ligar um serviço novo deixou de ser trabalho de
     instrumentar e virou trabalho de importar.
   - >-
-    Métrica de job deixou de ser "falhou ou não": execução, erro, quantos
+    Métrica de job deixou de ser “falhou ou não”: execução, erro, quantos
     estão em curso e quanto demora por status, que é o que permite notar
     degradação antes da reclamação.
 aprendizado: >-
