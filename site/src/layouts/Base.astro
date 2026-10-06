@@ -46,7 +46,7 @@ const nav = [
       "@type": "Person",
       "name": "João Vitor Nogueira Xavier",
       "alternateName": "jnogxavier",
-      "jobTitle": ["DevOps Engineer", "Platform Engineer", "Site Reliability Engineer", "Desenvolvedor Full Stack"],
+      "jobTitle": ["DevOps Engineer", "Platform Engineer", "Desenvolvedor Full Stack"],
       "description": "Engenheiro de plataforma e desenvolvedor full stack em Goiânia, Brasil.",
       "email": "mailto:jnogxavier@gmail.com",
       "address": { "@type": "PostalAddress", "addressLocality": "Goiânia", "addressRegion": "GO", "addressCountry": "BR" },
@@ -59,15 +59,34 @@ const nav = [
     })} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/zilla-slab-700-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/archivo-350_600-latin.woff2" />
+    <script is:inline>
+      (() => {
+        const raiz = document.documentElement;
+        const metas = document.querySelectorAll('meta[name="theme-color"]');
+        const cores = {};
+        metas.forEach((m) => { cores[/dark/.test(m.getAttribute('media')) ? 'dark' : 'light'] = m.content; });
+        const aplica = (t) => {
+          raiz.dataset.tema = t;
+          metas.forEach((m) => { m.content = cores[t]; });
+        };
+        try {
+          const t = localStorage.getItem('tema');
+          if (t === 'dark' || t === 'light') aplica(t);
+        } catch (e) {}
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('#tema')) return;
+          const escuroAgora = raiz.dataset.tema
+            ? raiz.dataset.tema === 'dark'
+            : matchMedia('(prefers-color-scheme: dark)').matches;
+          const novo = escuroAgora ? 'light' : 'dark';
+          raiz.dataset.trocando = '';
+          aplica(novo);
+          setTimeout(() => delete raiz.dataset.trocando, 360);
+          try { localStorage.setItem('tema', novo); } catch (e) {}
+        });
+      })();
+    </script>
   </head>
-  <script is:inline>
-    (() => {
-      try {
-        const t = localStorage.getItem('tema');
-        if (t === 'dark' || t === 'light') document.documentElement.dataset.tema = t;
-      } catch (e) {}
-    })();
-  </script>
   <body>
     <a class="pular" href="#conteudo">{rotulos.pular}</a>
 
@@ -83,20 +102,20 @@ const nav = [
       </div>
 
       <div class="faixa topo__linha">
-        <a class="marca" href={raiz} aria-label="Início" aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
+        <a class="marca" href={raiz} aria-label={rotulos.inicio} aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
 
-        <nav class="menu" aria-label="Principal">
+        <nav class="menu" aria-label={rotulos.menu}>
           {nav.map((l) => (
             <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
-          <a class="menu__cv" href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
-          <div class="idiomas" role="group" aria-label={lang === 'en' ? 'Language' : 'Idioma'}>
+          <a href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
+          <div class="idiomas" role="group" aria-label={rotulos.idioma}>
             {lang === 'pt'
-              ? <span class="idioma idioma--atual" aria-current="true" lang="pt">Português</span>
-              : <a class="idioma" href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
+              ? <span class="idioma--atual" aria-current="true" lang="pt">Português</span>
+              : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
             {lang === 'en'
-              ? <span class="idioma idioma--atual" aria-current="true" lang="en">English</span>
-              : <a class="idioma" href={alterna} hreflang="en" lang="en">English</a>}
+              ? <span class="idioma--atual" aria-current="true" lang="en">English</span>
+              : <a href={alterna} hreflang="en" lang="en">English</a>}
           </div>
           <button class="tema" type="button" id="tema" aria-label={rotulos.alternarTema}>
             <svg viewBox="0 0 24 24" aria-hidden="true" class="tema__sol">
@@ -115,8 +134,8 @@ const nav = [
 
     <footer class="rodape">
       <div class="faixa rodape__linha">
-        <p class="rodape__nome">João Vitor Nogueira Xavier<span>Goiânia, Brasil</span></p>
-        <nav class="rodape__links" aria-label="Contato">
+        <p class="rodape__nome">João Vitor Nogueira Xavier<span>{rotulos.local}</span></p>
+        <nav class="rodape__links" aria-label={rotulos.rodape}>
           <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" /><span translate="no">jnogxavier@gmail.com</span></a>
           <a href="https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
           <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
@@ -128,19 +147,6 @@ const nav = [
         </nav>
       </div>
     </footer>
-    <script is:inline>
-      document.getElementById('tema')?.addEventListener('click', () => {
-        const raiz = document.documentElement;
-        const escuroAgora = raiz.dataset.tema
-          ? raiz.dataset.tema === 'dark'
-          : matchMedia('(prefers-color-scheme: dark)').matches;
-        const novo = escuroAgora ? 'light' : 'dark';
-        raiz.dataset.trocando = '';
-        raiz.dataset.tema = novo;
-        setTimeout(() => delete raiz.dataset.trocando, 360);
-        try { localStorage.setItem('tema', novo); } catch (e) {}
-      });
-    </script>
   </body>
 </html>
 
@@ -148,7 +154,7 @@ const nav = [
   :global(html) {
     margin: 0;
     -webkit-tap-highlight-color: transparent;
-    scroll-padding-top: 7.5rem;
+    scroll-padding-top: var(--space-4);
     scroll-behavior: smooth;
   }
   @media (prefers-reduced-motion: reduce) { :global(html) { scroll-behavior: auto; } }
@@ -159,7 +165,7 @@ const nav = [
     animation: alvo 1600ms ease-out both;
   }
   @keyframes alvo {
-    0%, 60% { box-shadow: inset 0 -0.42em 0 color-mix(in oklch, var(--measure) 32%, transparent); }
+    0%, 60% { box-shadow: inset 0 -0.42em 0 color-mix(in oklch, var(--brand) 22%, transparent); }
     100% { box-shadow: inset 0 -0.42em 0 transparent; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -194,9 +200,13 @@ const nav = [
   :global(main:focus) { outline: none; }
   :global(main:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
 
-  .topo { border-bottom: 1px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+  .topo { border-bottom: 1px solid var(--line); background: var(--surface); z-index: 10; }
+  @media (min-width: 56rem) {
+    .topo { position: sticky; top: 0; }
+    :global(html) { scroll-padding-top: 7.5rem; }
+  }
   .tarja { border-bottom: 1px solid var(--line); background: var(--surface-raised); }
-  .tarja__linha { display: flex; align-items: center; min-height: 36px; }
+  .tarja__linha { display: flex; align-items: center; min-height: 44px; }
   .topo__linha {
     display: flex; align-items: center; justify-content: space-between;
     gap: var(--space-3) var(--space-5); min-height: 60px; flex-wrap: wrap;
@@ -209,42 +219,22 @@ const nav = [
     width: 7px; height: 7px; border-radius: var(--radius-full);
     background: var(--healthy); flex: none; align-self: center;
   }
-  .estado a { color: inherit; display: inline-flex; align-items: center; min-height: 36px; text-underline-offset: 3px; text-decoration-color: var(--line); }
+  .estado a { color: inherit; display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 3px; text-decoration-color: var(--line); }
   .estado a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
   @media (hover: hover) and (pointer: fine) { .estado a:hover { text-decoration-color: currentColor; } }
   .estado__onde { color: var(--ink-muted); white-space: nowrap; margin-left: var(--space-2); }
 
-  .menu__cv, .idiomas, .tema {
-    display: inline-flex; align-items: center; justify-content: center;
-    height: 40px; align-self: center; flex: none; position: relative;
-    background: none; border: 1px solid var(--line); border-radius: var(--radius-sm);
-    color: var(--ink-muted); cursor: pointer; text-decoration: none;
-    font: 500 0.875rem/1 var(--font-sans);
-    transition: color 140ms ease, border-color 140ms ease, transform 140ms var(--ease-out);
+  .tema {
+    display: grid; place-items: center; flex: none;
+    width: 44px; height: 44px; padding: 0;
+    background: none; border: 0; cursor: pointer; color: var(--ink-muted);
+    transition: color 140ms ease, transform 140ms var(--ease-out);
   }
-  .menu__cv { padding-inline: var(--space-4); color: var(--ink-muted) !important; padding-block: 0 !important; }
-  .tema { width: 40px; padding: 0; }
-  @media (prefers-reduced-motion: reduce) { .tema svg { transition: opacity 160ms var(--ease-out); transform: none !important; } }
-
-  .idiomas { padding: 0; overflow: hidden; }
-  .idioma {
-    display: inline-flex; align-items: center; height: 100%;
-    padding-inline: var(--space-3); white-space: nowrap;
-    font: 500 0.8125rem/1 var(--font-sans); color: var(--ink-muted) !important;
-    text-decoration: none; transition: background-color 140ms ease, color 140ms ease;
+  .tema svg {
+    grid-area: 1 / 1; width: 18px; height: 18px;
+    fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round;
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
   }
-  .idioma + .idioma { border-inline-start: 1px solid var(--line); }
-  .idioma--atual { background: var(--brand); color: var(--surface) !important; }
-
-  .menu__cv::after, .tema::after { content: ''; position: absolute; inset: -2px; }
-  @media (hover: hover) and (pointer: fine) {
-    .menu__cv:hover, .tema:hover { color: var(--ink) !important; border-color: var(--brand); }
-    a.idioma:hover { background: var(--surface-raised); color: var(--ink) !important; }
-  }
-  .menu__cv:focus-visible, .tema:focus-visible, .idioma:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-  .tema svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
-  .tema { display: grid; place-items: center; }
-  .tema svg { grid-area: 1 / 1; transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out); }
   .tema__lua { opacity: 0; transform: rotate(-90deg) scale(0.8); }
   :global(:root[data-tema='dark']) .tema__sol,
   :global(:root:not([data-tema='light'])) .tema__sol { opacity: 0; transform: rotate(90deg) scale(0.8); }
@@ -254,27 +244,28 @@ const nav = [
     :global(:root:not([data-tema='dark'])) .tema__sol { opacity: 1; transform: none; }
     :global(:root:not([data-tema='dark'])) .tema__lua { opacity: 0; transform: rotate(-90deg) scale(0.8); }
   }
-  .tema:active, .menu__cv:active { transform: scale(0.96); }
+  .tema:active { transform: scale(0.96); }
   .tema:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-  @media (hover: hover) and (pointer: fine) { .tema:hover { color: var(--ink); border-color: var(--brand); } }
+  @media (hover: hover) and (pointer: fine) { .tema:hover { color: var(--ink); } }
+  @media (prefers-reduced-motion: reduce) { .tema svg { transition: opacity 160ms var(--ease-out); transform: none !important; } }
 
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; }
   .menu { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
-  @media (max-width: 56rem) {
-    .menu { gap: var(--space-2) var(--space-4); }
-    :global(a), :global(button) { touch-action: manipulation; }
-  .menu a { padding-block: 0.9375rem; font-size: 0.875rem; }
-    .topo__linha { padding-block: var(--space-2); }
-  }
+  .idiomas { display: flex; align-items: center; gap: var(--space-4); }
   :global(a), :global(button) { touch-action: manipulation; }
-  .menu a {
+  .menu a, .idioma--atual {
     font: 500 0.9375rem/1 var(--font-sans); letter-spacing: 0.005em;
     color: var(--ink-muted); text-decoration: none; padding-block: 1.46875rem;
     transition: color 140ms ease;
   }
+  @media (max-width: 56rem) {
+    .menu { gap: var(--space-2) var(--space-4); }
+    .menu a, .idioma--atual { padding-block: 0.9375rem; font-size: 0.875rem; }
+    .topo__linha { padding-block: var(--space-2); }
+  }
   @media (hover: hover) and (pointer: fine) { .menu a:hover { color: var(--ink); } }
-  .menu a[aria-current='page'] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); }
+  .menu a[aria-current='page'], .idioma--atual { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); }
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .rodape { position: relative; overflow: hidden; margin-top: var(--space-9); background: var(--band); color: var(--band-ink); }
@@ -286,7 +277,7 @@ const nav = [
     font: 400 0.875rem/1.5 var(--font-sans);
   }
   .rodape__nome { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
-  .rodape__nome span { opacity: 0.7; }
+  .rodape__nome span { opacity: 0.75; }
   .rodape__links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
   .rodape__links a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; }
   .rodape a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in oklch, currentColor 45%, transparent); }
