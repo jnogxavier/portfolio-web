@@ -7,8 +7,8 @@ import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
 import { contato } from '../data/contato';
-interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string }
-const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo } = Astro.props;
+interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string; canais?: boolean }
+const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo, canais = true } = Astro.props;
 const rotulos = textos[lang];
 const raiz = rotulos.raiz;
 const aqui = Astro.url.pathname;
@@ -151,16 +151,18 @@ const nav = [
     <footer class="rodape">
       <div class="faixa rodape__linha">
         <p class="rodape__nome">João Vitor Nogueira Xavier<span>{rotulos.local}</span></p>
-        <nav class="rodape__links" aria-label={rotulos.rodape}>
-          <a href={`mailto:${contato.email}`}><Icone nome="email" /><span translate="no">{contato.email}</span></a>
-          <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-          <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-          <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-          <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
-          {lang === 'pt'
-            ? <a href={alterna} hreflang="en" lang="en">English</a>
-            : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
-        </nav>
+        {canais && (
+          <nav class="rodape__links" aria-label={rotulos.rodape}>
+            <a href={`mailto:${contato.email}`}><Icone nome="email" /><span translate="no">{contato.email}</span></a>
+            <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
+            <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
+            <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+            <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
+            {lang === 'pt'
+              ? <a href={alterna} hreflang="en" lang="en">English</a>
+              : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
+          </nav>
+        )}
       </div>
     </footer>
   </body>
