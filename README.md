@@ -15,9 +15,9 @@ npm run dev
 
 ## Domínio
 
-`site` em `astro.config.mjs` define o endereço usado em canonical, Open Graph,
-hreflang, JSON-LD, sitemap e robots. Está em `https://jnogxavier.com` como
-provisório — trocar lá e em `public/robots.txt` quando o domínio for definido.
+O endereço é `https://jnogxavier.com.br`. `site` em `astro.config.mjs` o define para
+canonical, Open Graph, hreflang, JSON-LD e sitemap, e `public/robots.txt` o repete
+na linha do sitemap. Mudar de domínio é trocar os dois.
 
 ## Onde está o quê
 
