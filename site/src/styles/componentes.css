@@ -11,7 +11,8 @@
 .jnx-caso__medida { font: 700 2.5rem/1 var(--font-display); letter-spacing: -0.02em; color: var(--measure-ink); font-variant-numeric: tabular-nums; }
 .jnx-caso__unidade { font: 500 0.75rem/1.4167 var(--font-sans); color: var(--ink-muted); }
 
-.jnx-link { color: var(--brand-ink); text-underline-offset: 3px; overflow-wrap: anywhere; display: inline-block; padding-block: 0.5625rem; min-width: 0; }
+.jnx-link { color: var(--brand-ink); text-underline-offset: 3px; overflow-wrap: anywhere; display: inline-block; padding-block: 0.5625rem; min-width: 0; transition: transform 160ms var(--ease-out); }
+.jnx-link:active { transform: scale(0.97); }
 .jnx-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 
 .jnx-acao {
@@ -36,7 +37,8 @@
 :root[data-tema="dark"] :is(body, .jnx-caso__texto) { line-height: 1.69; font-weight: 350; }
 
 .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
-.dg__rolagem { overflow-x: auto; }
+.dg__rolagem { overflow-x: auto; padding: 2px; margin: -2px; }
+.dg__rolagem:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .dg svg { width: 100%; min-width: 40rem; height: auto; display: block; color: var(--ink); overflow: visible; }
 .dg figcaption { font: 400 1rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
 .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
