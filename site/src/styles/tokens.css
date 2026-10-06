@@ -9,7 +9,6 @@
   --band: oklch(43.0% 0.137 8.9);
   --band-ink: oklch(94.6% 0.008 354.7);
   --brand-ink: oklch(36.5% 0.116 11.8);
-  --measure: oklch(62.0% 0.112 36.0);
   --measure-ink: oklch(47.5% 0.098 34.0);
   --healthy: oklch(52.0% 0.082 148.0);
   --focus: var(--brand);
@@ -39,7 +38,6 @@
   --band: oklch(24.5% 0.062 10.0);
   --band-ink: oklch(92.0% 0.010 354.0);
   --brand-ink: oklch(80.5% 0.068 8.0);
-  --measure: oklch(74.0% 0.098 40.0);
   --measure-ink: oklch(80.0% 0.080 42.0);
   --healthy: oklch(68.0% 0.072 150.0);
   --focus: var(--brand);
@@ -54,7 +52,6 @@
   --band: oklch(24.5% 0.062 10.0);
   --band-ink: oklch(92.0% 0.010 354.0);
   --brand-ink: oklch(80.5% 0.068 8.0);
-  --measure: oklch(74.0% 0.098 40.0);
   --measure-ink: oklch(80.0% 0.080 42.0);
   --healthy: oklch(68.0% 0.072 150.0);
   --focus: var(--brand);
