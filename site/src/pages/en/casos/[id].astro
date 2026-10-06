@@ -5,14 +5,15 @@ import { textos } from '../../../i18n';
 import Caso from '../../../components/Caso.astro';
 
 export async function getStaticPaths() {
-  const casos = await getCollection('casosEn');
-  return casos.map((c) => ({ params: { id: c.id }, props: { caso: c.data } }));
+  const casos = (await getCollection('casosEn')).sort((a, b) => a.data.ordem - b.data.ordem);
+  const ref = (c) => c && { id: c.id, titulo: c.data.titulo };
+  return casos.map((c, i) => ({ params: { id: c.id }, props: { caso: c.data, ant: ref(casos[i - 1]), prox: ref(casos[i + 1]) } }));
 }
-const { caso } = Astro.props;
+const { caso, ant, prox } = Astro.props;
 ---
 <Base titulo={`${caso.titulo} — jnogxavier`} descricao={caso.chamada} parUrl={caso.par ? `/casos/${caso.par}/` : undefined} lang="en">
   <section class="faixa pagina">
     <a class="voltar jnx-link" href="/en/#casos">{textos.en.voltar}</a>
-    <Caso {...caso} lang="en" />
+    <Caso {...caso} lang="en" ant={ant} prox={prox} />
   </section>
 </Base>
