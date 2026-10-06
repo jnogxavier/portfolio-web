@@ -20,6 +20,21 @@ resultado:
 chamada: >-
   Dozens of near-identical pipelines became six shared templates, and build
   time dropped from 15 to 6 minutes.
+ganhos:
+  - >-
+    Each pipeline started running in less time. The team waits less to learn
+    whether a commit passed, and the agent is free sooner for the next one.
+  - >-
+    Shipping a service got faster. A new service is born with its pipeline
+    already in place, instead of copying another team's pipeline and tweaking it
+    by hand.
+  - >-
+    Agents moved into separate pools by kind of service: one dedicated to a
+    single service, one for mobile and one for the rest. Contention for agents
+    eased, and one group's pipelines stopped blocking another's.
+  - >-
+    Improving the pipeline became a change to one template, instead of a change
+    to dozens of files.
 aprendizado: >-
   I left the migration optional for too long. For weeks we ran two standards at
   once, which is worse than either one alone. Today I would start with the

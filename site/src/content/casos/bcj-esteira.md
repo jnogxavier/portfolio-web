@@ -20,6 +20,20 @@ resultado:
 chamada: >-
   Dezenas de pipelines quase iguais viraram seis templates, e o build caiu
   de 15 para 6 minutos.
+ganhos:
+  - >-
+    Cada pipeline passou a rodar em menos tempo. O time espera menos para saber
+    se um commit passou, e o agente fica livre mais cedo para o próximo.
+  - >-
+    Publicar um serviço ficou mais rápido. O serviço novo já nasce com a esteira
+    pronta, em vez de copiar o pipeline de outro time e ajustar na mão.
+  - >-
+    Os agentes passaram a ficar em pools separados por tipo de serviço: um
+    dedicado a um dos serviços, outro ao mobile e outro aos demais. A disputa
+    por agente diminuiu, e a esteira de um grupo deixou de travar a de outro.
+  - >-
+    Melhorar a esteira virou uma mudança em um template, em vez de uma mudança
+    em dezenas de arquivos.
 aprendizado: >-
   Deixei a migração opcional tempo demais. Fiquei com dois padrões rodando por
   semanas, o que é pior do que qualquer um dos dois sozinho. Hoje eu começaria
