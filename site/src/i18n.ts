@@ -1,6 +1,6 @@
 export const textos = {
   pt: {
-    lang: 'pt-BR', outro: 'en', raiz: '/',
+    lang: 'pt-BR', raiz: '/',
     nav: { sobre: 'Sobre', exp: 'Experiência', skills: 'Skills', casos: 'Casos', contato: 'Contato', cv: 'Currículo' },
     status: 'Disponível para propostas',
     statusLabel: 'Disponível para propostas — enviar e-mail',
@@ -25,7 +25,7 @@ export const textos = {
     contra: 'contra', antes: 'antes',
   },
   en: {
-    lang: 'en', outro: 'pt', raiz: '/en/',
+    lang: 'en', raiz: '/en/',
     nav: { sobre: 'About', exp: 'Experience', skills: 'Skills', casos: 'Case Studies', contato: 'Contact', cv: 'Résumé' },
     status: 'Open to offers',
     statusLabel: 'Open to offers — send an email',
