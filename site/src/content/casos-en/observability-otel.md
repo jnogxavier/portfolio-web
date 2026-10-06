@@ -46,7 +46,7 @@ ganhos:
     services — so wiring up a new service stopped being instrumentation work
     and became an import.
   - >-
-    Job metrics stopped being "failed or not": executions, errors, how many are
+    Job metrics stopped being “failed or not”: executions, errors, how many are
     in flight and how long they take by status, which is what lets you notice
     degradation before the complaint.
 aprendizado: >-

@@ -17,7 +17,7 @@
 .jnx-acao {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; min-width: 11ch; padding-inline: var(--space-5);
-  font: 500 0.9375rem/1 var(--font-sans); text-decoration: none;
+  font: 500 1rem/1 var(--font-sans); text-decoration: none;
   border: 1.5px solid var(--band-ink); background: var(--band-ink); color: var(--band);
   cursor: pointer;
   transition: transform 160ms var(--ease-out), background-color 140ms ease, border-color 140ms ease;
@@ -31,14 +31,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="light"]) .jnx-caso__texto { line-height: 1.69; font-weight: 350; }
+  :root:not([data-tema="light"]) :is(body, .jnx-caso__texto) { line-height: 1.69; font-weight: 350; }
 }
-:root[data-tema="dark"] .jnx-caso__texto { line-height: 1.69; font-weight: 350; }
+:root[data-tema="dark"] :is(body, .jnx-caso__texto) { line-height: 1.69; font-weight: 350; }
 
 .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
 .dg__rolagem { overflow-x: auto; }
 .dg svg { width: 100%; min-width: 40rem; height: auto; display: block; color: var(--ink); overflow: visible; }
-.dg figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
+.dg figcaption { font: 400 1rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
 .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
 .dg-linha .dg-marcado { stroke: var(--brand); stroke-width: 1.75; }
 .dg-seta path { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.75; }
@@ -48,4 +48,3 @@
 .dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
 
 .pagina { padding-block: var(--space-6) var(--space-9); display: flex; flex-direction: column; gap: var(--space-6); }
-.voltar { font-size: 0.875rem; }
