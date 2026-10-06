@@ -4,36 +4,38 @@ interface Props { d: any }
 const { d } = Astro.props;
 ---
 <figure class="dg">
-  <svg viewBox="0 0 620 230" role="img"
-       aria-label={d.alt}>
-    <Ponta />
+  <div class="dg__rolagem">
+    <svg viewBox="0 0 620 230" role="img"
+         aria-label={d.alt}>
+      <Ponta />
 
-    <g class="dg-linha">
-      <rect x="0" y="62" width="140" height="56" rx="2" />
-      <text x="70" y="86" class="dg-rot">{d.repo}</text>
-      <text x="70" y="104" class="dg-nota-in">{d.repoN}</text>
+      <g class="dg-linha">
+        <rect x="0" y="62" width="140" height="56" rx="2" />
+        <text x="70" y="86" class="dg-rot">{d.repo}</text>
+        <text x="70" y="104" class="dg-nota-in">{d.repoN}</text>
 
-      <rect x="240" y="62" width="140" height="56" rx="2" class="dg-marcado" />
-      <text x="310" y="94" class="dg-rot">ArgoCD</text>
+        <rect x="240" y="62" width="140" height="56" rx="2" class="dg-marcado" />
+        <text x="310" y="94" class="dg-rot">ArgoCD</text>
 
-      <rect x="480" y="62" width="140" height="56" rx="2" />
-      <text x="550" y="86" class="dg-rot">{d.cluster}</text>
-      <text x="550" y="104" class="dg-nota-in">{d.clusterN}</text>
-    </g>
+        <rect x="480" y="62" width="140" height="56" rx="2" />
+        <text x="550" y="86" class="dg-rot">{d.cluster}</text>
+        <text x="550" y="104" class="dg-nota-in">{d.clusterN}</text>
+      </g>
 
-    <g class="dg-seta" marker-end="url(#ponta)">
-      <path d="M140 90 H234" />
-      <path d="M380 78 H474" />
-      <path d="M474 110 H386" />
-      <path d="M550 190 V124" class="dg-tracejada" />
-    </g>
+      <g class="dg-seta" marker-end="url(#ponta)">
+        <path d="M140 90 H234" />
+        <path d="M380 78 H474" />
+        <path d="M474 110 H386" />
+        <path d="M550 190 V124" class="dg-tracejada" />
+      </g>
 
-    <text x="187" y="80" class="dg-aresta">{d.le}</text>
-    <text x="427" y="68" class="dg-aresta">{d.aplica}</text>
-    <text x="427" y="128" class="dg-aresta">{d.compara}</text>
-    <text x="550" y="208" class="dg-nota">{d.drift1}</text>
-    <text x="550" y="224" class="dg-nota">{d.drift2}</text>
-  </svg>
+      <text x="187" y="80" class="dg-aresta">{d.le}</text>
+      <text x="427" y="68" class="dg-aresta">{d.aplica}</text>
+      <text x="427" y="128" class="dg-aresta">{d.compara}</text>
+      <text x="550" y="208" class="dg-nota">{d.drift1}</text>
+      <text x="550" y="224" class="dg-nota">{d.drift2}</text>
+    </svg>
+  </div>
   <figcaption>{d.cap}</figcaption>
 </figure>
 

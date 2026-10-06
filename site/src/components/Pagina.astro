@@ -92,11 +92,11 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
         {casos.map((c) => (
           <li>
             <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
-              <span class="lista__texto">
+              <div class="lista__texto">
                 <h3>{c.data.titulo}</h3>
                 <p>{c.data.chamada}</p>
                 <span class="lista__onde">{c.data.meta}</span>
-              </span>
+              </div>
               <svg class="lista__seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" fill="none" stroke="currentColor"
                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -112,7 +112,7 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
     <div class="faixa">
       <h2>{rotulos.tContato}</h2>
       <p class="contato__nota">{rotulos.contatoNota}</p>
-      <nav class="canais" aria-label="Canais de contato">
+      <nav class="canais" aria-label={rotulos.canais}>
         <a href="mailto:jnogxavier@gmail.com"><Icone nome="email" />jnogxavier@gmail.com</a>
         <a href={zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
         <a href="https://github.com/jnogxavier" target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
@@ -159,7 +159,6 @@ const zap = 'https://wa.me/5562983339111?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Vitor.%2
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
   .sobre { display: flex; flex-direction: column; }
-  }
 
   .capa__nome, .capa h1, .lede, .capa__acoes {
     transform: none;

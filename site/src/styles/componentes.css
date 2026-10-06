@@ -41,7 +41,8 @@
 :root[data-tema="dark"] .jnx-caso__texto { line-height: 1.69; font-weight: 350; }
 
 .dg { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
-.dg svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+.dg__rolagem { overflow-x: auto; }
+.dg svg { width: 100%; min-width: 40rem; height: auto; display: block; color: var(--ink); overflow: visible; }
 .dg figcaption { font: 400 0.9375rem/1.5 var(--font-sans); color: var(--ink-muted); max-width: 62ch; }
 .dg-linha rect { fill: none; stroke: currentColor; stroke-width: 1.25; }
 .dg-marcado { stroke: var(--brand) !important; stroke-width: 1.75 !important; }
@@ -49,7 +50,7 @@
 .dg-rot { fill: currentColor; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-anchor: middle; }
 .dg-nota-in { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.72; }
 .dg-aresta { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
-.dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.6; }
+.dg-nota { fill: currentColor; font-family: var(--font-sans); font-size: 11px; text-anchor: middle; opacity: 0.7; }
 
 .pagina { padding-block: var(--space-6) var(--space-9); display: flex; flex-direction: column; gap: var(--space-6); }
 .voltar { font-size: 0.875rem; }
