@@ -159,17 +159,17 @@ const rotulos = textos[lang];
 
   .capa__nome, .capa h1, .lede, .capa__acoes {
     transform: none;
-    transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out);
+    transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out);
   }
-  .capa h1 { transition-delay: 70ms; }
-  .lede { transition-delay: 140ms; }
-  .capa__acoes { transition-delay: 210ms; }
+  .capa h1 { transition-delay: 50ms; }
+  .lede { transition-delay: 100ms; }
+  .capa__acoes { transition-delay: 150ms; }
   @starting-style {
     .capa__nome, .capa h1, .lede, .capa__acoes { opacity: 0; transform: translateY(14px); }
   }
   @media (prefers-reduced-motion: reduce) {
     .capa__nome, .capa h1, .lede, .capa__acoes {
-      transition: opacity 220ms linear; transition-delay: 0ms; transform: none !important;
+      transition: opacity 220ms var(--ease-out); transition-delay: 0ms; transform: none !important;
     }
   }
   .sobre__texto { display: flex; flex-direction: column; min-width: 0; }
@@ -242,6 +242,8 @@ const rotulos = textos[lang];
     display: inline-flex; align-items: center; gap: var(--space-2);
     min-height: 44px; color: var(--brand-ink);
     font: 500 1rem/1 var(--font-sans); text-underline-offset: 4px; overflow-wrap: anywhere;
+    transition: transform 160ms var(--ease-out);
   }
   .canais a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  .canais a:active { transform: scale(0.97); }
 </style>
