@@ -251,27 +251,44 @@ const nav = [
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
   .menu { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
-  .idiomas { display: flex; align-items: center; }
-  .idiomas > * { padding-inline: var(--space-3); }
-  .idiomas > * + * { position: relative; }
-  .idiomas > * + *::before {
-    content: ''; position: absolute; inset-inline-start: 0; top: 50%;
-    width: 1px; height: 1.25em; background: var(--line); transform: translateY(-50%);
+  .idiomas {
+    display: inline-flex; align-items: center; flex: none; padding: 2px;
+    border: 1px solid var(--line); border-radius: var(--radius-full);
   }
+  .menu .idiomas > * {
+    position: relative; isolation: isolate; display: inline-flex; align-items: center;
+    height: 34px; padding: 0 var(--space-4); border-radius: var(--radius-full);
+    font: 500 0.875rem/1 var(--font-sans); white-space: nowrap;
+    transition: color 140ms ease, transform 160ms var(--ease-out);
+  }
+  .menu .idiomas > *::after { content: ''; position: absolute; inset: -5px 0; }
+  .menu .idiomas > .idioma--atual { background: var(--brand-ink); color: var(--surface); }
+  .menu .idiomas > a::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    background: color-mix(in oklch, var(--brand-ink) 14%, transparent);
+    opacity: 0; transform: scale(0.9);
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .menu .idiomas > a:focus-visible { outline-offset: 1px; }
+  @media (hover: hover) and (pointer: fine) {
+    .menu .idiomas > a:hover { color: var(--ink); }
+    .menu .idiomas > a:hover::before { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .menu .idiomas > a::before { transform: none; } }
   :global(a), :global(button) { touch-action: manipulation; }
-  .menu a, .idioma--atual {
+  .menu a {
     font: 500 1rem/1 var(--font-sans); letter-spacing: 0.005em;
     color: var(--ink-muted); text-decoration: none; padding-block: 1.46875rem;
     transition: color 140ms ease, transform 160ms var(--ease-out);
   }
   @media (max-width: 56rem) {
     .menu { gap: var(--space-2) var(--space-4); }
-    .menu a, .idioma--atual { padding-block: 0.9375rem; }
+    .menu a { padding-block: 0.9375rem; }
     .topo__linha { padding-block: var(--space-2); }
   }
   @media (hover: hover) and (pointer: fine) { .menu a:hover { color: var(--ink); } }
   .menu a:active { transform: scale(0.97); }
-  .menu a[aria-current='page'], .idioma--atual { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); }
+  .menu a[aria-current='page'] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); }
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .rodape { position: relative; overflow: hidden; margin-top: var(--space-9); background: var(--band); color: var(--band-ink); }
