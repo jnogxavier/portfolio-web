@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import Pagina from '../components/Pagina.astro';
+import { trajetoria } from '../data/trajetoria';
+import { sobre } from '../data/sobre';
+import { textos } from '../i18n';
+
+const casos = (await getCollection('casos')).sort((a, b) => a.data.ordem - b.data.ordem);
+---
+
+<Pagina
+  lang="pt"
+  seo={{ titulo: textos.pt.seoTitulo, descricao: textos.pt.seoDescricao }}
+  casos={casos}
+  linha={trajetoria.pt}
+  sobre={sobre}
+/>

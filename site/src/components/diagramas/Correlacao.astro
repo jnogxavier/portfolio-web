@@ -1,0 +1,48 @@
+---
+import Ponta from './Ponta.astro';
+interface Props { d: any }
+const { d } = Astro.props;
+---
+<figure class="dg">
+  <div class="dg__rolagem" tabindex="0">
+    <svg viewBox="0 0 640 300" role="img"
+         aria-label={d.alt}>
+      <Ponta />
+
+      <g class="dg-linha">
+        <rect x="0" y="126" width="122" height="48" rx="2" class="dg-marcado" />
+        <text x="61" y="146" class="dg-rot">{d.exec}</text>
+        <text x="61" y="163" class="dg-nota-in">{d.execN}</text>
+
+        <rect x="182" y="40" width="112" height="40" rx="2" /><text x="238" y="65" class="dg-rot">{d.log}</text>
+        <rect x="182" y="130" width="112" height="40" rx="2" /><text x="238" y="155" class="dg-rot">{d.met}</text>
+        <rect x="182" y="220" width="112" height="40" rx="2" /><text x="238" y="245" class="dg-rot">{d.trace}</text>
+
+        <rect x="356" y="126" width="120" height="48" rx="2" />
+        <text x="416" y="146" class="dg-rot">{d.col}</text>
+        <text x="416" y="163" class="dg-nota-in">{d.colN}</text>
+
+        <rect x="528" y="40" width="112" height="40" rx="2" /><text x="584" y="65" class="dg-rot">{d.dLog}</text>
+        <rect x="528" y="130" width="112" height="40" rx="2" /><text x="584" y="155" class="dg-rot">{d.dMet}</text>
+        <rect x="528" y="220" width="112" height="40" rx="2" /><text x="584" y="245" class="dg-rot">{d.dTrace}</text>
+      </g>
+
+      <g class="dg-seta" marker-end="url(#ponta)">
+        <path d="M122 150 H152 V60 H176" />
+        <path d="M122 150 H176" />
+        <path d="M122 150 H152 V240 H176" />
+        <path d="M294 60 H324 V150 H350" />
+        <path d="M294 150 H350" />
+        <path d="M294 240 H324 V150 H350" />
+        <path d="M476 150 H506 V60 H522" />
+        <path d="M476 150 H522" />
+        <path d="M476 150 H506 V240 H522" />
+      </g>
+
+      <text x="238" y="100" class="dg-aresta">{d.mesmo}</text>
+      <text x="325" y="286" class="dg-aresta">{d.otlp}</text>
+    </svg>
+  </div>
+  <figcaption>{d.cap}</figcaption>
+</figure>
+
