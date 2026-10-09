@@ -4,6 +4,10 @@ meta: Continuous delivery
 ordem: 1
 par: esteira-compartilhada
 diagrama: esteira
+resultado:
+  valor: 6 min
+  unidade: build time per pipeline
+  antes: 15 min
 declarado: >-
   A small set of templates defines how every service is built, tested and shipped, and each service only declares what sets it apart.
 observado: >-

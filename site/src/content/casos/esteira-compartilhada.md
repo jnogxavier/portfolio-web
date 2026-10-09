@@ -4,6 +4,10 @@ meta: Entrega contínua
 ordem: 1
 par: shared-pipelines
 diagrama: esteira
+resultado:
+  valor: 6 min
+  unidade: de build por pipeline
+  antes: 15 min
 declarado: >-
   Um conjunto pequeno de templates define como todo serviço é construído, testado e publicado, e cada serviço só declara o que o distingue.
 observado: >-

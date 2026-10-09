@@ -47,8 +47,10 @@ const leituras = [
   {resultado && (
     <p class="jnx-caso__resultado">
       <span class="jnx-caso__medida">{resultado.valor}</span>
-      {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
-      {resultado.antes && <span class="jnx-caso__unidade">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
+      <span class="jnx-caso__legenda">
+        {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
+        {resultado.antes && <span class="jnx-caso__contexto">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
+      </span>
     </p>
   )}
 

@@ -7,9 +7,11 @@
 .jnx-caso__resultado + .jnx-caso__movimento { padding-top: var(--space-6); border-top: 1px solid var(--line); }
 .jnx-caso__rotulo { font: 600 1.25rem/1.4 var(--font-sans); color: var(--brand-ink); margin: 0; }
 .jnx-caso__texto { font: 400 1rem/1.625 var(--font-sans); color: var(--ink); margin: 0; overflow-wrap: anywhere; }
-.jnx-caso__resultado { display: flex; align-items: baseline; column-gap: var(--space-1); row-gap: var(--space-2); flex-wrap: wrap; }
-.jnx-caso__medida { font: 700 2.5rem/1 var(--font-display); letter-spacing: -0.02em; color: var(--measure-ink); font-variant-numeric: tabular-nums; }
-.jnx-caso__unidade { font: 500 0.75rem/1.4167 var(--font-sans); color: var(--ink-muted); }
+.jnx-caso__resultado { display: flex; align-items: center; gap: var(--space-3) var(--space-5); flex-wrap: wrap; margin: 0; }
+.jnx-caso__medida { font: 700 clamp(3rem, 2rem + 4vw, 4.5rem)/1 var(--font-mono); letter-spacing: -0.04em; word-spacing: -0.35em; color: var(--measure-ink); font-variant-numeric: tabular-nums; }
+.jnx-caso__legenda { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.jnx-caso__unidade { font: 600 1rem/1.4 var(--font-sans); color: var(--ink); }
+.jnx-caso__contexto { font: 400 0.875rem/1.4 var(--font-sans); color: var(--ink-muted); }
 
 .jnx-link { color: var(--brand-ink); text-underline-offset: 3px; overflow-wrap: anywhere; display: inline-block; padding-block: 0.5625rem; min-width: 0; transition: transform 160ms var(--ease-out); }
 .jnx-link:active { transform: scale(0.97); }
