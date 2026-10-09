@@ -1,7 +1,7 @@
 ---
 titulo: Infrastructure that only existed in the console
 meta: Infrastructure as code
-ordem: 4
+ordem: 5
 par: infraestrutura-como-codigo
 restricao: >-
   The environment was already up and working, so moving it to code could not interrupt what existed.

@@ -9,7 +9,7 @@ resultado:
   unidade: build time per pipeline
   antes: 15 min
 restricao: >-
-  The pipelines were already in use and each service had its own details, so the new standard could not require every service to be identical.
+  The services belonged to different teams and came in different kinds, and each kind had its own way of publishing. My first proposal, a single template, did not fit.
 decisao: >-
   Shared templates per pipeline type, with default variables for the most common values. Each project's pipeline only overrides what diverges from the default. The templates also reference condensed steps.
 tradeoff: >-

@@ -1,7 +1,7 @@
 ---
 titulo: Infraestrutura que só existia no console
 meta: Infraestrutura como código
-ordem: 4
+ordem: 5
 par: infrastructure-as-code
 restricao: >-
   O ambiente já estava no ar e funcionando, então passar para código não podia interromper o que existia.
