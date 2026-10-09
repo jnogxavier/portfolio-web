@@ -29,7 +29,7 @@ export const textos = {
   },
   en: {
     lang: 'en', raiz: '/en/',
-    nav: { sobre: 'About', exp: 'Experience', skills: 'Skills', casos: 'Case Studies', contato: 'Contact' },
+    nav: { sobre: 'About', exp: 'Experience', skills: 'Skills', casos: 'Cases', contato: 'Contact' },
     status: 'Open to offers',
     statusLabel: 'Open to offers — send an email',
     onde: 'Goiânia, Brazil or remote',

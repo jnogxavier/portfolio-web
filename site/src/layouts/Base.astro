@@ -127,6 +127,9 @@ const nav = [
           {nav.map((l) => (
             <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
+        </nav>
+
+        <div class="controles">
           <div class="idiomas" role="group" aria-label={rotulos.idioma}>
             {lang === 'pt'
               ? <span class="idioma--atual" aria-current="true" lang="pt">Português</span>
@@ -144,7 +147,7 @@ const nav = [
               <path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z" />
             </svg>
           </button>
-        </nav>
+        </div>
       </div>
     </header>
 
@@ -267,31 +270,42 @@ const nav = [
 
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
-  .menu { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
+  .marca { order: 1; }
+  .menu { order: 2; margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
+  .controles { order: 3; display: flex; align-items: center; gap: var(--space-5); flex: none; }
   .idiomas {
     display: inline-flex; align-items: center; flex: none; padding: 2px;
     border: 1px solid var(--line); border-radius: var(--radius-full);
   }
-  .menu .idiomas > * {
+  .controles .idiomas > * {
     position: relative; isolation: isolate; display: inline-flex; align-items: center;
     height: 34px; padding: 0 var(--space-4); border-radius: var(--radius-full);
     font: 500 0.875rem/1 var(--font-sans); white-space: nowrap;
+    color: var(--ink-muted); text-decoration: none;
     transition: color 140ms ease, transform 160ms var(--ease-out);
   }
-  .menu .idiomas > *::after { content: ''; position: absolute; inset: -5px 0; }
-  .menu .idiomas > .idioma--atual { background: var(--brand-ink); color: var(--surface); }
-  .menu .idiomas > a::before {
+  .controles .idiomas > *::after { content: ''; position: absolute; inset: -5px 0; }
+  .controles .idiomas > .idioma--atual { background: var(--brand-ink); color: var(--surface); }
+  .controles .idiomas > a::before {
     content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
     background: color-mix(in oklch, var(--brand-ink) 14%, transparent);
     opacity: 0; transform: scale(0.9);
     transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
   }
-  .menu .idiomas > a:focus-visible { outline-offset: 1px; }
-  @media (hover: hover) and (pointer: fine) {
-    .menu .idiomas > a:hover { color: var(--ink); }
-    .menu .idiomas > a:hover::before { opacity: 1; transform: none; }
+  .controles .idiomas > a:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  @media (max-width: 30rem) { .controles .idiomas > * { padding: 0 var(--space-3); } }
+  @media (max-width: 30rem) { .topo__linha { column-gap: var(--space-2); } }
+  @media (max-width: 24rem) {
+    .controles .idiomas > * { padding: 0 var(--space-2); }
+    .controles { gap: var(--space-2); }
+    .menu { gap: var(--space-2) var(--space-3); }
+    .menu a { font-size: 0.9375rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .menu .idiomas > a::before { transform: none; } }
+  @media (hover: hover) and (pointer: fine) {
+    .controles .idiomas > a:hover { color: var(--ink); }
+    .controles .idiomas > a:hover::before { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .controles .idiomas > a::before { transform: none; } }
   :global(a), :global(button) { touch-action: manipulation; }
   .menu a {
     font: 500 1rem/1 var(--font-sans); letter-spacing: 0.005em;
@@ -299,7 +313,8 @@ const nav = [
     transition: color 140ms ease, transform 160ms var(--ease-out);
   }
   @media (max-width: 56rem) {
-    .menu { gap: var(--space-2) var(--space-4); }
+    .menu { order: 3; flex-basis: 100%; margin-left: 0; gap: var(--space-2) var(--space-4); }
+    .controles { order: 2; margin-left: auto; gap: var(--space-3); }
     .menu a { padding-block: 0.9375rem; }
     .topo__linha { padding-block: var(--space-2); }
   }
