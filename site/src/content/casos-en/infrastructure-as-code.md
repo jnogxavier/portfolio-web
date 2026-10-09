@@ -3,6 +3,12 @@ titulo: Infrastructure that only existed in the console
 meta: Infrastructure as code
 ordem: 4
 par: infraestrutura-como-codigo
+restricao: >-
+  The environment was already up and working, so moving it to code could not interrupt what existed.
+decisao: >-
+  Terraform in modules, one workspace per environment, and the decisions recorded as ADRs.
+tradeoff: >-
+  Every change now costs a plan and an apply, instead of a click in the console.
 declarado: >-
   Infrastructure is described in code, and any environment can be rebuilt from the repository.
 observado: >-
@@ -10,7 +16,7 @@ observado: >-
 reconciliado: >-
   Terraform in modules, with remote state and one workspace per environment. A guard rail compares the workspace with the environment in the variables file and makes the plan fail before any change, because applying production thinking it is staging is the mistake nobody makes twice. Architecture decisions were recorded as ADRs, with the reason and what was discarded.
 chamada: >-
-  Network, cluster and edge existed only in the console. They became Terraform modules, with the decisions recorded.
+  The worst case became an apply, not an archaeology dig.
 ganhos:
   - >-
     Infrastructure stopped being a fragile object. The worst case became an apply, not an archaeology dig.

@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icone from './Icone.astro';
-import { skills, areasEn, itensEn } from '../data/skills';
+import Trajetoria from './Trajetoria.astro';
+import Competencias from './Competencias.astro';
 import { textos, type Idioma } from '../i18n';
 import { contato } from '../data/contato';
 
@@ -10,7 +11,7 @@ interface Props {
   seo: { titulo: string; descricao: string };
   casos: { id: string; data: any }[];
   linha: any[];
-  sobre: string[];
+  sobre: { abertura: string; resto: string }[];
 }
 const { lang, seo, casos, linha, sobre } = Astro.props;
 const rotulos = textos[lang];
@@ -28,56 +29,12 @@ const rotulos = textos[lang];
         <h1>{rotulos.h1}</h1>
         <p class="lede">{rotulos.lede}</p>
         <p class="capa__acoes">
-          <a class="jnx-acao" href="#casos">{rotulos.verCasos}</a>
-          <a class="jnx-acao jnx-acao--secundaria" href={contato.zap}
-             target="_blank" rel="noopener noreferrer">{rotulos.zap}</a>
+          <a class="jnx-acao" href={`mailto:${contato.email}`}>{rotulos.email}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
         </p>
       </div>
       <img class="capa__retrato" src="/retrato-capa.webp" width="512" height="640"
            alt={rotulos.fotoAlt} fetchpriority="high" decoding="async" />
-    </div>
-  </section>
-
-  <section class="secao" id="sobre">
-    <div class="faixa">
-      <h2>{rotulos.tSobre}</h2>
-      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p>{p}</p></div>)}</div>
-    </div>
-  </section>
-
-  <section class="secao secao--alt" id="experiencia">
-    <div class="faixa">
-      <h2>{rotulos.tExp}</h2>
-      <ol class="trilha">
-        {linha.map((e) => (
-          <li>
-            <div class="trilha__quando">
-              <span class="trilha__periodo">{e.periodo}</span>
-              <span class="trilha__lugar">{e.lugar}</span>
-            </div>
-            <div class="trilha__oque">
-              <h3>{e.cargo}</h3>
-              <p class="trilha__onde">{e.onde}</p>
-              {e.texto.map((paragrafo) => <p>{paragrafo}</p>)}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="secao" id="skills">
-    <div class="faixa">
-      <h2>{rotulos.tSkills}</h2>
-      <p class="skills__intro">{rotulos.skillsNota}</p>
-      <dl class="skills">
-        {skills.map((g) => (
-          <div class="skills__linha">
-            <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
-            <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
-          </div>
-        ))}
-      </dl>
     </div>
   </section>
 
@@ -107,15 +64,41 @@ const rotulos = textos[lang];
     </div>
   </section>
 
-  <section class="secao" id="contato">
+  <section class="secao" id="sobre">
+    <div class="faixa">
+      <h2>{rotulos.tSobre}</h2>
+      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p><strong class="sobre__lead">{p.abertura}</strong> {p.resto}</p></div>)}</div>
+    </div>
+  </section>
+
+  <section class="secao secao--alt" id="experiencia">
+    <div class="faixa">
+      <div class="secao__cabeca">
+        <h2>{rotulos.tExp}</h2>
+        <p class="secao__nota">{rotulos.expNota}</p>
+      </div>
+      <Trajetoria linha={linha} />
+    </div>
+  </section>
+
+  <section class="secao" id="skills">
+    <div class="faixa">
+      <h2>{rotulos.tSkills}</h2>
+      <p class="skills__intro">{rotulos.skillsNota}</p>
+      <Competencias lang={lang} />
+    </div>
+  </section>
+
+  <section class="secao secao--banda" id="contato">
     <div class="faixa">
       <h2>{rotulos.tContato}</h2>
       <p class="contato__nota">{rotulos.contatoNota}</p>
+      <a class="contato__email" href={`mailto:${contato.email}`} translate="no">{contato.email}</a>
       <nav class="canais" aria-label={rotulos.canais}>
-        <a href={`mailto:${contato.email}`}><Icone nome="email" />{contato.email}</a>
-        <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-        <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-        <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+        <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp<span class="sr"> {rotulos.novaAba}</span></a>
+        <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub<span class="sr"> {rotulos.novaAba}</span></a>
+        <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn<span class="sr"> {rotulos.novaAba}</span></a>
+        <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
       </nav>
     </div>
   </section>
@@ -138,7 +121,10 @@ const rotulos = textos[lang];
     .capa__grade { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); }
     .capa__retrato { max-width: 340px; justify-self: end; }
   }
-  .capa__nome { margin: 0; font: 500 1rem/1.3 var(--font-sans); opacity: 0.8; }
+  .capa__nome {
+    margin: 0; font: 700 clamp(1.375rem, 1rem + 1.5vw, 2rem)/1.15 var(--font-display);
+    letter-spacing: -0.015em; text-wrap: balance;
+  }
   h1 {
     margin: 0; max-width: 18ch;
     font: 700 clamp(2rem, 1rem + 3.4vw, 3.5rem)/1.08 var(--font-display);
@@ -177,31 +163,8 @@ const rotulos = textos[lang];
   .sobre__bloco { padding-block: var(--space-4); border-top: 1px solid var(--line); }
   .sobre__bloco:first-child { border-top: none; padding-top: 0; }
   .sobre__bloco p { margin: 0; max-width: 66ch; }
+  .sobre__lead { font-weight: 600; }
 
-  .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .trilha li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
-  .trilha li:first-child { border-top: none; padding-top: 0; }
-  .trilha__quando { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
-  .trilha__periodo { font: 500 0.75rem/1.4 var(--font-sans); color: var(--ink); font-variant-numeric: tabular-nums; }
-  .trilha__lugar { font: 400 0.75rem/1.4 var(--font-sans); color: var(--ink-muted); }
-  .trilha__oque { display: flex; flex-direction: column; gap: var(--space-2); max-width: 66ch; min-width: 0; }
-  .trilha h3 { margin: 0; font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
-  .trilha__onde { margin: 0; font: 500 1rem/1.4 var(--font-sans); color: var(--brand-ink); }
-  .trilha__oque p { margin: 0; color: var(--ink-muted); }
-  .trilha__oque p.trilha__onde { color: var(--brand-ink); }
-  @media (min-width: 52rem) {
-    .trilha li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
-  }
-
-  .skills { margin: 0; }
-  .skills__linha { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid var(--line); }
-  .skills__linha:first-child { border-top: none; padding-top: 0; }
-  .skills dt { font: 600 1rem/1.4 var(--font-sans); color: var(--ink); }
-  .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); min-width: 0; }
-  .skills dd span { font: 400 1rem/1.5 var(--font-sans); color: var(--ink-muted); overflow-wrap: anywhere; }
-  @media (min-width: 46rem) {
-    .skills__linha { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
-  }
 
   .lista { list-style: none; margin: 0; padding: 0; }
   .lista li { border-top: 1px solid var(--line); }
@@ -223,7 +186,7 @@ const rotulos = textos[lang];
   }
   .lista h3 { margin: 0 0 var(--space-2); font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
   .lista p { margin: 0 0 var(--space-2); color: var(--ink-muted); max-width: 64ch; }
-  .lista__onde { font-size: 0.75rem; color: var(--ink-muted); }
+  .lista__onde { font: 500 0.75rem/1.4 var(--font-mono); color: var(--brand-ink); }
   @media (hover: hover) and (pointer: fine) {
     .lista a:hover { background: color-mix(in oklch, var(--brand) 7%, transparent); }
     .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
@@ -237,14 +200,23 @@ const rotulos = textos[lang];
   .lista a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 
   .skills__intro { margin: -0.5rem 0 var(--space-5); color: var(--ink-muted); max-width: 62ch; }
-  .contato__nota { margin: 0 0 var(--space-5); max-width: 62ch; color: var(--ink-muted); }
+  .secao--banda { background: var(--band); color: var(--band-ink); border-block: none; }
+  .secao--banda h2 { color: inherit; }
+  .contato__nota { margin: 0 0 var(--space-5); max-width: 62ch; opacity: 0.88; }
+  .contato__email {
+    display: flex; align-items: center; width: fit-content; min-height: 44px; margin-bottom: var(--space-2);
+    font: 500 1.25rem/1.3 var(--font-sans);
+    color: inherit; text-underline-offset: 4px; overflow-wrap: anywhere;
+    transition: transform 160ms var(--ease-out);
+  }
+  .contato__email:focus-visible, .canais a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
+  .contato__email:active, .canais a:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) { .contato__email:hover, .canais a:hover { text-decoration-thickness: 2px; } }
   .canais { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
   .canais a {
     display: inline-flex; align-items: center; gap: var(--space-2);
-    min-height: 44px; color: var(--brand-ink);
+    min-height: 44px; color: inherit;
     font: 500 1rem/1 var(--font-sans); text-underline-offset: 4px; overflow-wrap: anywhere;
     transition: transform 160ms var(--ease-out);
   }
-  .canais a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-  .canais a:active { transform: scale(0.97); }
 </style>

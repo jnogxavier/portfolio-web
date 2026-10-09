@@ -4,6 +4,12 @@ meta: Configuration and secrets
 ordem: 5
 par: configuracao-e-segredos
 diagrama: tresfontes
+restricao: >-
+  Configuration lived in three places with separate permissions, and a secret's value could not appear on screen.
+decisao: >-
+  A single view that reads all three through the API.
+tradeoff: >-
+  Masking hides the secret's value even from whoever is investigating.
 declarado: >-
   For each service you can answer which variables it receives, where each value comes from and who can see it.
 observado: >-
@@ -11,13 +17,13 @@ observado: >-
 reconciliado: >-
   A single view that reads all three at once through the API and presents them by service, with automatic masking of what is sensitive and a filter by type. The read uses the instance's own identity instead of an access key.
 chamada: >-
-  Variables, secrets and parameters lived in three places that did not talk to each other. The way out was one view that joins the three, with the sensitive parts masked.
+  Production configuration can be inspected without exposing any secret's value, and auditing no longer depends on three consoles.
 ganhos:
   - >-
     Auditing stopped depending on someone with access to three consoles and the patience to cross-check by hand.
   - >-
     Masking made it possible to look at production configuration without exposing a secret value on the screen of whoever is investigating.
 aprendizado: >-
-  If the read comes before the authentication, the tool ends up seeing the configuration of a whole account behind nothing but network access. That is the wrong order: a governance tool without access control is one more surface to govern. Today I would start with login and roles, even if the first release showed less.
+  A governance tool is one more surface to govern. Today I would start with login and roles, even if the first release showed less.
 links: []
 ---

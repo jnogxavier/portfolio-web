@@ -43,6 +43,8 @@ const varre = (pasta) => {
 varre('');
 for (const h of hosts) if (h !== host) erros.push(`endereço de outro domínio no build: ${h}`);
 
+if (!le('404.html')) erros.push('404.html não foi gerada');
+
 const sitemap = le('sitemap.xml') ?? '';
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 if (locs.length !== paginas.length) erros.push(`sitemap tem ${locs.length} endereços e o site tem ${paginas.length} páginas`);

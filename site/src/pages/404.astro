@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base titulo="Página não encontrada — jnogxavier" descricao="O endereço não existe ou mudou." robots="noindex">
+  <section class="faixa pagina">
+    <h1 class="jnx-caso__titulo">Página não encontrada</h1>
+    <p>O endereço não existe ou mudou. Volte ao início ou veja os casos.</p>
+    <p class="atalhos">
+      <a class="jnx-link" href="/">Ir para o início</a>
+      <a class="jnx-link" href="/#casos">Ver os casos</a>
+    </p>
+    <p lang="en">
+      Page not found.{' '}
+      <a class="jnx-link" href="/en/">Go to the English home</a> or{' '}
+      <a class="jnx-link" href="/en/#casos">read the case studies</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .atalhos { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); margin: 0; }
+  p { margin: 0; max-width: 62ch; }
+</style>

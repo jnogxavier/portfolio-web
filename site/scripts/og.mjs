@@ -19,7 +19,7 @@ html, body { margin: 0; width: 1200px; height: 630px; }
 body {
   box-sizing: border-box; padding: 72px 80px; display: flex; flex-direction: column;
   justify-content: space-between; align-items: flex-start;
-  background: oklch(43.0% 0.137 8.9); color: oklch(94.6% 0.008 354.7);
+  background: #4A1525; color: #F9F9F8;
 }
 .meta { font: 500 28px/1.3 'Archivo', sans-serif; opacity: 0.8; }
 .titulo { font: 700 78px/1.08 'Zilla Slab', serif; letter-spacing: -0.02em; max-width: 1000px; text-wrap: balance; }

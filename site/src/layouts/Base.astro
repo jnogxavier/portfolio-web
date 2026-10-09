@@ -7,17 +7,17 @@ import '../styles/fontes.css';
 
 import { textos, type Idioma } from '../i18n';
 import { contato } from '../data/contato';
-interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string; canais?: boolean }
-const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo, canais = true } = Astro.props;
+interface Props { titulo: string; descricao: string; lang?: Idioma; parUrl?: string; imagem?: string; tipo?: 'website' | 'article'; manchete?: string; canais?: boolean; robots?: string }
+const { titulo, descricao, lang = 'pt', parUrl, imagem = '/og.png', tipo = 'website', manchete = titulo, canais = true, robots } = Astro.props;
 const rotulos = textos[lang];
 const raiz = rotulos.raiz;
 const aqui = Astro.url.pathname;
 const alterna = parUrl ?? (lang === 'en' ? '/' : '/en/');
 const nav = [
+  { texto: rotulos.nav.casos, href: raiz + '#casos' },
   { texto: rotulos.nav.sobre, href: raiz + '#sobre' },
   { texto: rotulos.nav.exp, href: raiz + '#experiencia' },
   { texto: rotulos.nav.skills, href: raiz + '#skills' },
-  { texto: rotulos.nav.casos, href: raiz + '#casos' },
   { texto: rotulos.nav.contato, href: raiz + '#contato' },
 ];
 ---
@@ -28,9 +28,10 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{titulo}</title>
     <meta name="description" content={descricao} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#f2ebed" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#181115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F9F9F8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
     <link rel="alternate" hreflang="pt-BR" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
     <link rel="alternate" hreflang="en" href={new URL(lang === 'en' ? aqui : alterna, Astro.site).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
@@ -73,6 +74,7 @@ const nav = [
     })} />}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/zilla-slab-700-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/archivo-350_600-latin.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/jetbrains-mono-400_700-latin.woff2" />
     <script is:inline>
       (() => {
         const raiz = document.documentElement;
@@ -80,20 +82,21 @@ const nav = [
         const cores = {};
         let fim;
         metas.forEach((m) => { cores[/dark/.test(m.getAttribute('media')) ? 'dark' : 'light'] = m.content; });
+        const escuro = () => raiz.dataset.tema ? raiz.dataset.tema === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        const marca = () => document.getElementById('tema')?.setAttribute('aria-pressed', String(escuro()));
         const aplica = (t) => {
           raiz.dataset.tema = t;
           metas.forEach((m) => { m.content = cores[t]; });
+          marca();
         };
+        document.addEventListener('DOMContentLoaded', marca);
         try {
           const t = localStorage.getItem('tema');
           if (t === 'dark' || t === 'light') aplica(t);
         } catch (e) {}
         document.addEventListener('click', (e) => {
           if (!e.target.closest('#tema')) return;
-          const escuroAgora = raiz.dataset.tema
-            ? raiz.dataset.tema === 'dark'
-            : matchMedia('(prefers-color-scheme: dark)').matches;
-          const novo = escuroAgora ? 'light' : 'dark';
+          const novo = escuro() ? 'light' : 'dark';
           raiz.dataset.trocando = '';
           aplica(novo);
           clearTimeout(fim);
@@ -118,13 +121,15 @@ const nav = [
       </div>
 
       <div class="faixa topo__linha">
-        <a class="marca" href={raiz} aria-label={rotulos.inicio} aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
+        <a class="marca" href={raiz} aria-label={`jnogxavier, ${rotulos.inicio}`} aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
 
         <nav class="menu" aria-label={rotulos.menu}>
           {nav.map((l) => (
             <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
-          <a href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
+        </nav>
+
+        <div class="controles">
           <div class="idiomas" role="group" aria-label={rotulos.idioma}>
             {lang === 'pt'
               ? <span class="idioma--atual" aria-current="true" lang="pt">Português</span>
@@ -142,22 +147,22 @@ const nav = [
               <path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z" />
             </svg>
           </button>
-        </nav>
+        </div>
       </div>
     </header>
 
     <main id="conteudo" tabindex="-1"><slot /></main>
 
-    <footer class="rodape">
+    <footer class={canais ? 'rodape' : 'rodape rodape--colado'}>
       <div class="faixa rodape__linha">
         <p class="rodape__nome">João Vitor Nogueira Xavier<span>{rotulos.local}</span></p>
         {canais && (
           <nav class="rodape__links" aria-label={rotulos.rodape}>
             <a href={`mailto:${contato.email}`}><Icone nome="email" /><span translate="no">{contato.email}</span></a>
-            <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-            <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-            <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-            <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
+            <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp<span class="sr"> {rotulos.novaAba}</span></a>
+            <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub<span class="sr"> {rotulos.novaAba}</span></a>
+            <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn<span class="sr"> {rotulos.novaAba}</span></a>
+            <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
             {lang === 'pt'
               ? <a href={alterna} hreflang="en" lang="en">English</a>
               : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
@@ -227,7 +232,7 @@ const nav = [
   }
   .estado {
     margin: 0; display: flex; align-items: center; gap: var(--space-2); min-width: 0;
-    font: 400 0.75rem/1 var(--font-sans); color: var(--ink);
+    font: 400 0.75rem/1 var(--font-mono); color: var(--ink);
   }
   .estado__no {
     width: 7px; height: 7px; border-radius: var(--radius-full);
@@ -265,31 +270,42 @@ const nav = [
 
   @media (max-width: 30rem) { .estado__onde { display: none; } }
   .marca { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
-  .menu { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
+  .marca { order: 1; }
+  .menu { order: 2; margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); min-width: 0; }
+  .controles { order: 3; display: flex; align-items: center; gap: var(--space-5); flex: none; }
   .idiomas {
     display: inline-flex; align-items: center; flex: none; padding: 2px;
     border: 1px solid var(--line); border-radius: var(--radius-full);
   }
-  .menu .idiomas > * {
+  .controles .idiomas > * {
     position: relative; isolation: isolate; display: inline-flex; align-items: center;
     height: 34px; padding: 0 var(--space-4); border-radius: var(--radius-full);
     font: 500 0.875rem/1 var(--font-sans); white-space: nowrap;
+    color: var(--ink-muted); text-decoration: none;
     transition: color 140ms ease, transform 160ms var(--ease-out);
   }
-  .menu .idiomas > *::after { content: ''; position: absolute; inset: -5px 0; }
-  .menu .idiomas > .idioma--atual { background: var(--brand-ink); color: var(--surface); }
-  .menu .idiomas > a::before {
+  .controles .idiomas > *::after { content: ''; position: absolute; inset: -5px 0; }
+  .controles .idiomas > .idioma--atual { background: var(--brand-ink); color: var(--surface); }
+  .controles .idiomas > a::before {
     content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
     background: color-mix(in oklch, var(--brand-ink) 14%, transparent);
     opacity: 0; transform: scale(0.9);
     transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
   }
-  .menu .idiomas > a:focus-visible { outline-offset: 1px; }
-  @media (hover: hover) and (pointer: fine) {
-    .menu .idiomas > a:hover { color: var(--ink); }
-    .menu .idiomas > a:hover::before { opacity: 1; transform: none; }
+  .controles .idiomas > a:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  @media (max-width: 30rem) { .controles .idiomas > * { padding: 0 var(--space-3); } }
+  @media (max-width: 30rem) { .topo__linha { column-gap: var(--space-2); } }
+  @media (max-width: 24rem) {
+    .controles .idiomas > * { padding: 0 var(--space-2); }
+    .controles { gap: var(--space-2); }
+    .menu { gap: var(--space-2) var(--space-3); }
+    .menu a { font-size: 0.9375rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .menu .idiomas > a::before { transform: none; } }
+  @media (hover: hover) and (pointer: fine) {
+    .controles .idiomas > a:hover { color: var(--ink); }
+    .controles .idiomas > a:hover::before { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .controles .idiomas > a::before { transform: none; } }
   :global(a), :global(button) { touch-action: manipulation; }
   .menu a {
     font: 500 1rem/1 var(--font-sans); letter-spacing: 0.005em;
@@ -297,7 +313,8 @@ const nav = [
     transition: color 140ms ease, transform 160ms var(--ease-out);
   }
   @media (max-width: 56rem) {
-    .menu { gap: var(--space-2) var(--space-4); }
+    .menu { order: 3; flex-basis: 100%; margin-left: 0; gap: var(--space-2) var(--space-4); }
+    .controles { order: 2; margin-left: auto; gap: var(--space-3); }
     .menu a { padding-block: 0.9375rem; }
     .topo__linha { padding-block: var(--space-2); }
   }
@@ -307,6 +324,7 @@ const nav = [
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .rodape { position: relative; overflow: hidden; margin-top: var(--space-9); background: var(--band); color: var(--band-ink); }
+  .rodape--colado { margin-top: 0; border-top: 1px solid color-mix(in oklch, var(--band-ink) 20%, var(--band)); }
   .rodape > * { position: relative; }
   .rodape__linha {
     display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6);
@@ -320,6 +338,7 @@ const nav = [
   .rodape__links a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; overflow-wrap: anywhere; transition: transform 160ms var(--ease-out); }
   .rodape a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in oklch, currentColor 45%, transparent); }
   @media (hover: hover) and (pointer: fine) { .rodape a:hover { text-decoration-color: currentColor; } }
+  @media (hover: hover) and (pointer: fine) { .rodape a:hover { text-decoration-thickness: 2px; } }
   .rodape a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
   .rodape__links a:active { transform: scale(0.97); }
 </style>

@@ -4,6 +4,12 @@ meta: Observabilidade
 ordem: 3
 par: observability-otel
 diagrama: correlacao
+restricao: >-
+  A instrumentação dependia de um fornecedor, e o dado sensível não podia sair do ambiente.
+decisao: >-
+  OpenTelemetry com um Collector que decide o destino, no lugar de o agente do fornecedor decidir.
+tradeoff: >-
+  A telemetria passou a ser algo que a plataforma mantém, em vez de um serviço de fornecedor.
 declarado: >-
   Quando um job falha ou demora, dá para abrir o log, achar o trace daquela execução e ver onde o tempo foi embora.
 observado: >-
@@ -12,7 +18,7 @@ reconciliado: >-
   Coleta com OpenTelemetry no cluster, exportando por OTLP para um Collector, que decide o destino em vez de a aplicação decidir. Um coletor de logs no caminho remove campo sensível antes de o dado sair do ambiente. A métrica vai para o Prometheus e o painel para o Grafana, para a investigação começar de um lugar.
   Na aplicação, o SDK é inicializado no core antes de qualquer outra coisa, com auto-instrumentação de HTTP e de banco, cada job com span próprio, contador de execução e de erro, medidor de jobs em curso e histograma de duração por status, e o log carregando traceId e spanId quando há span ativo.
 chamada: >-
-  Coleta com OpenTelemetry, dado sensível filtrado antes de sair e log, métrica e trace ligados pelo mesmo identificador.
+  Do log, pelo traceId, dá para ir direto ao trace da execução, e trocar de backend de telemetria virou configuração.
 ganhos:
   - >-
     A telemetria deixou de depender de um fornecedor. O Collector passou a decidir o destino, e trocar de backend virou configuração, não refatoração.

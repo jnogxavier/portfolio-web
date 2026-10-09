@@ -1,0 +1,39 @@
+---
+import { skills, areasEn, itensEn } from '../data/skills';
+import { textos, type Idioma } from '../i18n';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const rotulos = textos[lang];
+const grupos = [
+  { titulo: rotulos.tNucleo, itens: skills.filter((g) => g.nucleo) },
+  { titulo: rotulos.tTambem, itens: skills.filter((g) => !g.nucleo) },
+];
+---
+{grupos.map((gr) => (
+  <section class="skills__grupo">
+    <h3>{gr.titulo}</h3>
+    <dl class="skills">
+      {gr.itens.map((g) => (
+        <div class="skills__linha">
+          <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
+          <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+))}
+
+<style>
+  .skills__grupo + .skills__grupo { margin-top: var(--space-7); }
+  .skills__grupo h3 { margin: 0 0 var(--space-4); font: 600 0.875rem/1.4 var(--font-mono); color: var(--ink-muted); }
+  .skills { margin: 0; }
+  .skills__linha { display: grid; gap: var(--space-1); padding-block: var(--space-3); border-top: 1px solid var(--line); }
+  .skills__linha:first-child { border-top: none; padding-top: 0; }
+  .skills dt { font: 600 1rem/1.4 var(--font-sans); color: var(--ink); }
+  .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); min-width: 0; }
+  .skills dd span { font: 400 0.875rem/1.6 var(--font-mono); color: var(--ink-muted); overflow-wrap: anywhere; }
+  @media (min-width: 46rem) {
+    .skills__linha { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
+  }
+</style>

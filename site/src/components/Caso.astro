@@ -10,6 +10,8 @@ const diagramas = { esteira: Esteira, reconciliacao: Reconciliacao, correlacao: 
 
 interface Props {
   titulo: string; meta: string;
+  restricao: string; decisao: string; tradeoff?: string;
+  chamada: string;
   declarado: string; observado: string; reconciliado: string;
   resultado?: { antes?: string; valor: string; unidade?: string };
   diagrama?: 'esteira' | 'reconciliacao' | 'correlacao' | 'tresfontes';
@@ -19,13 +21,15 @@ interface Props {
   lang?: Idioma;
   aprendizado: string;
 }
-const { titulo, meta, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, ant, prox, lang = 'pt' } = Astro.props;
+const { titulo, meta, chamada, restricao, decisao, tradeoff, declarado, observado, reconciliado, resultado, diagrama, ganhos = [], aprendizado, ant, prox, lang = 'pt' } = Astro.props;
 const rotulos = textos[lang];
 const Diagrama = diagrama ? diagramas[diagrama] : null;
-const leituras = [
-  { rotulo: rotulos.movimentos[0], texto: declarado },
-  { rotulo: rotulos.movimentos[1], texto: observado },
-  { rotulo: rotulos.movimentos[2], texto: reconciliado },
+const antes = [
+  { rotulo: rotulos.rDeveria, texto: declarado },
+  { rotulo: rotulos.rAcontecia, texto: observado },
+  { rotulo: rotulos.rRestricao, texto: restricao },
+  { rotulo: rotulos.rDecisao, texto: decisao },
+  { rotulo: rotulos.rComo, texto: reconciliado },
 ];
 ---
 <article class="jnx-caso">
@@ -34,23 +38,29 @@ const leituras = [
     <p class="jnx-caso__meta">{meta}</p>
   </div>
 
-  {leituras.map(({ rotulo, texto }) => (
+  <div class="jnx-caso__movimento jnx-caso__movimento--resultado">
+    <h2 class="jnx-caso__rotulo">{rotulos.rResultado}</h2>
+    <p class="jnx-caso__texto">{chamada}</p>
+    {resultado && (
+      <p class="jnx-caso__resultado">
+        <span class="jnx-caso__medida">{resultado.valor}</span>
+        <span class="jnx-caso__legenda">
+          {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
+          {resultado.antes && <span class="jnx-caso__contexto">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
+        </span>
+      </p>
+    )}
+  </div>
+
+  {antes.map(({ rotulo, texto }) => (
     <div class="jnx-caso__movimento">
       <h2 class="jnx-caso__rotulo">{rotulo}</h2>
       <p class="jnx-caso__texto">{texto}</p>
     </div>
   ))}
 
-
   {Diagrama && diagrama && <Diagrama d={dg[diagrama][lang]} />}
 
-  {resultado && (
-    <p class="jnx-caso__resultado">
-      <span class="jnx-caso__medida">{resultado.valor}</span>
-      {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
-      {resultado.antes && <span class="jnx-caso__unidade">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
-    </p>
-  )}
 
   {ganhos.length > 0 && (
     <div class="jnx-caso__movimento">
@@ -58,6 +68,13 @@ const leituras = [
       <ul class="ganhos">
         {ganhos.map((g) => <li>{g}</li>)}
       </ul>
+    </div>
+  )}
+
+  {tradeoff && (
+    <div class="jnx-caso__movimento">
+      <h2 class="jnx-caso__rotulo">{rotulos.rTradeoff}</h2>
+      <p class="jnx-caso__texto">{tradeoff}</p>
     </div>
   )}
 

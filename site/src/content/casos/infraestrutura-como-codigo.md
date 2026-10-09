@@ -3,6 +3,12 @@ titulo: Infraestrutura que só existia no console
 meta: Infraestrutura como código
 ordem: 4
 par: infrastructure-as-code
+restricao: >-
+  O ambiente já estava no ar e funcionando, então passar para código não podia interromper o que existia.
+decisao: >-
+  Terraform em módulos, com um workspace por ambiente e as decisões registradas como ADR.
+tradeoff: >-
+  Toda mudança passou a custar um plan e um apply, em vez de um clique no console.
 declarado: >-
   A infraestrutura está descrita em código, e qualquer ambiente pode ser reconstruído a partir do repositório.
 observado: >-
@@ -10,7 +16,7 @@ observado: >-
 reconciliado: >-
   Terraform em módulos, com estado remoto e um workspace por ambiente. Um guard rail compara o workspace com o ambiente do arquivo de variáveis e faz o plan falhar antes de qualquer mudança, porque aplicar produção achando que é homologação é o erro que ninguém comete duas vezes. As decisões de arquitetura ficaram registradas como ADR, com o motivo e o que foi descartado.
 chamada: >-
-  Rede, cluster e borda existiam só no console. Viraram módulos de Terraform, com as decisões registradas.
+  O pior caso passou a ser um apply, não uma arqueologia.
 ganhos:
   - >-
     A infraestrutura deixou de ser um objeto frágil. O pior caso passou a ser um apply, não uma arqueologia.
