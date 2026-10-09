@@ -39,7 +39,14 @@ const rotulos = textos[lang];
     </div>
   </section>
 
-  <section class="secao secao--alt" id="casos">
+  <section class="secao secao--alt" id="sobre">
+    <div class="faixa">
+      <h2>{rotulos.tSobre}</h2>
+      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p><strong class="sobre__lead">{p.abertura}</strong> {p.resto}</p></div>)}</div>
+    </div>
+  </section>
+
+  <section class="secao" id="casos">
     <div class="faixa">
       <div class="secao__cabeca">
         <h2>{rotulos.tCasos}</h2>
@@ -62,13 +69,6 @@ const rotulos = textos[lang];
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <section class="secao" id="sobre">
-    <div class="faixa">
-      <h2>{rotulos.tSobre}</h2>
-      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p><strong class="sobre__lead">{p.abertura}</strong> {p.resto}</p></div>)}</div>
     </div>
   </section>
 
