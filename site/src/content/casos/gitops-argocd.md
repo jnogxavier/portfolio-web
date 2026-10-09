@@ -17,7 +17,7 @@ observado: >-
 reconciliado: >-
   Uma Application do ArgoCD por serviço reconcilia o cluster contra o repositório. A configuração de cada serviço entra num hash em uma anotação do template do pod, então mudar uma variável muda o template e dispara um rollout, sem passar por build. Com maxUnavailable em zero e readiness probe, nenhum pod antigo sai antes de um novo responder. E quando alguém edita o cluster por fora, a aplicação aparece OutOfSync em vez de virar surpresa semanas depois.
 chamada: >-
-  Trocar uma variável custava um deploy inteiro. Com GitOps virou um sync, sem derrubar nada.
+  Trocar uma variável virou um sync, sem derrubar nada, e o histórico do cluster virou o histórico do git, então dá para auditar quem mudou o quê, quando e por quê.
 ganhos:
   - >-
     O histórico do cluster virou o histórico do git. Quem mudou, quando, em qual commit, e com qual justificativa no pull request.

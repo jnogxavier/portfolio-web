@@ -17,7 +17,7 @@ observado: >-
 reconciliado: >-
   One ArgoCD Application per service reconciles the cluster against the repository. Each service's configuration goes into a hash on an annotation of the pod template, so changing a variable changes the template and triggers a rollout, without going through a build. With maxUnavailable at zero and a readiness probe, no old pod leaves before a new one answers. And when someone edits the cluster directly, the application shows up OutOfSync instead of turning into a surprise weeks later.
 chamada: >-
-  Changing a variable used to cost a whole deploy. With GitOps it became a sync, with nothing taken down.
+  Changing a variable became a sync, with no downtime, and the cluster's history became the git history, so you can audit who changed what, when and why.
 ganhos:
   - >-
     The cluster's history became the git history. Who changed what, when, in which commit, and with what reasoning in the pull request.

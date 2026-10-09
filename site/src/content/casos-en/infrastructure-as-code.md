@@ -16,7 +16,7 @@ observado: >-
 reconciliado: >-
   Terraform in modules, with remote state and one workspace per environment. A guard rail compares the workspace with the environment in the variables file and makes the plan fail before any change, because applying production thinking it is staging is the mistake nobody makes twice. Architecture decisions were recorded as ADRs, with the reason and what was discarded.
 chamada: >-
-  Network, cluster and edge existed only in the console. They became Terraform modules, with the decisions recorded.
+  The worst case became an apply, not an archaeology dig.
 ganhos:
   - >-
     Infrastructure stopped being a fragile object. The worst case became an apply, not an archaeology dig.

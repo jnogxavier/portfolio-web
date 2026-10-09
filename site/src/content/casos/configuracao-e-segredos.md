@@ -17,7 +17,7 @@ observado: >-
 reconciliado: >-
   Uma visão única que lê os três de uma vez pela API e apresenta por serviço, com mascaramento automático do que é sensível e filtro por tipo. A leitura usa a identidade da própria instância em vez de chave de acesso.
 chamada: >-
-  Variável, segredo e parâmetro viviam em três lugares que não se falavam. A saída foi uma visão que junta os três, com o sensível mascarado.
+  Dá para olhar a configuração de produção sem expor o valor de nenhum segredo, e a auditoria deixou de depender de três consoles.
 ganhos:
   - >-
     Auditoria deixou de depender de alguém com acesso aos três consoles e paciência para cruzar à mão.

@@ -17,7 +17,7 @@ observado: >-
 reconciliado: >-
   A single view that reads all three at once through the API and presents them by service, with automatic masking of what is sensitive and a filter by type. The read uses the instance's own identity instead of an access key.
 chamada: >-
-  Variables, secrets and parameters lived in three places that did not talk to each other. The way out was one view that joins the three, with the sensitive parts masked.
+  Production configuration can be inspected without exposing any secret's value, and auditing no longer depends on three consoles.
 ganhos:
   - >-
     Auditing stopped depending on someone with access to three consoles and the patience to cross-check by hand.

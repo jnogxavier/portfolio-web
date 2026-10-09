@@ -16,7 +16,7 @@ observado: >-
 reconciliado: >-
   Terraform em módulos, com estado remoto e um workspace por ambiente. Um guard rail compara o workspace com o ambiente do arquivo de variáveis e faz o plan falhar antes de qualquer mudança, porque aplicar produção achando que é homologação é o erro que ninguém comete duas vezes. As decisões de arquitetura ficaram registradas como ADR, com o motivo e o que foi descartado.
 chamada: >-
-  Rede, cluster e borda existiam só no console. Viraram módulos de Terraform, com as decisões registradas.
+  O pior caso passou a ser um apply, não uma arqueologia.
 ganhos:
   - >-
     A infraestrutura deixou de ser um objeto frágil. O pior caso passou a ser um apply, não uma arqueologia.

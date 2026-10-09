@@ -18,7 +18,7 @@ reconciliado: >-
   Collection with OpenTelemetry in the cluster, exporting over OTLP to a Collector, which decides the destination instead of the application deciding. A log collector on the log path removes sensitive fields before the data leaves the environment. Metrics go to Prometheus and dashboards to Grafana, so an investigation starts from one place.
   On the application side, the SDK is initialized in the core before anything else, with automatic instrumentation of HTTP and the database, a span for each job, execution and error counters, a gauge of jobs in flight and a duration histogram by status, and logs carrying traceId and spanId when a span is active.
 chamada: >-
-  Collection with OpenTelemetry, sensitive data filtered before it leaves, and log, metric and trace tied together by one identifier.
+  From the log, the traceId leads straight to the execution's trace, and switching telemetry backends became configuration.
 ganhos:
   - >-
     Telemetry stopped depending on a vendor. The Collector decides the destination, and changing backends became configuration, not refactoring.
