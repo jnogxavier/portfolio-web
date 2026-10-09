@@ -5,7 +5,7 @@ ordem: 1
 par: shared-pipelines
 diagrama: esteira
 resultado:
-  valor: 6–8 min
+  valor: 6–8 min
   unidade: de build por pipeline
   antes: 15 min
 restricao: >-

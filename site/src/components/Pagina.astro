@@ -95,9 +95,9 @@ const rotulos = textos[lang];
       <p class="contato__nota">{rotulos.contatoNota}</p>
       <a class="contato__email" href={`mailto:${contato.email}`} translate="no">{contato.email}</a>
       <nav class="canais" aria-label={rotulos.canais}>
-        <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-        <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-        <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+        <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp<span class="sr"> {rotulos.novaAba}</span></a>
+        <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub<span class="sr"> {rotulos.novaAba}</span></a>
+        <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn<span class="sr"> {rotulos.novaAba}</span></a>
         <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
       </nav>
     </div>
@@ -211,6 +211,7 @@ const rotulos = textos[lang];
   }
   .contato__email:focus-visible, .canais a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
   .contato__email:active, .canais a:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) { .contato__email:hover, .canais a:hover { text-decoration-thickness: 2px; } }
   .canais { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
   .canais a {
     display: inline-flex; align-items: center; gap: var(--space-2);

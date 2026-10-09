@@ -5,10 +5,9 @@ import { textos, type Idioma } from '../i18n';
 interface Props { lang: Idioma }
 const { lang } = Astro.props;
 const rotulos = textos[lang];
-const nucleo = new Set(['Plataforma e containers', 'Entrega e GitOps', 'Infraestrutura como código', 'Cloud', 'Observabilidade', 'Mensageria e gateway', 'Segurança', 'Backend e dados']);
 const grupos = [
-  { titulo: rotulos.tNucleo, itens: skills.filter((g) => nucleo.has(g.area)) },
-  { titulo: rotulos.tTambem, itens: skills.filter((g) => !nucleo.has(g.area)) },
+  { titulo: rotulos.tNucleo, itens: skills.filter((g) => g.nucleo) },
+  { titulo: rotulos.tTambem, itens: skills.filter((g) => !g.nucleo) },
 ];
 ---
 {grupos.map((gr) => (

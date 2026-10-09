@@ -14,6 +14,8 @@
 
 .jnx-link { color: var(--brand-ink); text-underline-offset: 3px; overflow-wrap: anywhere; display: inline-block; padding-block: 0.5625rem; min-width: 0; transition: transform 160ms var(--ease-out); }
 .jnx-link:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .jnx-link:hover { text-decoration-thickness: 2px; } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .jnx-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 
 .jnx-acao {

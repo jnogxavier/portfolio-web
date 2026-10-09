@@ -82,20 +82,21 @@ const nav = [
         const cores = {};
         let fim;
         metas.forEach((m) => { cores[/dark/.test(m.getAttribute('media')) ? 'dark' : 'light'] = m.content; });
+        const escuro = () => raiz.dataset.tema ? raiz.dataset.tema === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        const marca = () => document.getElementById('tema')?.setAttribute('aria-pressed', String(escuro()));
         const aplica = (t) => {
           raiz.dataset.tema = t;
           metas.forEach((m) => { m.content = cores[t]; });
+          marca();
         };
+        document.addEventListener('DOMContentLoaded', marca);
         try {
           const t = localStorage.getItem('tema');
           if (t === 'dark' || t === 'light') aplica(t);
         } catch (e) {}
         document.addEventListener('click', (e) => {
           if (!e.target.closest('#tema')) return;
-          const escuroAgora = raiz.dataset.tema
-            ? raiz.dataset.tema === 'dark'
-            : matchMedia('(prefers-color-scheme: dark)').matches;
-          const novo = escuroAgora ? 'light' : 'dark';
+          const novo = escuro() ? 'light' : 'dark';
           raiz.dataset.trocando = '';
           aplica(novo);
           clearTimeout(fim);
@@ -155,9 +156,9 @@ const nav = [
         {canais && (
           <nav class="rodape__links" aria-label={rotulos.rodape}>
             <a href={`mailto:${contato.email}`}><Icone nome="email" /><span translate="no">{contato.email}</span></a>
-            <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
-            <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
-            <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+            <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp<span class="sr"> {rotulos.novaAba}</span></a>
+            <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub<span class="sr"> {rotulos.novaAba}</span></a>
+            <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn<span class="sr"> {rotulos.novaAba}</span></a>
             <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
             {lang === 'pt'
               ? <a href={alterna} hreflang="en" lang="en">English</a>
@@ -322,6 +323,7 @@ const nav = [
   .rodape__links a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; overflow-wrap: anywhere; transition: transform 160ms var(--ease-out); }
   .rodape a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in oklch, currentColor 45%, transparent); }
   @media (hover: hover) and (pointer: fine) { .rodape a:hover { text-decoration-color: currentColor; } }
+  @media (hover: hover) and (pointer: fine) { .rodape a:hover { text-decoration-thickness: 2px; } }
   .rodape a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
   .rodape__links a:active { transform: scale(0.97); }
 </style>

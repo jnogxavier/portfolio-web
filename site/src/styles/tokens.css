@@ -38,8 +38,8 @@
   --brand: #C25A3C;
   --band: #4A1525;
   --band-ink: #F2EFEC;
-  /* #C25A3C dá 4.0:1 sobre o fundo; texto pequeno precisa de 4.5:1 */
-  --brand-ink: #D2643F;
+  /* #C25A3C dá 4.0:1 sobre o fundo; texto pequeno precisa de 4.5:1, também sobre --surface-raised */
+  --brand-ink: #DB6E49;
   --measure-ink: #C25A3C;
   --signal: #4A7C7E;
   --healthy: oklch(68.0% 0.072 150.0);
@@ -54,7 +54,7 @@
   --brand: #C25A3C;
   --band: #4A1525;
   --band-ink: #F2EFEC;
-  --brand-ink: #D2643F;
+  --brand-ink: #DB6E49;
   --measure-ink: #C25A3C;
   --signal: #4A7C7E;
   --healthy: oklch(68.0% 0.072 150.0);

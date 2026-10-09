@@ -5,7 +5,7 @@ ordem: 1
 par: esteira-compartilhada
 diagrama: esteira
 resultado:
-  valor: 6–8 min
+  valor: 6–8 min
   unidade: build time per pipeline
   antes: 15 min
 restricao: >-
