@@ -4,6 +4,12 @@ meta: GitOps
 ordem: 2
 par: gitops-argocd
 diagrama: reconciliacao
+restricao: >-
+  A configuração já divergia entre os desenvolvedores, e trocar uma variável não podia derrubar a aplicação.
+decisao: >-
+  O repositório como única fonte do que roda, com o ArgoCD reconciliando o cluster contra ele.
+tradeoff: >-
+  Editar o cluster direto deixou de ser um caminho legítimo: toda mudança passa pelo repositório.
 declarado: >-
   O repositório descreve o que deve estar rodando em cada ambiente, e o cluster obedece ao repositório.
 observado: >-

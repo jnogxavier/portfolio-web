@@ -4,6 +4,12 @@ meta: Configuração e segredos
 ordem: 5
 par: config-and-secrets
 diagrama: tresfontes
+restricao: >-
+  A configuração vivia em três lugares com permissões separadas, e o valor de um segredo não podia aparecer na tela.
+decisao: >-
+  Uma visão única que lê os três pela API.
+tradeoff: >-
+  O mascaramento esconde o valor do segredo até de quem está investigando.
 declarado: >-
   Para cada serviço é possível responder quais variáveis ele recebe, de onde cada valor vem e quem pode vê-lo.
 observado: >-

@@ -4,6 +4,12 @@ meta: Observabilidade
 ordem: 3
 par: observability-otel
 diagrama: correlacao
+restricao: >-
+  A instrumentação dependia de um fornecedor, e o dado sensível não podia sair do ambiente.
+decisao: >-
+  OpenTelemetry com um Collector que decide o destino, no lugar de o agente do fornecedor decidir.
+tradeoff: >-
+  A telemetria passou a ser algo que a plataforma mantém, em vez de um serviço de fornecedor.
 declarado: >-
   Quando um job falha ou demora, dá para abrir o log, achar o trace daquela execução e ver onde o tempo foi embora.
 observado: >-

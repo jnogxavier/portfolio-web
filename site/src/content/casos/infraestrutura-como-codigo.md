@@ -3,6 +3,12 @@ titulo: Infraestrutura que só existia no console
 meta: Infraestrutura como código
 ordem: 4
 par: infrastructure-as-code
+restricao: >-
+  O ambiente já estava no ar e funcionando, então passar para código não podia interromper o que existia.
+decisao: >-
+  Terraform em módulos, com um workspace por ambiente e as decisões registradas como ADR.
+tradeoff: >-
+  Toda mudança passou a custar um plan e um apply, em vez de um clique no console.
 declarado: >-
   A infraestrutura está descrita em código, e qualquer ambiente pode ser reconstruído a partir do repositório.
 observado: >-

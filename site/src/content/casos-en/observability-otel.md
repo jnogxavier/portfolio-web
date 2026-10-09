@@ -4,6 +4,12 @@ meta: Observability
 ordem: 3
 par: observabilidade-otel
 diagrama: correlacao
+restricao: >-
+  Instrumentation depended on a vendor, and sensitive data could not leave the environment.
+decisao: >-
+  OpenTelemetry with a Collector that decides the destination, in place of the vendor agent deciding.
+tradeoff: >-
+  Telemetry became something the platform maintains, instead of a vendor service.
 declarado: >-
   When a job fails or runs slow, you can open the log, find the trace of that run and see where the time went.
 observado: >-

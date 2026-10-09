@@ -3,6 +3,12 @@ titulo: Infrastructure that only existed in the console
 meta: Infrastructure as code
 ordem: 4
 par: infraestrutura-como-codigo
+restricao: >-
+  The environment was already up and working, so moving it to code could not interrupt what existed.
+decisao: >-
+  Terraform in modules, one workspace per environment, and the decisions recorded as ADRs.
+tradeoff: >-
+  Every change now costs a plan and an apply, instead of a click in the console.
 declarado: >-
   Infrastructure is described in code, and any environment can be rebuilt from the repository.
 observado: >-

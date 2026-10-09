@@ -8,12 +8,18 @@ resultado:
   valor: 6 min
   unidade: de build por pipeline
   antes: 15 min
+restricao: >-
+  Os pipelines já estavam em uso e cada serviço tinha detalhes próprios, então o padrão novo não podia exigir que todos fossem iguais.
+decisao: >-
+  Templates compartilhados com exceção declarada, em vez de um pipeline por serviço.
+tradeoff: >-
+  Perdi flexibilidade: quem precisa de algo fora do padrão abre uma exceção declarada, e ela aparece no diff.
 declarado: >-
   Um conjunto pequeno de templates define como todo serviço é construído, testado e publicado, e cada serviço só declara o que o distingue.
 observado: >-
   Cada serviço carregava o próprio pipeline, escrito e versionado junto do código. Com o tempo viraram arquivos quase iguais que divergiam em detalhes, sem cache e sem dono. Subir um serviço novo significava copiar o pipeline de outro e ajustar na mão.
 reconciliado: >-
-  Os pipelines passaram a vir de templates compartilhados, com build em estágios e cache. Perdi flexibilidade: quem precisa de algo fora do padrão abre uma exceção declarada, e ela aparece no diff.
+  Os pipelines passaram a vir de templates compartilhados, com build em estágios e cache.
   Os agentes de build também foram separados em pools por tipo de serviço, para que a esteira de um grupo não ficasse esperando a de outro.
 chamada: >-
   Pipelines quase iguais, copiados de serviço em serviço, viraram templates compartilhados com cache e exceções declaradas.

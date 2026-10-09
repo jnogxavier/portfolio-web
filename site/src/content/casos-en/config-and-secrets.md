@@ -4,6 +4,12 @@ meta: Configuration and secrets
 ordem: 5
 par: configuracao-e-segredos
 diagrama: tresfontes
+restricao: >-
+  Configuration lived in three places with separate permissions, and a secret's value could not appear on screen.
+decisao: >-
+  A single view that reads all three through the API.
+tradeoff: >-
+  Masking hides the secret's value even from whoever is investigating.
 declarado: >-
   For each service you can answer which variables it receives, where each value comes from and who can see it.
 observado: >-

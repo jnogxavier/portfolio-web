@@ -8,12 +8,18 @@ resultado:
   valor: 6 min
   unidade: build time per pipeline
   antes: 15 min
+restricao: >-
+  The pipelines were already in use and each service had its own details, so the new standard could not require every service to be identical.
+decisao: >-
+  Shared templates with declared exceptions, instead of one pipeline per service.
+tradeoff: >-
+  I gave up flexibility: anyone who needs something off the standard opens a declared exception, and it shows up in the diff.
 declarado: >-
   A small set of templates defines how every service is built, tested and shipped, and each service only declares what sets it apart.
 observado: >-
   Each service carried its own pipeline, written and versioned next to the code. Over time they turned into near-identical files that drifted apart in small ways, with no caching and no owner. Standing up a new service meant copying another pipeline and tweaking it by hand.
 reconciliado: >-
-  Pipelines now come from shared templates, with multi-stage builds and caching. I gave up flexibility: anyone who needs something off the standard opens a declared exception, and it shows up in the diff.
+  Pipelines now come from shared templates, with multi-stage builds and caching.
   I also split the build agents into pools by kind of service, so one group's pipelines stop waiting on another's.
 chamada: >-
   Near-identical pipelines copied from service to service became shared templates with caching and declared exceptions.
