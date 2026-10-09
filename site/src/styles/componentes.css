@@ -3,8 +3,7 @@
 .jnx-caso__titulo { font: 700 2rem/1.1875 var(--font-display); letter-spacing: -0.01em; color: var(--ink); margin: 0; text-wrap: balance; overflow-wrap: anywhere; }
 .jnx-caso__meta { font: 500 0.75rem/1.4167 var(--font-mono); color: var(--ink-muted); margin: 0; }
 .jnx-caso__movimento { display: flex; flex-direction: column; gap: var(--space-3); }
-.jnx-caso__movimento + .jnx-caso__movimento,
-.jnx-caso__resultado + .jnx-caso__movimento { padding-top: var(--space-6); border-top: 1px solid var(--line); }
+.jnx-caso__movimento + .jnx-caso__movimento { padding-top: var(--space-6); border-top: 1px solid var(--line); }
 .jnx-caso__rotulo { font: 600 1.25rem/1.4 var(--font-sans); color: var(--brand-ink); margin: 0; }
 .jnx-caso__texto { font: 400 1rem/1.625 var(--font-sans); color: var(--ink); margin: 0; overflow-wrap: anywhere; }
 .jnx-caso__resultado { display: flex; align-items: center; gap: var(--space-3) var(--space-5); flex-wrap: wrap; margin: 0; }
