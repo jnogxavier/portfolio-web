@@ -7,7 +7,7 @@ diagrama: reconciliacao
 restricao: >-
   Configuration had already drifted between developers, and changing a variable could not take the application down.
 decisao: >-
-  The repository as the single source of what runs, with ArgoCD reconciling the cluster against it.
+  The repository as the single source of truth, with ArgoCD reconciling the cluster against it.
 tradeoff: >-
   Editing the cluster directly stopped being a legitimate path: every change goes through the repository.
 declarado: >-
