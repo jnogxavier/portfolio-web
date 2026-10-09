@@ -26,7 +26,7 @@
   --radius-full: 999px;
   --font-display: "Zilla Slab", Georgia, "Times New Roman", serif;
   --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-tema="light"]) {
   --surface: #1A1A1A;
