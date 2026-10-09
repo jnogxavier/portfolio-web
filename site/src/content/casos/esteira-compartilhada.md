@@ -9,7 +9,7 @@ resultado:
   unidade: de build por pipeline
   antes: 15 min
 restricao: >-
-  Os pipelines já estavam em uso e cada serviço tinha detalhes próprios, então o padrão novo não podia exigir que todos fossem iguais.
+  Os serviços eram de times e de tipos diferentes, e cada tipo tinha o próprio jeito de publicar. Minha primeira proposta, um template único, não serviu.
 decisao: >-
   Templates compartilhados por tipo de pipeline, com variáveis padrão para os valores mais usados. O pipeline de cada projeto só sobrescreve o que diverge do padrão. Os templates também referenciam steps condensados.
 tradeoff: >-
