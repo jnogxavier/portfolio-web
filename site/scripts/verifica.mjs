@@ -9,7 +9,7 @@ const host = new URL(site).host;
 const erros = [];
 const le = (arquivo) => (existsSync(join(dist, arquivo)) ? readFileSync(join(dist, arquivo), 'utf8') : null);
 
-const paginas = [{ url: '', arquivo: 'index.html' }, { url: 'en/', arquivo: 'en/index.html' }];
+const paginas = [{ url: '', arquivo: 'index.html' }, { url: 'en/', arquivo: 'en/index.html' }, { url: 'curriculo/', arquivo: 'curriculo/index.html' }, { url: 'en/resume/', arquivo: 'en/resume/index.html' }];
 for (const [idioma, pasta] of [['pt', 'casos'], ['en', 'casos-en']]) {
   for (const md of readdirSync(join(raiz, 'src/content', pasta)).filter((a) => a.endsWith('.md'))) {
     const id = md.replace(/\.md$/, '');

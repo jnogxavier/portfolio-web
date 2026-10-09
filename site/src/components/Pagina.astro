@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icone from './Icone.astro';
-import { skills, areasEn, itensEn } from '../data/skills';
+import Trajetoria from './Trajetoria.astro';
+import Competencias from './Competencias.astro';
 import { textos, type Idioma } from '../i18n';
 import { contato } from '../data/contato';
 
@@ -14,12 +15,6 @@ interface Props {
 }
 const { lang, seo, casos, linha, sobre } = Astro.props;
 const rotulos = textos[lang];
-const nucleo = new Set(['Plataforma e containers', 'Entrega e GitOps', 'Infraestrutura como código', 'Cloud', 'Observabilidade', 'Mensageria e gateway', 'Segurança', 'Backend e dados']);
-const grupos = [
-  { titulo: rotulos.tNucleo, itens: skills.filter((g) => nucleo.has(g.area)) },
-  { titulo: rotulos.tTambem, itens: skills.filter((g) => !nucleo.has(g.area)) },
-];
-const marca = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '<strong class="num">$1</strong>');
 const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['', t] : [t.slice(0, i + 1), t.slice(i + 2)]; };
 ---
 <Base
@@ -35,9 +30,8 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
         <h1>{rotulos.h1}</h1>
         <p class="lede">{rotulos.lede}</p>
         <p class="capa__acoes">
-          <a class="jnx-acao" href="#casos">{rotulos.verCasos}</a>
-          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
-          <a class="jnx-acao jnx-acao--secundaria" href={`mailto:${contato.email}`}>{rotulos.email}</a>
+          <a class="jnx-acao" href={`mailto:${contato.email}`}>{rotulos.email}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvRota}>{rotulos.nav.cv}</a>
         </p>
       </div>
       <img class="capa__retrato" src="/retrato-capa.webp" width="512" height="640"
@@ -84,23 +78,7 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
         <h2>{rotulos.tExp}</h2>
         <p class="secao__nota">{rotulos.expNota}</p>
       </div>
-      <ol class="trilha">
-        {linha.map((e) => (
-          <li>
-            <div class="trilha__quando">
-              <span class="trilha__periodo">{e.periodo}</span>
-              <span class="trilha__lugar">{e.lugar}</span>
-            </div>
-            <div class="trilha__oque">
-              <h3>{e.cargo}</h3>
-              <p class="trilha__onde">{e.onde}</p>
-              <ul class="trilha__itens">
-                {e.texto.map((item) => <li set:html={marca(item)} />)}
-              </ul>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <Trajetoria linha={linha} />
     </div>
   </section>
 
@@ -108,31 +86,20 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
     <div class="faixa">
       <h2>{rotulos.tSkills}</h2>
       <p class="skills__intro">{rotulos.skillsNota}</p>
-      {grupos.map((gr) => (
-        <section class="skills__grupo">
-          <h3>{gr.titulo}</h3>
-          <dl class="skills">
-            {gr.itens.map((g) => (
-              <div class="skills__linha">
-                <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
-                <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ))}
+      <Competencias lang={lang} />
     </div>
   </section>
 
-  <section class="secao secao--alt" id="contato">
+  <section class="secao secao--banda" id="contato">
     <div class="faixa">
       <h2>{rotulos.tContato}</h2>
       <p class="contato__nota">{rotulos.contatoNota}</p>
+      <a class="contato__email" href={`mailto:${contato.email}`} translate="no">{contato.email}</a>
       <nav class="canais" aria-label={rotulos.canais}>
-        <a href={`mailto:${contato.email}`}><Icone nome="email" />{contato.email}</a>
         <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
         <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
         <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
+        <a href={rotulos.cvRota}>{rotulos.nav.cv}</a>
       </nav>
     </div>
   </section>
@@ -199,34 +166,6 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
   .sobre__bloco p { margin: 0; max-width: 66ch; }
   .sobre__lead { font-weight: 600; }
 
-  .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .trilha > li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
-  .trilha > li:first-child { border-top: none; padding-top: 0; }
-  .trilha__quando { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
-  .trilha__periodo { font: 500 0.75rem/1.4 var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
-  .trilha__lugar { font: 400 0.75rem/1.4 var(--font-mono); color: var(--ink-muted); }
-  .trilha__oque { display: flex; flex-direction: column; gap: var(--space-2); max-width: 66ch; min-width: 0; }
-  .trilha h3 { margin: 0; font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
-  .trilha__onde { margin: 0; font: 500 1rem/1.4 var(--font-sans); color: var(--brand-ink); }
-  .trilha__itens { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
-  .trilha__itens li { position: relative; padding-left: var(--space-4); color: var(--ink-muted); }
-  .trilha__itens li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 6px; height: 1px; background: var(--ink-muted); }
-  .trilha__itens :global(.num) { font: 600 0.9em var(--font-mono); color: var(--brand-ink); white-space: nowrap; }
-  @media (min-width: 52rem) {
-    .trilha > li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
-  }
-
-  .skills__grupo + .skills__grupo { margin-top: var(--space-7); }
-  .skills__grupo h3 { margin: 0 0 var(--space-4); font: 600 0.875rem/1.4 var(--font-mono); color: var(--ink-muted); }
-  .skills { margin: 0; }
-  .skills__linha { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid var(--line); }
-  .skills__linha:first-child { border-top: none; padding-top: 0; }
-  .skills dt { font: 600 1rem/1.4 var(--font-sans); color: var(--ink); }
-  .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); min-width: 0; }
-  .skills dd span { font: 400 0.875rem/1.6 var(--font-mono); color: var(--ink-muted); overflow-wrap: anywhere; }
-  @media (min-width: 46rem) {
-    .skills__linha { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
-  }
 
   .lista { list-style: none; margin: 0; padding: 0; }
   .lista li { border-top: 1px solid var(--line); }
@@ -248,7 +187,7 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
   }
   .lista h3 { margin: 0 0 var(--space-2); font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
   .lista p { margin: 0 0 var(--space-2); color: var(--ink-muted); max-width: 64ch; }
-  .lista__onde { font: 400 0.75rem/1.4 var(--font-mono); color: var(--ink-muted); }
+  .lista__onde { font: 500 0.75rem/1.4 var(--font-mono); color: var(--brand-ink); }
   @media (hover: hover) and (pointer: fine) {
     .lista a:hover { background: color-mix(in oklch, var(--brand) 7%, transparent); }
     .lista a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
@@ -262,14 +201,22 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
   .lista a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 
   .skills__intro { margin: -0.5rem 0 var(--space-5); color: var(--ink-muted); max-width: 62ch; }
-  .contato__nota { margin: 0 0 var(--space-5); max-width: 62ch; color: var(--ink-muted); }
+  .secao--banda { background: var(--band); color: var(--band-ink); border-block: none; }
+  .secao--banda h2 { color: inherit; }
+  .contato__nota { margin: 0 0 var(--space-5); max-width: 62ch; opacity: 0.88; }
+  .contato__email {
+    display: flex; align-items: center; width: fit-content; min-height: 44px; margin-bottom: var(--space-2);
+    font: 500 1.25rem/1.3 var(--font-sans);
+    color: inherit; text-underline-offset: 4px; overflow-wrap: anywhere;
+    transition: transform 160ms var(--ease-out);
+  }
+  .contato__email:focus-visible, .canais a:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
+  .contato__email:active, .canais a:active { transform: scale(0.97); }
   .canais { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
   .canais a {
     display: inline-flex; align-items: center; gap: var(--space-2);
-    min-height: 44px; color: var(--brand-ink);
+    min-height: 44px; color: inherit;
     font: 500 1rem/1 var(--font-sans); text-underline-offset: 4px; overflow-wrap: anywhere;
     transition: transform 160ms var(--ease-out);
   }
-  .canais a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-  .canais a:active { transform: scale(0.97); }
 </style>

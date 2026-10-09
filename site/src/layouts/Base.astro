@@ -125,7 +125,7 @@ const nav = [
           {nav.map((l) => (
             <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
-          <a href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
+          <a href={rotulos.cvRota} aria-current={aqui === rotulos.cvRota ? 'page' : undefined}>{rotulos.nav.cv}</a>
           <div class="idiomas" role="group" aria-label={rotulos.idioma}>
             {lang === 'pt'
               ? <span class="idioma--atual" aria-current="true" lang="pt">Português</span>
@@ -149,7 +149,7 @@ const nav = [
 
     <main id="conteudo" tabindex="-1"><slot /></main>
 
-    <footer class="rodape">
+    <footer class={canais ? 'rodape' : 'rodape rodape--colado'}>
       <div class="faixa rodape__linha">
         <p class="rodape__nome">João Vitor Nogueira Xavier<span>{rotulos.local}</span></p>
         {canais && (
@@ -158,7 +158,7 @@ const nav = [
             <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
             <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
             <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-            <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.nav.cv}</a>
+            <a href={rotulos.cvRota}>{rotulos.nav.cv}</a>
             {lang === 'pt'
               ? <a href={alterna} hreflang="en" lang="en">English</a>
               : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
@@ -308,6 +308,7 @@ const nav = [
   .marca:focus-visible, .menu a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .rodape { position: relative; overflow: hidden; margin-top: var(--space-9); background: var(--band); color: var(--band-ink); }
+  .rodape--colado { margin-top: 0; border-top: 1px solid color-mix(in oklch, var(--band-ink) 20%, var(--band)); }
   .rodape > * { position: relative; }
   .rodape__linha {
     display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6);

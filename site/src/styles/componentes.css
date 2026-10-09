@@ -1,7 +1,7 @@
 .jnx-caso { max-width: 68ch; min-width: 0; display: flex; flex-direction: column; gap: var(--space-7); font: 400 1rem/1.625 var(--font-sans); }
 .jnx-caso__cabeca { display: flex; flex-direction: column; gap: var(--space-2); }
 .jnx-caso__titulo { font: 700 2rem/1.1875 var(--font-display); letter-spacing: -0.01em; color: var(--ink); margin: 0; text-wrap: balance; overflow-wrap: anywhere; }
-.jnx-caso__meta { font: 500 0.75rem/1.4167 var(--font-mono); color: var(--ink-muted); margin: 0; }
+.jnx-caso__meta { font: 500 0.75rem/1.4167 var(--font-mono); color: var(--brand-ink); margin: 0; }
 .jnx-caso__movimento { display: flex; flex-direction: column; gap: var(--space-3); }
 .jnx-caso__movimento + .jnx-caso__movimento { padding-top: var(--space-6); border-top: 1px solid var(--line); }
 .jnx-caso__rotulo { font: 600 1.25rem/1.4 var(--font-sans); color: var(--brand-ink); margin: 0; }
@@ -25,10 +25,12 @@
   transition: transform 160ms var(--ease-out), background-color 140ms ease, border-color 140ms ease;
 }
 .jnx-acao--secundaria { background: transparent; color: var(--band-ink); }
+.jnx-acao--solido { gap: var(--space-2); background: var(--band); color: var(--band-ink); border-color: color-mix(in oklch, var(--band-ink) 35%, var(--band)); }
 .jnx-acao:active { transform: scale(0.97); }
 .jnx-acao:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) {
   .jnx-acao:hover { background: var(--surface); border-color: var(--surface); }
+  .jnx-acao--solido:hover { background: color-mix(in oklch, var(--band) 80%, var(--band-ink)); border-color: var(--band-ink); }
   .jnx-acao--secundaria:hover { background: color-mix(in oklch, var(--band-ink) 16%, transparent); }
 }
 
