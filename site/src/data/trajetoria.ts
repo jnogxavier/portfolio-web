@@ -19,7 +19,7 @@ export const trajetoria = {
     texto: [
       'Esteira de entrega em ambiente de serviços financeiros: GitOps com ArgoCD, CI/CD no Azure DevOps, Docker e Kubernetes.',
       'Padronizei os pipelines em templates compartilhados e reduzi o tempo de build **de 15 para 6 minutos**.',
-      'Como também leio o código da aplicação, Rails e JavaScript, dava para depurar o problema em vez de devolver para o time.',
+      'Como também leio o código da aplicação, dava para depurar o problema em vez de devolver para o time.',
     ],
   },
   {
@@ -74,7 +74,7 @@ export const trajetoria = {
     texto: [
       'Delivery pipeline in a financial services environment: GitOps with ArgoCD, CI/CD in Azure DevOps, Docker and Kubernetes.',
       'I standardized the pipelines into shared templates and cut build time **from 15 to 6 minutes**.',
-      'Since I also read the application code, Rails and JavaScript, I could debug the problem instead of handing it back to the team.',
+      'Since I also read the application code, I could debug the problem instead of handing it back to the team.',
     ],
   },
   {
