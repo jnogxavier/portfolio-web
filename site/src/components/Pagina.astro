@@ -14,6 +14,13 @@ interface Props {
 }
 const { lang, seo, casos, linha, sobre } = Astro.props;
 const rotulos = textos[lang];
+const nucleo = new Set(['Plataforma e containers', 'Entrega e GitOps', 'Infraestrutura como código', 'Cloud', 'Observabilidade', 'Mensageria e gateway', 'Segurança', 'Backend e dados']);
+const grupos = [
+  { titulo: rotulos.tNucleo, itens: skills.filter((g) => nucleo.has(g.area)) },
+  { titulo: rotulos.tTambem, itens: skills.filter((g) => !nucleo.has(g.area)) },
+];
+const marca = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '<strong class="num">$1</strong>');
+const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['', t] : [t.slice(0, i + 1), t.slice(i + 2)]; };
 ---
 <Base
   titulo={seo.titulo}
@@ -29,8 +36,8 @@ const rotulos = textos[lang];
         <p class="lede">{rotulos.lede}</p>
         <p class="capa__acoes">
           <a class="jnx-acao" href="#casos">{rotulos.verCasos}</a>
-          <a class="jnx-acao jnx-acao--secundaria" href={contato.zap}
-             target="_blank" rel="noopener noreferrer">{rotulos.zap}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvArquivo} download>{rotulos.nav.cv}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={`mailto:${contato.email}`}>{rotulos.email}</a>
         </p>
       </div>
       <img class="capa__retrato" src="/retrato-capa.webp" width="512" height="640"
@@ -67,13 +74,16 @@ const rotulos = textos[lang];
   <section class="secao" id="sobre">
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
-      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p>{p}</p></div>)}</div>
+      <div class="sobre__texto">{sobre.map((p) => { const [lead, resto] = abertura(p); return <div class="sobre__bloco"><p>{lead && <strong class="sobre__lead">{lead} </strong>}{resto}</p></div>; })}</div>
     </div>
   </section>
 
   <section class="secao secao--alt" id="experiencia">
     <div class="faixa">
-      <h2>{rotulos.tExp}</h2>
+      <div class="secao__cabeca">
+        <h2>{rotulos.tExp}</h2>
+        <p class="secao__nota">{rotulos.expNota}</p>
+      </div>
       <ol class="trilha">
         {linha.map((e) => (
           <li>
@@ -84,7 +94,9 @@ const rotulos = textos[lang];
             <div class="trilha__oque">
               <h3>{e.cargo}</h3>
               <p class="trilha__onde">{e.onde}</p>
-              {e.texto.map((paragrafo) => <p>{paragrafo}</p>)}
+              <ul class="trilha__itens">
+                {e.texto.map((item) => <li set:html={marca(item)} />)}
+              </ul>
             </div>
           </li>
         ))}
@@ -96,14 +108,19 @@ const rotulos = textos[lang];
     <div class="faixa">
       <h2>{rotulos.tSkills}</h2>
       <p class="skills__intro">{rotulos.skillsNota}</p>
-      <dl class="skills">
-        {skills.map((g) => (
-          <div class="skills__linha">
-            <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
-            <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
-          </div>
-        ))}
-      </dl>
+      {grupos.map((gr) => (
+        <section class="skills__grupo">
+          <h3>{gr.titulo}</h3>
+          <dl class="skills">
+            {gr.itens.map((g) => (
+              <div class="skills__linha">
+                <dt>{lang === "en" ? areasEn[g.area] ?? g.area : g.area}</dt>
+                <dd translate="no">{g.itens.map((i) => <span>{lang === "en" ? itensEn[i] ?? i : i}</span>)}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
     </div>
   </section>
 
@@ -180,22 +197,27 @@ const rotulos = textos[lang];
   .sobre__bloco { padding-block: var(--space-4); border-top: 1px solid var(--line); }
   .sobre__bloco:first-child { border-top: none; padding-top: 0; }
   .sobre__bloco p { margin: 0; max-width: 66ch; }
+  .sobre__lead { font-weight: 600; }
 
   .trilha { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .trilha li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
-  .trilha li:first-child { border-top: none; padding-top: 0; }
+  .trilha > li { padding-block: var(--space-5); border-top: 1px solid var(--line); display: grid; gap: var(--space-2); }
+  .trilha > li:first-child { border-top: none; padding-top: 0; }
   .trilha__quando { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
   .trilha__periodo { font: 500 0.75rem/1.4 var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
   .trilha__lugar { font: 400 0.75rem/1.4 var(--font-mono); color: var(--ink-muted); }
   .trilha__oque { display: flex; flex-direction: column; gap: var(--space-2); max-width: 66ch; min-width: 0; }
   .trilha h3 { margin: 0; font: 700 1.25rem/1.25 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
   .trilha__onde { margin: 0; font: 500 1rem/1.4 var(--font-sans); color: var(--brand-ink); }
-  .trilha__oque p { margin: 0; color: var(--ink-muted); }
-  .trilha__oque p.trilha__onde { color: var(--brand-ink); }
+  .trilha__itens { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+  .trilha__itens li { position: relative; padding-left: var(--space-4); color: var(--ink-muted); }
+  .trilha__itens li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 6px; height: 1px; background: var(--ink-muted); }
+  .trilha__itens :global(.num) { font: 600 0.9em var(--font-mono); color: var(--measure-ink); white-space: nowrap; }
   @media (min-width: 52rem) {
-    .trilha li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
+    .trilha > li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--space-5); }
   }
 
+  .skills__grupo + .skills__grupo { margin-top: var(--space-7); }
+  .skills__grupo h3 { margin: 0 0 var(--space-4); font: 600 0.875rem/1.4 var(--font-mono); color: var(--ink-muted); }
   .skills { margin: 0; }
   .skills__linha { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid var(--line); }
   .skills__linha:first-child { border-top: none; padding-top: 0; }

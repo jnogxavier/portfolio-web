@@ -34,6 +34,16 @@ const leituras = [
     <p class="jnx-caso__meta">{meta}</p>
   </div>
 
+  {resultado && (
+    <p class="jnx-caso__resultado">
+      <span class="jnx-caso__medida">{resultado.valor}</span>
+      <span class="jnx-caso__legenda">
+        {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
+        {resultado.antes && <span class="jnx-caso__contexto">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
+      </span>
+    </p>
+  )}
+
   {leituras.map(({ rotulo, texto }) => (
     <div class="jnx-caso__movimento">
       <h2 class="jnx-caso__rotulo">{rotulo}</h2>
@@ -44,15 +54,6 @@ const leituras = [
 
   {Diagrama && diagrama && <Diagrama d={dg[diagrama][lang]} />}
 
-  {resultado && (
-    <p class="jnx-caso__resultado">
-      <span class="jnx-caso__medida">{resultado.valor}</span>
-      <span class="jnx-caso__legenda">
-        {resultado.unidade && <span class="jnx-caso__unidade">{resultado.unidade}</span>}
-        {resultado.antes && <span class="jnx-caso__contexto">{rotulos.contra} {resultado.antes} {rotulos.antes}</span>}
-      </span>
-    </p>
-  )}
 
   {ganhos.length > 0 && (
     <div class="jnx-caso__movimento">
