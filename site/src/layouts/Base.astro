@@ -74,6 +74,7 @@ const nav = [
     })} />}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/zilla-slab-700-latin.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/archivo-350_600-latin.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fontes/jetbrains-mono-400_700-latin.woff2" />
     <script is:inline>
       (() => {
         const raiz = document.documentElement;
@@ -119,7 +120,7 @@ const nav = [
       </div>
 
       <div class="faixa topo__linha">
-        <a class="marca" href={raiz} aria-label={rotulos.inicio} aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
+        <a class="marca" href={raiz} aria-label={`jnogxavier, ${rotulos.inicio}`} aria-current={aqui === raiz ? 'page' : undefined}><Placa /></a>
 
         <nav class="menu" aria-label={rotulos.menu}>
           {nav.map((l) => (
