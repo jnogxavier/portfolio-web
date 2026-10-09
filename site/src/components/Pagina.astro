@@ -38,6 +38,32 @@ const rotulos = textos[lang];
     </div>
   </section>
 
+  <section class="secao secao--alt" id="casos">
+    <div class="faixa">
+      <div class="secao__cabeca">
+        <h2>{rotulos.tCasos}</h2>
+        <p class="secao__nota">{rotulos.casosNota}</p>
+      </div>
+      <ol class="lista">
+        {casos.map((c) => (
+          <li>
+            <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
+              <div class="lista__texto">
+                <h3>{c.data.titulo}</h3>
+                <p>{c.data.chamada}</p>
+                <span class="lista__onde">{c.data.meta}</span>
+              </div>
+              <svg class="lista__seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
   <section class="secao" id="sobre">
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
@@ -81,33 +107,7 @@ const rotulos = textos[lang];
     </div>
   </section>
 
-  <section class="secao secao--alt" id="casos">
-    <div class="faixa">
-      <div class="secao__cabeca">
-        <h2>{rotulos.tCasos}</h2>
-        <p class="secao__nota">{rotulos.casosNota}</p>
-      </div>
-      <ol class="lista">
-        {casos.map((c) => (
-          <li>
-            <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
-              <div class="lista__texto">
-                <h3>{c.data.titulo}</h3>
-                <p>{c.data.chamada}</p>
-                <span class="lista__onde">{c.data.meta}</span>
-              </div>
-              <svg class="lista__seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" fill="none" stroke="currentColor"
-                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="secao" id="contato">
+  <section class="secao secao--alt" id="contato">
     <div class="faixa">
       <h2>{rotulos.tContato}</h2>
       <p class="contato__nota">{rotulos.contatoNota}</p>
