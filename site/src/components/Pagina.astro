@@ -31,7 +31,7 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
         <p class="lede">{rotulos.lede}</p>
         <p class="capa__acoes">
           <a class="jnx-acao" href={`mailto:${contato.email}`}>{rotulos.email}</a>
-          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvRota}>{rotulos.nav.cv}</a>
+          <a class="jnx-acao jnx-acao--secundaria" href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
         </p>
       </div>
       <img class="capa__retrato" src="/retrato-capa.webp" width="512" height="640"
@@ -99,7 +99,7 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
         <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
         <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
         <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-        <a href={rotulos.cvRota}>{rotulos.nav.cv}</a>
+        <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
       </nav>
     </div>
   </section>

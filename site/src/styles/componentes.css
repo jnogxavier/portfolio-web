@@ -18,19 +18,17 @@
 
 .jnx-acao {
   display: inline-flex; align-items: center; justify-content: center;
-  min-height: 44px; min-width: 11ch; padding-inline: var(--space-5);
+  min-height: 44px; min-width: 11ch; padding-inline: var(--space-5); gap: var(--space-2);
   font: 500 1rem/1 var(--font-sans); text-decoration: none;
   border: 1.5px solid var(--band-ink); background: var(--band-ink); color: var(--band);
   cursor: pointer;
   transition: transform 160ms var(--ease-out), background-color 140ms ease, border-color 140ms ease;
 }
 .jnx-acao--secundaria { background: transparent; color: var(--band-ink); }
-.jnx-acao--solido { gap: var(--space-2); background: var(--band); color: var(--band-ink); border-color: color-mix(in oklch, var(--band-ink) 35%, var(--band)); }
 .jnx-acao:active { transform: scale(0.97); }
 .jnx-acao:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) {
   .jnx-acao:hover { background: var(--surface); border-color: var(--surface); }
-  .jnx-acao--solido:hover { background: color-mix(in oklch, var(--band) 80%, var(--band-ink)); border-color: var(--band-ink); }
   .jnx-acao--secundaria:hover { background: color-mix(in oklch, var(--band-ink) 16%, transparent); }
 }
 

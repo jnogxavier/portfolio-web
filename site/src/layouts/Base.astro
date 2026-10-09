@@ -125,7 +125,6 @@ const nav = [
           {nav.map((l) => (
             <a href={l.href} aria-current={aqui === l.href ? 'page' : undefined}>{l.texto}</a>
           ))}
-          <a href={rotulos.cvRota} aria-current={aqui === rotulos.cvRota ? 'page' : undefined}>{rotulos.nav.cv}</a>
           <div class="idiomas" role="group" aria-label={rotulos.idioma}>
             {lang === 'pt'
               ? <span class="idioma--atual" aria-current="true" lang="pt">Português</span>
@@ -158,7 +157,7 @@ const nav = [
             <a href={contato.zap} target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" />WhatsApp</a>
             <a href={contato.github} target="_blank" rel="me noopener noreferrer"><Icone nome="github" />GitHub</a>
             <a href={contato.linkedin} target="_blank" rel="me noopener noreferrer"><Icone nome="linkedin" />LinkedIn</a>
-            <a href={rotulos.cvRota}>{rotulos.nav.cv}</a>
+            <a href={rotulos.cvArquivo} download><Icone nome="download" />{rotulos.cvBaixar}</a>
             {lang === 'pt'
               ? <a href={alterna} hreflang="en" lang="en">English</a>
               : <a href={alterna} hreflang="pt-BR" lang="pt">Português</a>}
