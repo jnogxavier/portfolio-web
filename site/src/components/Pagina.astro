@@ -25,6 +25,7 @@ const rotulos = textos[lang];
   <section class="capa" id="topo">
     <div class="faixa capa__grade">
       <div class="capa__texto">
+        <p class="capa__estado"><span class="capa__no" aria-hidden="true"></span><a href={`mailto:${contato.email}`} aria-label={rotulos.statusLabel}>{rotulos.status}</a></p>
         <p class="capa__nome">João Vitor Nogueira Xavier</p>
         <h1>{rotulos.h1}</h1>
         <p class="lede">{rotulos.lede}</p>
@@ -121,6 +122,14 @@ const rotulos = textos[lang];
     .capa__grade { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); }
     .capa__retrato { max-width: 340px; justify-self: end; }
   }
+  .capa__estado {
+    margin: calc(-1 * var(--space-3)) 0; display: flex; align-items: center; gap: var(--space-2);
+    font: 400 0.75rem/1 var(--font-mono);
+  }
+  .capa__no { width: 7px; height: 7px; border-radius: var(--radius-full); background: var(--healthy); flex: none; }
+  .capa__estado a { color: inherit; display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 3px; }
+  .capa__estado a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  @media (min-width: 56rem) { .capa__estado { display: none; } }
   .capa__nome {
     margin: 0; font: 700 clamp(1.375rem, 1rem + 1.5vw, 2rem)/1.15 var(--font-display);
     letter-spacing: -0.015em; text-wrap: balance;
@@ -144,7 +153,7 @@ const rotulos = textos[lang];
   .secao__nota { margin: 0; color: var(--ink-muted); max-width: 62ch; }
 
 
-  .capa__nome, .capa h1, .lede, .capa__acoes {
+  .capa__estado, .capa__nome, .capa h1, .lede, .capa__acoes {
     transform: none;
     transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out);
   }
@@ -152,10 +161,10 @@ const rotulos = textos[lang];
   .lede { transition-delay: 100ms; }
   .capa__acoes { transition-delay: 150ms; }
   @starting-style {
-    .capa__nome, .capa h1, .lede, .capa__acoes { opacity: 0; transform: translateY(14px); }
+    .capa__estado, .capa__nome, .capa h1, .lede, .capa__acoes { opacity: 0; transform: translateY(14px); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .capa__nome, .capa h1, .lede, .capa__acoes {
+    .capa__estado, .capa__nome, .capa h1, .lede, .capa__acoes {
       transition: opacity 220ms var(--ease-out); transition-delay: 0ms; transform: none !important;
     }
   }
