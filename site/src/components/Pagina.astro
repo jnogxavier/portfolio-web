@@ -67,7 +67,7 @@ const rotulos = textos[lang];
   <section class="secao" id="sobre">
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
-      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p><strong class="sobre__lead">{p.abertura}</strong> {p.resto}</p></div>)}</div>
+      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p class="sobre__lead">{p.abertura}</p><p class="sobre__resto">{p.resto}</p></div>)}</div>
     </div>
   </section>
 
@@ -159,9 +159,14 @@ const rotulos = textos[lang];
       transition: opacity 220ms var(--ease-out); transition-delay: 0ms; transform: none !important;
     }
   }
-  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
-  .sobre__bloco p { margin: 0; max-width: 66ch; }
-  .sobre__lead { font-weight: 600; }
+  .sobre__texto { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+  .sobre__bloco { display: grid; gap: var(--space-3); }
+  .sobre__bloco p { margin: 0; }
+  .sobre__lead { font: 700 1.25rem/1.3 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+  .sobre__resto { max-width: 66ch; }
+  @media (min-width: 52rem) {
+    .sobre__bloco { grid-template-columns: 19rem minmax(0, 1fr); gap: var(--space-6); }
+  }
 
 
   .lista { list-style: none; margin: 0; padding: 0; }
