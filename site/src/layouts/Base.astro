@@ -30,8 +30,8 @@ const nav = [
     <meta name="description" content={descricao} />
     {robots && <meta name="robots" content={robots} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#f2ebed" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#181115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F9F9F8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
     <link rel="alternate" hreflang="pt-BR" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
     <link rel="alternate" hreflang="en" href={new URL(lang === 'en' ? aqui : alterna, Astro.site).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(lang === 'pt' ? aqui : alterna, Astro.site).href} />
@@ -232,7 +232,7 @@ const nav = [
   }
   .estado__no {
     width: 7px; height: 7px; border-radius: var(--radius-full);
-    background: var(--healthy); flex: none; align-self: center;
+    background: var(--signal); flex: none; align-self: center;
   }
   .estado a { color: inherit; display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 3px; text-decoration-color: var(--line); }
   .estado a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
