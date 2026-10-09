@@ -50,7 +50,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Goiás',
     texto: [
       'Aplicativo em Flutter para terapeutas de crianças autistas, publicado na Play Store e na App Store.',
-      'Offline-first com SQLite e sincronização via Firebase, porque o atendimento acontece em lugar sem sinal e os dados não podem esperar.',
+      'Offline-first com SQLite e sincronização via Firebase, porque o atendimento pode acontecer em lugar sem sinal e os dados não podem esperar.',
     ],
   },
 ],
@@ -105,7 +105,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Brazil',
     texto: [
       'A Flutter app for therapists working with autistic children, published on the Play Store and the App Store.',
-      'Offline-first with SQLite and Firebase sync, because sessions happen where there is no signal and the data cannot wait.',
+      'Offline-first with SQLite and Firebase sync, because sessions can happen where there is no signal and the data cannot wait.',
     ],
   },
 ],
