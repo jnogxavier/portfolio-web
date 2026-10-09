@@ -104,7 +104,7 @@ export const trajetoria = {
     periodo: 'Feb 2021 – Feb 2023',
     lugar: 'Goiânia, Brazil',
     texto: [
-      'A Flutter app for therapists working with autistic children, published on the Play Store and the App Store.',
+      'A Flutter app for therapists working with children on the autism spectrum, published on the Play Store and the App Store.',
       'Offline-first with SQLite and Firebase sync, because sessions can happen where there is no signal and the data cannot wait.',
     ],
   },
