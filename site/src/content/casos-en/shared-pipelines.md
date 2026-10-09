@@ -11,7 +11,7 @@ resultado:
 restricao: >-
   The pipelines were already in use and each service had its own details, so the new standard could not require every service to be identical.
 decisao: >-
-  Shared templates per pipeline type (frontend, backend, SDK), with default variables for the most common values. Each project's pipeline only overrides what diverges from the default. The templates also reference condensed steps: the install step accepts npm or another command, and the security scan step can point to a real step or to a placeholder, for a service that is not ready for scanning yet but cannot be blocked.
+  Shared templates per pipeline type, with default variables for the most common values. Each project's pipeline only overrides what diverges from the default. The templates also reference condensed steps.
 tradeoff: >-
   It required more detailed documentation and a skill to make it easier for others to create pipelines.
 declarado: >-

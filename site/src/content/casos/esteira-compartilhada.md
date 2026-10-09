@@ -11,7 +11,7 @@ resultado:
 restricao: >-
   Os pipelines já estavam em uso e cada serviço tinha detalhes próprios, então o padrão novo não podia exigir que todos fossem iguais.
 decisao: >-
-  Templates compartilhados por tipo de pipeline (frontend, backend, SDK), com variáveis padrão para os valores mais usados. O pipeline de cada projeto só sobrescreve o que diverge do padrão. Os templates também referenciam steps condensados: o de instalação aceita npm ou outro comando, e o de scan de segurança pode apontar para um step real ou para um placeholder, no caso de serviço que ainda não está pronto para scan mas não pode ser bloqueado.
+  Templates compartilhados por tipo de pipeline, com variáveis padrão para os valores mais usados. O pipeline de cada projeto só sobrescreve o que diverge do padrão. Os templates também referenciam steps condensados.
 tradeoff: >-
   Exigiu documentação mais detalhada e a criação de uma skill para facilitar a criação de pipelines por outras pessoas.
 declarado: >-
