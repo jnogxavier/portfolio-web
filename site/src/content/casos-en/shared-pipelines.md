@@ -22,7 +22,7 @@ reconciliado: >-
   Pipelines now come from shared templates, with multi-stage builds and caching.
   I also split the build agents into pools by kind of service, so one group's pipelines stop waiting on another's.
 chamada: >-
-  Near-identical pipelines copied from service to service became shared templates with caching and declared exceptions.
+  Near-identical pipelines copied from service to service became shared templates with caching and default variables, which each project overrides only where it differs.
 ganhos:
   - >-
     Each pipeline started running in less time. Whoever opens a commit waits less to learn whether it passed, and the agent is free sooner for the next one.

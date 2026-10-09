@@ -22,7 +22,7 @@ reconciliado: >-
   Os pipelines passaram a vir de templates compartilhados, com build em estágios e cache.
   Os agentes de build também foram separados em pools por tipo de serviço, para que a esteira de um grupo não ficasse esperando a de outro.
 chamada: >-
-  Pipelines quase iguais, copiados de serviço em serviço, viraram templates compartilhados com cache e exceções declaradas.
+  Pipelines quase iguais, copiados de serviço em serviço, viraram templates compartilhados com cache e variáveis padrão, que cada projeto sobrescreve só no que diverge.
 ganhos:
   - >-
     Cada pipeline passou a rodar em menos tempo. Quem abre um commit espera menos para saber se ele passou, e o agente fica livre mais cedo para o próximo.
