@@ -25,8 +25,8 @@ const { titulo, meta, chamada, restricao, decisao, tradeoff, declarado, observad
 const rotulos = textos[lang];
 const Diagrama = diagrama ? diagramas[diagrama] : null;
 const antes = [
-  { rotulo: rotulos.rProblema[0], texto: declarado },
-  { rotulo: rotulos.rProblema[1], texto: observado },
+  { rotulo: rotulos.rDeveria, texto: declarado },
+  { rotulo: rotulos.rAcontecia, texto: observado },
   { rotulo: rotulos.rRestricao, texto: restricao },
   { rotulo: rotulos.rDecisao, texto: decisao },
   { rotulo: rotulos.rComo, texto: reconciliado },

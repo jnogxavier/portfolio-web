@@ -11,11 +11,10 @@ interface Props {
   seo: { titulo: string; descricao: string };
   casos: { id: string; data: any }[];
   linha: any[];
-  sobre: string[];
+  sobre: { abertura: string; resto: string }[];
 }
 const { lang, seo, casos, linha, sobre } = Astro.props;
 const rotulos = textos[lang];
-const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['', t] : [t.slice(0, i + 1), t.slice(i + 2)]; };
 ---
 <Base
   titulo={seo.titulo}
@@ -68,7 +67,7 @@ const abertura = (t: string) => { const i = t.indexOf('. '); return i < 0 ? ['',
   <section class="secao" id="sobre">
     <div class="faixa">
       <h2>{rotulos.tSobre}</h2>
-      <div class="sobre__texto">{sobre.map((p) => { const [lead, resto] = abertura(p); return <div class="sobre__bloco"><p>{lead && <strong class="sobre__lead">{lead} </strong>}{resto}</p></div>; })}</div>
+      <div class="sobre__texto">{sobre.map((p) => <div class="sobre__bloco"><p><strong class="sobre__lead">{p.abertura}</strong> {p.resto}</p></div>)}</div>
     </div>
   </section>
 
