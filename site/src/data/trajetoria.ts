@@ -12,13 +12,13 @@ export const trajetoria = {
     ],
   },
   {
-    cargo: 'DevOps / Platform Engineer',
+    cargo: 'DevOps Engineer',
     onde: 'BCJ',
     periodo: 'fev 2026 – jul 2026',
     lugar: 'Goiânia, Goiás',
     texto: [
       'Esteira de entrega em ambiente de serviços financeiros: GitOps com ArgoCD, CI/CD no Azure DevOps, Docker e Kubernetes.',
-      'Padronizei os pipelines em templates compartilhados e reduzi o tempo de build **de 15 para 6 minutos**.',
+      'Padronizei os pipelines em templates compartilhados e reduzi o tempo de build **de 15 para 6–8 minutos**.',
       'Como também leio o código da aplicação, dava para depurar o problema em vez de devolver para o time.',
     ],
   },
@@ -36,7 +36,7 @@ export const trajetoria = {
     cargo: 'Desenvolvedor Full Stack',
     onde: 'Memorial Vivo',
     periodo: 'fev 2023 – dez 2024',
-    lugar: 'Remoto',
+    lugar: 'Goiânia, Goiás',
     texto: [
       'Sistema Rails com pagamento via Stripe e webhook idempotente.',
       'Peguei o upgrade em produção de Ruby 2.5 para 3.3 e de Rails 5.2 para 7.1 — o tipo de migração que ninguém quer fazer e todo mundo adia.',
@@ -67,13 +67,13 @@ export const trajetoria = {
     ],
   },
   {
-    cargo: 'DevOps / Platform Engineer',
+    cargo: 'DevOps Engineer',
     onde: 'BCJ',
     periodo: 'Feb 2026 – Jul 2026',
     lugar: 'Goiânia, Brazil',
     texto: [
       'Delivery pipeline in a financial services environment: GitOps with ArgoCD, CI/CD in Azure DevOps, Docker and Kubernetes.',
-      'I standardized the pipelines into shared templates and cut build time **from 15 to 6 minutes**.',
+      'I standardized the pipelines into shared templates and cut build time **from 15 to 6–8 minutes**.',
       'Since I also read the application code, I could debug the problem instead of handing it back to the team.',
     ],
   },
@@ -91,7 +91,7 @@ export const trajetoria = {
     cargo: 'Full Stack Developer',
     onde: 'Memorial Vivo',
     periodo: 'Feb 2023 – Dec 2024',
-    lugar: 'Remote',
+    lugar: 'Goiânia, Brazil',
     texto: [
       'A Rails system with Stripe payments and idempotent webhooks.',
       'I took on the production upgrade from Ruby 2.5 to 3.3 and Rails 5.2 to 7.1 — the kind of migration nobody wants and everybody postpones.',

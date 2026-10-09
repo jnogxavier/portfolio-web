@@ -24,6 +24,6 @@ ganhos:
   - >-
     O mascaramento tornou possível olhar configuração de produção sem expor valor de segredo na tela de quem está investigando.
 aprendizado: >-
-  Se a leitura vem antes da autenticação, a ferramenta passa a enxergar a configuração de uma conta inteira protegida só pelo acesso à rede. É a ordem errada: ferramenta de governança sem controle de acesso é mais uma superfície a governar. Hoje eu começaria pelo login e pelos papéis, mesmo que o primeiro release mostrasse menos coisa.
+  Ferramenta de governança é mais uma superfície a governar. Hoje eu começaria pelo login e pelos papéis, mesmo que o primeiro release mostrasse menos coisa.
 links: []
 ---

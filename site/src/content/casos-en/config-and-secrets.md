@@ -24,6 +24,6 @@ ganhos:
   - >-
     Masking made it possible to look at production configuration without exposing a secret value on the screen of whoever is investigating.
 aprendizado: >-
-  If the read comes before the authentication, the tool ends up seeing the configuration of a whole account behind nothing but network access. That is the wrong order: a governance tool without access control is one more surface to govern. Today I would start with login and roles, even if the first release showed less.
+  A governance tool is one more surface to govern. Today I would start with login and roles, even if the first release showed less.
 links: []
 ---
