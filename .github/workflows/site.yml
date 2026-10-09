@@ -38,8 +38,30 @@ jobs:
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@v6
+      # A análise de código padrão do GitHub é outro workflow, então `needs` não alcança.
+      # Se ela não aparecer em 5 minutos, ou falhar, a publicação para.
+      - name: Espera a análise de código da mesma revisão
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 40); do
+            estado=$(gh run list --repo "$GITHUB_REPOSITORY" --commit "$GITHUB_SHA" --limit 20 \
+              --json workflowName,status,conclusion \
+              -q '[.[] | select(.workflowName == "CodeQL")] | if length == 0 then "ausente" elif any(.status != "completed") then "andando" elif all(.conclusion == "success") then "ok" else "falhou" end')
+            echo "análise de código: $estado"
+            case "$estado" in
+              ok) exit 0 ;;
+              falhou) exit 1 ;;
+              ausente) [ "$i" -ge 20 ] && exit 1 ;;
+            esac
+            sleep 15
+          done
+          exit 1
       - uses: actions/download-artifact@v4
         with:
           name: dist
