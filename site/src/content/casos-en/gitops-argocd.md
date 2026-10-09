@@ -1,7 +1,7 @@
 ---
 titulo: "GitOps: the cluster as a reflection of the repository"
 meta: GitOps
-ordem: 2
+ordem: 3
 par: gitops-argocd
 diagrama: reconciliacao
 restricao: >-

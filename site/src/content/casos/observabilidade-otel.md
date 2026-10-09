@@ -1,7 +1,7 @@
 ---
 titulo: Telemetria que a plataforma controla
 meta: Observabilidade
-ordem: 3
+ordem: 4
 par: observability-otel
 diagrama: correlacao
 restricao: >-

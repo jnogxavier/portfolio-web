@@ -1,7 +1,7 @@
 ---
 titulo: Onde estão os segredos, afinal
 meta: Configuração e segredos
-ordem: 5
+ordem: 6
 par: config-and-secrets
 diagrama: tresfontes
 restricao: >-

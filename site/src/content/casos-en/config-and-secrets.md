@@ -1,7 +1,7 @@
 ---
 titulo: Where the secrets actually live
 meta: Configuration and secrets
-ordem: 5
+ordem: 6
 par: configuracao-e-segredos
 diagrama: tresfontes
 restricao: >-
