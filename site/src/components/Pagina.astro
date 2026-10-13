@@ -55,7 +55,7 @@ const rotulos = textos[lang];
       <ol class="lista">
         {casos.map((c) => (
           <li>
-            <a href={lang === "en" ? `/en/casos/${c.id}` : `/casos/${c.id}`}>
+            <a href={lang === "en" ? `/en/casos/${c.id}/` : `/casos/${c.id}/`}>
               <div class="lista__texto">
                 <h3>{c.data.titulo}</h3>
                 <p>{c.data.chamada}</p>
