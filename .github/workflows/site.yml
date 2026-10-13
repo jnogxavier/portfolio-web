@@ -20,6 +20,9 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v6
+        with:
+          # O sitemap tira o lastmod do histórico do git.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
