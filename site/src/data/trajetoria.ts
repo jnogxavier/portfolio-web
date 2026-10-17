@@ -29,7 +29,7 @@ export const trajetoria = {
     periodo: 'jun 2024 – jun 2025',
     lugar: 'Remoto',
     texto: [
-      'Três portais governamentais — Transparência, Gestão de Pessoas e Portal do Servidor — para órgãos como TJGO, TCE-GO e STF.',
+      'Três portais governamentais (Transparência, Gestão de Pessoas e Portal do Servidor) para órgãos como TJGO, TCE-GO e STF.',
       'APIs REST, modelagem e otimização de query em PostgreSQL e Oracle. Os jobs ficaram **cerca de 20% mais rápidos**. Scrum e TDD.',
     ],
   },
@@ -40,7 +40,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Goiás',
     texto: [
       'Sistema Rails com pagamento via Stripe e webhook idempotente.',
-      'Peguei o upgrade em produção de Ruby 2.5 para 3.3 e de Rails 5.2 para 7.1, sem parar o serviço — o tipo de migração que ninguém quer fazer e todo mundo adia.',
+      'Peguei o upgrade em produção de Ruby 2.5 para 3.3 e de Rails 5.2 para 7.1, sem parar o serviço.',
       'Testes em RSpec, RuboCop como linter, CI/CD no GitHub Actions.',
     ],
   },
@@ -85,7 +85,7 @@ export const trajetoria = {
     periodo: 'Jun 2024 – Jun 2025',
     lugar: 'Remote',
     texto: [
-      'Three government portals — Transparency, People Management and Civil Servant Portal — for bodies including the Goiás State Court of Justice, the Goiás State Audit Court and the Brazilian Supreme Court.',
+      'Three government portals (Transparency, People Management and Civil Servant Portal) for bodies including the Goiás State Court of Justice, the Goiás State Audit Court and the Brazilian Supreme Court.',
       'REST APIs, data modelling and query optimisation in PostgreSQL and Oracle. Jobs ran **about 20% faster**. Scrum and TDD.',
     ],
   },
@@ -96,7 +96,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Brazil',
     texto: [
       'A Rails system with Stripe payments and idempotent webhooks.',
-      'I took on the production upgrade from Ruby 2.5 to 3.3 and Rails 5.2 to 7.1 without stopping the service — the kind of migration nobody wants and everybody postpones.',
+      'I took on the production upgrade from Ruby 2.5 to 3.3 and Rails 5.2 to 7.1 without stopping the service.',
       'RSpec tests, RuboCop as the linter, CI/CD on GitHub Actions.',
     ],
   },
