@@ -1,17 +1,6 @@
 export const trajetoria = {
   pt: [
   {
-    cargo: 'Desenvolvedor Full Stack (Ruby on Rails)',
-    onde: 'Freelance',
-    periodo: 'jul 2025 – atual',
-    lugar: 'Remoto',
-    texto: [
-      'Plataforma de gestão para personal trainers, em produção. Rails 8.1 com Solid Stack e Hotwire, PostgreSQL, autorização por objetos de política em três níveis, prescrição de treino e plano nutricional.',
-      'Dado de saúde é dado sensível sob a LGPD, então entra criptografado. A suíte tem **1.409 testes** em RSpec, **72% de cobertura**, mais política de segurança de conteúdo com nonce por resposta, Brakeman e bundler-audit na CI.',
-      'Deploy com Kamal e Docker. Do MVP à produção em **cerca de três semanas**, sozinho.',
-    ],
-  },
-  {
     cargo: 'DevOps Engineer',
     onde: 'BCJ',
     periodo: 'fev 2026 – atual',
@@ -21,6 +10,17 @@ export const trajetoria = {
       'Introduzi o padrão de deploy com ArgoCD, ApplicationSets e Helm chart compartilhado, adotado por múltiplas equipes e clusters.',
       'Padronizei os pipelines em templates compartilhados e reduzi o tempo de build **de 15 para 6–8 minutos**.',
       'Como também leio o código da aplicação, dá para depurar o problema em vez de devolver para o time.',
+    ],
+  },
+  {
+    cargo: 'Desenvolvedor Full Stack (Ruby on Rails)',
+    onde: 'Freelance',
+    periodo: 'jul 2025 – atual',
+    lugar: 'Remoto',
+    texto: [
+      'Plataforma de gestão para personal trainers, em produção. Rails 8.1 com Solid Stack e Hotwire, PostgreSQL, autorização por objetos de política em três níveis, prescrição de treino e plano nutricional.',
+      'Dado de saúde é dado sensível sob a LGPD, então entra criptografado. A suíte tem **1.409 testes** em RSpec, **72% de cobertura**, mais política de segurança de conteúdo com nonce por resposta, Brakeman e bundler-audit na CI.',
+      'Deploy com Kamal e Docker. Do MVP à produção em **cerca de três semanas**, sozinho.',
     ],
   },
   {
@@ -57,17 +57,6 @@ export const trajetoria = {
 ],
   en: [
   {
-    cargo: 'Full Stack Developer (Ruby on Rails)',
-    onde: 'Freelance',
-    periodo: 'Jul 2025 – present',
-    lugar: 'Remote',
-    texto: [
-      'A management platform for personal trainers, in production. Rails 8.1 with the Solid Stack and Hotwire, PostgreSQL, three-tier authorisation through policy objects, workout prescription and nutrition plans.',
-      'Health data is sensitive data under Brazilian privacy law, so it goes in encrypted. The suite has **1,409 RSpec tests** at **72% coverage**, plus a content security policy with a per-response nonce, Brakeman and bundler-audit in CI.',
-      'Deployed with Kamal and Docker. From MVP to production in **about three weeks**, on my own.',
-    ],
-  },
-  {
     cargo: 'DevOps Engineer',
     onde: 'BCJ',
     periodo: 'Feb 2026 – present',
@@ -77,6 +66,17 @@ export const trajetoria = {
       'I introduced the deployment standard with ArgoCD, ApplicationSets and a shared Helm chart, adopted by multiple teams and clusters.',
       'I standardized the pipelines into shared templates and cut build time **from 15 to 6–8 minutes**.',
       'Since I also read the application code, I can debug the problem instead of handing it back to the team.',
+    ],
+  },
+  {
+    cargo: 'Full Stack Developer (Ruby on Rails)',
+    onde: 'Freelance',
+    periodo: 'Jul 2025 – present',
+    lugar: 'Remote',
+    texto: [
+      'A management platform for personal trainers, in production. Rails 8.1 with the Solid Stack and Hotwire, PostgreSQL, three-tier authorisation through policy objects, workout prescription and nutrition plans.',
+      'Health data is sensitive data under Brazilian privacy law, so it goes in encrypted. The suite has **1,409 RSpec tests** at **72% coverage**, plus a content security policy with a per-response nonce, Brakeman and bundler-audit in CI.',
+      'Deployed with Kamal and Docker. From MVP to production in **about three weeks**, on my own.',
     ],
   },
   {
