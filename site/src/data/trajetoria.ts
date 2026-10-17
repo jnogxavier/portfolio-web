@@ -18,6 +18,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Goiás',
     texto: [
       'Esteira de entrega em ambiente de serviços financeiros: GitOps com ArgoCD, CI/CD no Azure DevOps, Docker e Kubernetes.',
+      'Introduzi o padrão de deploy com ArgoCD, ApplicationSets e Helm chart compartilhado, adotado por múltiplas equipes e clusters.',
       'Padronizei os pipelines em templates compartilhados e reduzi o tempo de build **de 15 para 6–8 minutos**.',
       'Como também leio o código da aplicação, dá para depurar o problema em vez de devolver para o time.',
     ],
@@ -28,7 +29,7 @@ export const trajetoria = {
     periodo: 'jun 2024 – jun 2025',
     lugar: 'Remoto',
     texto: [
-      'Três portais governamentais — Transparência, Gestão de Pessoas e Portal do Servidor — para órgãos como TJGO, TCE-GO e STF.',
+      'Três portais governamentais (Transparência, Gestão de Pessoas e Portal do Servidor) para órgãos como TJGO, TCE-GO e STF.',
       'APIs REST, modelagem e otimização de query em PostgreSQL e Oracle. Os jobs ficaram **cerca de 20% mais rápidos**. Scrum e TDD.',
     ],
   },
@@ -39,7 +40,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Goiás',
     texto: [
       'Sistema Rails com pagamento via Stripe e webhook idempotente.',
-      'Peguei o upgrade em produção de Ruby 2.5 para 3.3 e de Rails 5.2 para 7.1, sem parar o serviço — o tipo de migração que ninguém quer fazer e todo mundo adia.',
+      'Peguei o upgrade em produção de Ruby 2.5 para 3.3 e de Rails 5.2 para 7.1, sem parar o serviço.',
       'Testes em RSpec, RuboCop como linter, CI/CD no GitHub Actions.',
     ],
   },
@@ -73,6 +74,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Brazil',
     texto: [
       'Delivery pipeline in a financial services environment: GitOps with ArgoCD, CI/CD in Azure DevOps, Docker and Kubernetes.',
+      'I introduced the deployment standard with ArgoCD, ApplicationSets and a shared Helm chart, adopted by multiple teams and clusters.',
       'I standardized the pipelines into shared templates and cut build time **from 15 to 6–8 minutes**.',
       'Since I also read the application code, I can debug the problem instead of handing it back to the team.',
     ],
@@ -83,7 +85,7 @@ export const trajetoria = {
     periodo: 'Jun 2024 – Jun 2025',
     lugar: 'Remote',
     texto: [
-      'Three government portals — Transparency, People Management and Civil Servant Portal — for bodies including the Goiás State Court of Justice, the Goiás State Audit Court and the Brazilian Supreme Court.',
+      'Three government portals (Transparency, People Management and Civil Servant Portal) for bodies including the Goiás State Court of Justice, the Goiás State Audit Court and the Brazilian Supreme Court.',
       'REST APIs, data modelling and query optimisation in PostgreSQL and Oracle. Jobs ran **about 20% faster**. Scrum and TDD.',
     ],
   },
@@ -94,7 +96,7 @@ export const trajetoria = {
     lugar: 'Goiânia, Brazil',
     texto: [
       'A Rails system with Stripe payments and idempotent webhooks.',
-      'I took on the production upgrade from Ruby 2.5 to 3.3 and Rails 5.2 to 7.1 without stopping the service — the kind of migration nobody wants and everybody postpones.',
+      'I took on the production upgrade from Ruby 2.5 to 3.3 and Rails 5.2 to 7.1 without stopping the service.',
       'RSpec tests, RuboCop as the linter, CI/CD on GitHub Actions.',
     ],
   },
